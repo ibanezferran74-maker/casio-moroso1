@@ -134,13 +134,17 @@ function handle(ws, m) {
 }
 
 /* ---------------- http + ws ---------------- */
-const INDEX_PATH = path.join(__dirname, 'public', 'index.html');
+// El juego puede estar en public/index.html o suelto junto a server.js.
+const INDEX_CANDIDATES = [path.join(__dirname, 'public', 'index.html'), path.join(__dirname, 'index.html')];
+const indexPath = () => INDEX_CANDIDATES.find(p => fs.existsSync(p));
 const server = http.createServer((req, res) => {
   const url = req.url.split('?')[0];
   if (url === '/healthz') { res.writeHead(200, { 'Content-Type': 'text/plain' }); return res.end('ok'); }
   if (url !== '/' && url !== '/index.html') { res.writeHead(302, { Location: '/' }); return res.end(); }
-  fs.readFile(INDEX_PATH, (err, buf) => {
-    if (err) { res.writeHead(500); return res.end('Falta public/index.html'); }
+  const file = indexPath();
+  if (!file) { res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' }); return res.end('Falta index.html: súbelo a GitHub junto a server.js.'); }
+  fs.readFile(file, (err, buf) => {
+    if (err) { res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' }); return res.end('No se pudo leer index.html'); }
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' }); res.end(buf);
   });
 });
