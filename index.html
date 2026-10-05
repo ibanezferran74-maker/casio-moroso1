@@ -118,7 +118,8 @@ label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu
 .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:pointer}
 .prompt{position:absolute;transform:translate(-50%,-130%);background:rgba(18,10,16,.88);border:1px solid var(--brass);color:var(--cream);padding:5px 10px;border-radius:8px;font-size:13px;font-weight:700;white-space:nowrap;pointer-events:none}
 .prompt kbd{font-family:var(--f-num);background:var(--brass);color:#2a1406;border-radius:4px;padding:0 5px;margin-right:6px}
-.phase-banner{position:absolute;left:50%;top:14px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;background:rgba(18,10,16,.9);border:1px solid var(--brass-d);border-radius:12px;padding:10px 14px;max-width:calc(100% - 24px);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.phase-banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(90deg,rgba(230,184,92,.14),rgba(18,10,16,.9));border:1px solid var(--brass-d);border-radius:12px;padding:10px 14px}
+.phase-banner p{flex:1;min-width:220px}
 .phase-banner p{margin:0;font-size:14px}
 .phase-banner:empty{display:none}
 .tray{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
@@ -241,8 +242,30 @@ label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu
 .tile.gem{background:#123634;animation:flip .25s ease-out}
 .tile.mine{background:#4a1220;animation:flip .25s ease-out}
 .tile.dim{opacity:.5}
+.mines-grid.gold{background:#2a200c;border-color:#6a5420}
+.mines-grid.gold .tile{background:linear-gradient(180deg,#8a6a2a,#5a4416)}
+.rl-board button.lucky{background:#ffe066!important;color:#2a1406;box-shadow:0 0 14px #ffe066;position:relative}
+.rl-board button.lucky::after{content:attr(data-x);position:absolute;left:50%;top:-14px;transform:translateX(-50%);font-size:9px;background:#2a1406;color:#ffe066;padding:0 3px;border-radius:3px;white-space:nowrap}
 @keyframes flip{from{transform:rotateY(90deg)}}
 .mult-big{font-family:var(--f-display);font-size:34px;color:var(--win);text-align:center;line-height:1}
+
+/* Dados, Hi-Lo, Keno */
+.dice-table{background:radial-gradient(120% 90% at 50% 0%,#17704f,#0b3a29);border:6px solid #5a3a20;border-radius:26px;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;box-shadow:inset 0 0 0 2px var(--brass-d)}
+.dice-row{display:flex;gap:22px}
+.die{width:88px;height:88px;border-radius:16px;background:linear-gradient(145deg,#fffaf0,#e9dcc6);box-shadow:0 8px 18px rgba(0,0,0,.4),inset 0 -4px 0 rgba(0,0,0,.12);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:12px;gap:4px}
+.die i{border-radius:50%;width:15px;height:15px;place-self:center}
+.die i.on{background:#c4162c;box-shadow:inset 0 2px 2px rgba(0,0,0,.3)}
+.dice-row.rolling .die{animation:shake .12s infinite alternate}
+@keyframes shake{from{transform:rotate(-12deg) translateY(-4px)}to{transform:rotate(12deg) translateY(4px)}}
+.dice-sum{font-family:var(--f-display);font-size:24px;color:#ffe8b3}
+.hl-table{background:radial-gradient(120% 90% at 50% 0%,#245f80,#10304a);border:6px solid #4a2a18;border-radius:20px;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:18px}
+.hl-cards{display:flex;justify-content:center;padding-left:28px;min-height:104px}
+.hl-cards .card-p:last-child{transform:scale(1.12);z-index:2}
+.keno-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;background:#0d0912;border:1px solid #4a2a5a;border-radius:14px;padding:12px}
+.kn{aspect-ratio:1;border-radius:50%;border:1px solid #2e3a5a;background:#18223a;font-family:var(--f-num);font-weight:700;font-size:13px;transition:transform .1s}
+.kn.pick{background:#b197fc;color:#1a0d24;border-color:#d0bfff}
+.kn.drawn{box-shadow:0 0 0 3px #5ce1e6 inset}
+.kn.hit{background:#4fd6a4;color:#0b2a20;transform:scale(1.08);box-shadow:0 0 14px rgba(79,214,164,.7)}
 
 /* Shop / board / day */
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
@@ -258,6 +281,12 @@ label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu
 .quota-table td.num{text-align:right}
 .quota-table tr.now td{background:rgba(230,184,92,.1);color:var(--brass);font-weight:800}
 .quota-table tr.done td{color:var(--muted)}
+.evbox{margin:0 0 10px;padding:10px 12px;border-radius:10px;background:rgba(79,214,164,.08);border:1px solid rgba(79,214,164,.35)}
+.evchip{background:#160d13;border:1px solid rgba(79,214,164,.45);color:var(--win);border-radius:8px;padding:3px 9px;font-weight:700;font-size:13px;max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.awards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-bottom:14px}
+.award{background:#160d13;border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.award b{display:flex;align-items:center;gap:6px;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.award .note{font-size:12.5px}
 .day-hero{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
 .day-hero div{background:#160d13;border:1px solid var(--line);border-radius:12px;padding:12px}
 .day-hero b{display:block;font-family:var(--f-num);font-size:24px}
@@ -291,6 +320,8 @@ label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu
   .day-hero{grid-template-columns:1fr}
   .card-p{width:58px;height:84px}
   .card-p .mid{font-size:26px}
+  .die{width:70px;height:70px;padding:9px}
+  .die i{width:12px;height:12px}
   .reacts{margin-left:0}
 }
 @media (prefers-reduced-motion:reduce){
@@ -335,10 +366,11 @@ label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu
         <h2>Cómo se juega</h2>
         <dl>
           <dt>Un banco para todos</dt><dd>Empezáis con 500 fichas. Cada apuesta sale del banco común y cada premio vuelve a él.</dd>
-          <dt>Objetivo diario</dt><dd>Al acabar los 5 minutos el banco tiene que llegar al objetivo del Tiburón: 1.000 el primer día, 100.000 el décimo.</dd>
-          <dt>Tres avisos</dt><dd>Cada día que no llegáis os lleváis un aviso. Al tercero, se acabó la partida.</dd>
+          <dt>Objetivo diario</dt><dd>Al acabar los 5 minutos el banco tiene que llegar al objetivo del Tiburón: 1.000 el primer día, 100.000 el décimo. Si llegáis antes, podéis pagar y cerrar el día: cada minuto que sobra es un ticket extra.</dd>
+          <dt>Tres avisos</dt><dd>Cada día que no llegáis os lleváis un aviso. Al tercero, se acabó la partida. También podéis rendiros cuando queráis.</dd>
           <dt>Tickets y ventanilla</dt><dd>Superar el día da tickets. En la ventanilla los cambiáis por objetos: seguro, rebobinar, ficha gratis, trébol, multiplicador y reloj de arena.</dd>
-          <dt>Seis máquinas</dt><dd>Tragaperras, ruleta, blackjack, crash, plinko y minas. Camina hasta una y pulsa E, o tócala.</dd>
+          <dt>Tres plantas, dieciocho máquinas</dt><dd>Abajo, las clásicas. Desde el día 4, el Salón Terciopelo: dados, rueda y versiones nuevas de la tragaperras, la ruleta, el crash y las minas. Desde el día 7, el Ático: hi-lo, keno y versiones de alto riesgo. Camina hasta una máquina y pulsa E, o tócala.</dd>
+          <dt>Eventos y clínica</dt><dd>Cada día trae una regla especial. Si os falta dinero, la clínica del Dr. Bisturí compra órganos: un tercio de lo que falta, a cambio de una marca para siempre.</dd>
         </dl>
         <p class="note" style="margin:0">Fichas de juego. Aquí no se apuesta dinero real.</p>
       </div>
@@ -353,19 +385,22 @@ label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu
         <div class="row"><span class="k">Banco común</span><b id="hBank" class="num">500</b><span class="k">de</span><b id="hQuota" class="num">1.000</b></div>
         <div class="meter" id="hMeterBox"><i id="hMeter"></i></div>
       </div>
+      <div><span class="k" id="hEventK">Evento</span><button id="hEvent" class="evchip" title="Ver evento">—</button></div>
+      <div><span class="k">Planta</span><b id="hFloor" style="font-family:var(--f-body);font-size:14px">Planta baja</b></div>
       <div><span class="k">Avisos</span><span id="hStrikes" class="strikes"></span></div>
       <div><span class="k">Tickets</span><b id="hTix">2</b></div>
       <div><span class="k">Sala</span><button id="hCode" class="code" title="Copiar código">----</button></div>
       <div class="hud-actions">
         <button id="btnSound" class="icon-btn" aria-label="Silenciar sonido" title="Sonido"></button>
+        <button id="btnGiveUp" class="btn small danger" hidden>Rendirse</button>
         <button id="btnLeave" class="btn small ghost">Salir</button>
       </div>
     </header>
     <div class="game-main">
       <div class="stage-col">
+        <div id="phaseBanner" class="phase-banner"></div>
         <div class="stage" id="stage">
           <canvas id="map" aria-label="Planta del casino. Usa las flechas o WASD para caminar y E para jugar."></canvas>
-          <div id="phaseBanner" class="phase-banner"></div>
           <div id="prompt" class="prompt" hidden></div>
         </div>
         <div class="tray">
@@ -548,7 +583,32 @@ const START_BANK = 500, START_TICKETS = 2, MAX_STRIKES = 3, CLOCK_BONUS = 45000;
 const COLORS = ['#ff6b6b', '#ffa94d', '#ffe066', '#69db7c', '#3bc9db', '#5c9dff', '#b197fc', '#f783ac'];
 const HATS = [['none', 'Ninguno'], ['top', 'Chistera'], ['cap', 'Gorra'], ['crown', 'Corona'], ['fedora', 'Fedora']];
 const EMOTES = ['🔥', '😱', '💸', '🙏', '😂', '🎉'];
-const GAME_NAMES = { slots: 'Tragaperras', ruleta: 'Ruleta', blackjack: 'Blackjack', crash: 'Crash', plinko: 'Plinko', minas: 'Minas' };
+const GAME_NAMES = { slots: 'Tragaperras', ruleta: 'Ruleta', blackjack: 'Blackjack', crash: 'Crash', plinko: 'Plinko', minas: 'Minas',
+  dados: 'Dados', rueda: 'Rueda de la fortuna', slots2: 'Tragaperras Salvaje', ruleta2: 'Ruleta Relámpago', crash2: 'Crash Doble', minas2: 'Minas 6×6',
+  hilo: 'Hi-Lo', keno: 'Keno', slots3: 'Tragaperras del Tiburón', ruleta3: 'Ruleta de dos bolas', blackjack2: 'Blackjack del Tiburón', plinko2: 'Plinko 16' };
+const GAME_MIN = { dados: 50, rueda: 50, slots2: 50, ruleta2: 50, crash2: 50, minas2: 50, hilo: 200, keno: 200, slots3: 200, ruleta3: 200, blackjack2: 200, plinko2: 200 };
+const EVENTS = {
+  tranquilo: { n: 'Día tranquilo', d: 'Sin sorpresas: todo funciona como siempre.' },
+  ruleta: { n: 'Noche de ruleta', d: 'Los plenos de la ruleta pagan ×40 en vez de ×36.' },
+  hora_feliz: { n: 'Hora feliz', d: 'Los tres iguales de la tragaperras pagan un 50 % más.' },
+  turbo: { n: 'Crash turbo', d: 'En Crash el multiplicador sube el doble de rápido.' },
+  bj: { n: 'Blackjack dorado', d: 'El blackjack natural paga 2 a 1 en vez de 3 a 2.' },
+  minas: { n: 'Detector prestado', d: 'En Minas cada retirada paga un 8 % más.' },
+  vigila: { n: 'El Tiburón vigila', d: 'El riesgo alto del plinko está cerrado hoy.' },
+  largo: { n: 'Turno largo', d: 'Hoy el día dura 6 minutos.' },
+  propina: { n: 'Propina del Tiburón', d: 'El banco empieza el día con 200 fichas extra.' },
+  inflacion: { n: 'Inflación', d: 'El objetivo sube un 15 %, pero cumplirlo da 2 tickets más.' },
+  rebajas: { n: 'Rebajas en la ventanilla', d: 'Todos los objetos cuestan 1 ticket menos.' },
+  clinica: { n: 'Doctor generoso', d: 'La clínica paga la mitad de lo que falta en vez de un tercio.' },
+};
+const PARTS = [{ id: 'dedo', n: 'un dedo', t: 'Dedo' }, { id: 'oreja', n: 'una oreja', t: 'Oreja' }, { id: 'ojo', n: 'un ojo', t: 'Ojo' }, { id: 'rinon', n: 'un riñón', t: 'Riñón' }];
+const PART_IDS = PARTS.map(p => p.id);
+function pickEvent(prev) { const ks = Object.keys(EVENTS).filter(k => k !== prev); return ks[rint(ks.length)]; }
+/** Evento en vigor hoy (solo durante el día). */
+const evNow = () => S.room && S.room.phase === 'day' ? S.room.event : null;
+/** Evento que afecta a la ventanilla: el de hoy, o el de mañana entre días. */
+const evShop = () => !S.room ? null : S.room.phase === 'day' ? S.room.event : S.room.nextEvent;
+const costOf = id => Math.max(1, ITEMS[id].cost - (evShop() === 'rebajas' ? 1 : 0));
 
 const ICON = {
   seguro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
@@ -609,10 +669,10 @@ const S = {
   finalizing: null, dayModalKey: null,
 };
 function newMe() {
-  return { nick: prefs.nick || 'Jugador', color: prefs.color, hat: prefs.hat, gid: null, day: 0, dayNet: 0, totalNet: 0, best: 0, plays: 0, items: {}, fx: {}, lastLoss: 0 };
+  return { nick: prefs.nick || 'Jugador', color: prefs.color, hat: prefs.hat, gid: null, day: 0, dayNet: 0, totalNet: 0, best: 0, plays: 0, items: {}, fx: {}, lastLoss: 0, parts: [], soldDay: 0, organCash: 0, allins: 0, worst: 0, used: 0 };
 }
 function newRoomData(code) {
-  return { code, gid: rid(), createdAt: Date.now(), createdBy: S.uid, phase: 'lobby', day: 1, dayStartBank: START_BANK, dayEndsAt: 0, quota: QUOTAS[0], strikes: 0, tickets: START_TICKETS, last: null };
+  return { code, gid: rid(), createdAt: Date.now(), createdBy: S.uid, phase: 'lobby', day: 1, dayStartBank: START_BANK, dayEndsAt: 0, quota: QUOTAS[0], strikes: 0, tickets: START_TICKETS, last: null, event: null, nextEvent: pickEvent() };
 }
 
 /* ================= network ================= */
@@ -721,30 +781,33 @@ function computeBank(r = S.room, players = S.players) {
 const bank = () => computeBank();
 function ensureDay() {
   const r = S.room; if (!r || !S.me) return;
-  if (S.me.gid !== r.gid) { Object.assign(S.me, { gid: r.gid, day: r.day, dayNet: 0, totalNet: 0, best: 0, plays: 0, items: {}, fx: {}, lastLoss: 0 }); saveMe(); }
+  if (S.me.gid !== r.gid) { Object.assign(S.me, { gid: r.gid, day: r.day, dayNet: 0, totalNet: 0, best: 0, plays: 0, items: {}, fx: {}, lastLoss: 0, parts: [], soldDay: 0, organCash: 0, allins: 0, worst: 0, used: 0 }); saveMe(); }
   else if (S.me.day !== r.day) { S.me.day = r.day; S.me.dayNet = 0; S.me.lastLoss = 0; saveMe(); }
 }
 function remaining() { const r = S.room; if (!r || r.phase !== 'day') return 0; return Math.max(0, r.dayEndsAt - Date.now()); }
 const freeCap = () => Math.round((S.room?.quota || 1000) * .25);
-function betError(amount) {
+function betError(amount, game) {
   if (!S.room) return 'No estás en ninguna sala.';
   if (S.room.phase === 'lobby') return 'El día aún no ha empezado. Pulsad «Empezar día 1».';
   if (S.room.phase !== 'day') return 'El día ha terminado. Mirad el resumen y empezad el siguiente.';
   if (remaining() <= 0) return 'Se acabó el tiempo de hoy.';
-  if (!(amount >= 1)) return 'La apuesta mínima es 1 ficha.';
+  const min = GAME_MIN[game] || 1;
+  if (!(amount >= min)) return min > 1 ? `En esta planta la apuesta mínima es ${fmt(min)}.` : 'La apuesta mínima es 1 ficha.';
   const free = (S.me.fx.gratis || 0) > 0 && amount <= freeCap();
   if (!free && amount > bank()) return `No hay tanto en el banco común (quedan ${fmt(bank())}).`;
   return null;
 }
 function placeBet(amount, game) {
   amount = Math.floor(amount);
-  const err = betError(amount); if (err) { toast(err, 'bad'); return null; }
+  const err = betError(amount, game); if (err) { toast(err, 'bad'); return null; }
+  const bankBefore = bank();
   ensureDay();
   const fx = S.me.fx, t = { amount, game, free: false, shield: false };
   if ((fx.gratis || 0) > 0 && amount <= freeCap()) { t.free = true; fx.gratis--; }
   else { S.me.dayNet -= amount; S.me.totalNet -= amount; }
   if ((fx.seguro || 0) > 0) { t.shield = true; fx.seguro--; }
   S.me.plays++;
+  if (amount >= 100 && amount >= bankBefore * .5) S.me.allins = (S.me.allins || 0) + 1;
   saveMe(); renderHud(); renderTray(); Sound.chip();
   return t;
 }
@@ -772,6 +835,7 @@ function settle(t, payout, label) {
   if (!t.free && net < 0) S.me.lastLoss = -net;
   S.me.dayNet += credit; S.me.totalNet += credit;
   if (net > S.me.best) S.me.best = net;
+  if (-net > (S.me.worst || 0)) S.me.worst = -net;
   saveMe(); renderHud(); renderTray();
   const mult = t.amount ? payout / t.amount : 0;
   if (net > 0) {
@@ -792,7 +856,9 @@ function onRoom(data) {
   ensureDay();
   const phaseChanged = !prev || prev.phase !== data.phase || prev.day !== data.day || prev.gid !== data.gid;
   if (phaseChanged) {
-    if (data.phase === 'day' && prev && prev.phase !== 'day') { Sound.bell(); toast(`Empieza el día ${data.day}. Objetivo: ${fmt(data.quota)}.`, 'good'); addFeed({ cls: 'sys', text: `Día ${data.day} en marcha. Objetivo ${fmt(data.quota)}.` }); closeDayModal(); }
+    if (data.phase === 'day' && prev && prev.phase !== 'day') { Sound.bell(); toast(`Empieza el día ${data.day}. Objetivo: ${fmt(data.quota)}.`, 'good'); addFeed({ cls: 'sys', text: `Día ${data.day} en marcha. Objetivo ${fmt(data.quota)}.` }); if (data.event && EVENTS[data.event]) addFeed({ cls: 'win', html: `<b>Evento: ${EVENTS[data.event].n}.</b> ${EVENTS[data.event].d}` }); closeDayModal(); }
+    if (prev && data.gid === prev.gid && data.phase !== 'over') for (const i of [1, 2]) if (data.day >= FLOORS[i].from && prev.day < FLOORS[i].from) addFeed({ cls: 'win', html: `<b>Se abre ${FLOORS[i].name}.</b> Coge el ascensor.` });
+    if (Floor.floor && data.day < FLOORS[Floor.floor].from) Floor.goFloor(0);
     if (['summary', 'over', 'won'].includes(data.phase)) { maybeOpenDayModal(); if (prev && prev.phase === 'day') Sound.bell(); }
     if (data.phase === 'lobby' && prev && prev.gid !== data.gid) { closeDayModal(); addFeed({ cls: 'sys', text: 'Nueva partida. Banco de vuelta a 500.' }); }
   }
@@ -802,12 +868,20 @@ function onRoom(data) {
 }
 async function startDay() {
   const r = S.room; if (!r || !['lobby', 'summary'].includes(r.phase)) return;
-  await roomUpdate({ phase: 'day', dayEndsAt: Date.now() + DAY_MS, quota: QUOTAS[r.day - 1] });
+  const ev = r.nextEvent && EVENTS[r.nextEvent] ? r.nextEvent : pickEvent(r.event);
+  const base = QUOTAS[r.day - 1];
+  await roomUpdate({ phase: 'day', event: ev, nextEvent: null, dayEndsAt: Date.now() + DAY_MS + (ev === 'largo' ? 60000 : 0), quota: ev === 'inflacion' ? Math.round(base * 1.15 / 50) * 50 : base, dayStartBank: (r.dayStartBank || 0) + (ev === 'propina' ? 200 : 0) });
 }
 async function newGame() {
-  await roomUpdate({ gid: rid(), phase: 'lobby', day: 1, dayStartBank: START_BANK, dayEndsAt: 0, quota: QUOTAS[0], strikes: 0, tickets: START_TICKETS, last: null });
+  await roomUpdate({ gid: rid(), phase: 'lobby', day: 1, dayStartBank: START_BANK, dayEndsAt: 0, quota: QUOTAS[0], strikes: 0, tickets: START_TICKETS, last: null, event: null, nextEvent: pickEvent() });
 }
-async function finalizeDay() {
+function contribOf(r, players) {
+  const contrib = {}; const ids = new Set(Object.keys(players || {})); if (S.uid) ids.add(S.uid);
+  for (const id of ids) { const p = id === S.uid ? S.me : players[id]; if (p && p.gid === r.gid && p.day === r.day && (p.dayNet || p.plays)) contrib[id] = { n: Math.round(p.dayNet || 0), nick: String(p.nick || 'Jugador').slice(0, 16), c: p.color }; }
+  return contrib;
+}
+/** Cierra el día. early = el grupo paga antes de tiempo porque ya llegó al objetivo. */
+async function finalizeDay(early = false) {
   const r0 = S.room; if (!r0 || r0.phase !== 'day') return;
   const key = r0.gid + ':' + r0.day; if (S.finalizing === key) return; S.finalizing = key;
   try {
@@ -816,23 +890,32 @@ async function finalizeDay() {
       if (writing) await writing;
       const ref = Net.roomRef();
       const lease = await ref.acquire({ holder: S.uid + ':' + TAB, ttlMs: 8000 });
-      if (!lease.acquired) return;
-      const fresh = await ref.get(); if (!fresh.exists) return; r = fresh.data();
-      if (r.phase !== 'day' || r.gid !== r0.gid || r.day !== r0.day || Date.now() < r.dayEndsAt) { S.finalizing = null; return; }
+      if (!lease.acquired) { S.finalizing = null; return; }
+      const fresh = await ref.get(); if (!fresh.exists) { S.finalizing = null; return; } r = fresh.data();
+      if (r.phase !== 'day' || r.gid !== r0.gid || r.day !== r0.day || (!early && Date.now() < r.dayEndsAt)) { S.finalizing = null; return; }
       const ps = await Net.db.collection(`rooms/${S.code}/players`).get(); players = {}; ps.docs.forEach(d => players[d.id] = d.data());
     }
     const b = computeBank(r, players);
     const passed = b >= r.quota;
+    if (early && !passed) { S.finalizing = null; toast('Todavía no llegáis al objetivo.', 'bad'); return; }
     const strikes = r.strikes + (passed ? 0 : 1);
-    const earned = passed ? 2 + clamp(Math.floor((b / r.quota - 1) * 4), 0, 4) : 1;
-    const contrib = {};
-    const ids = new Set(Object.keys(players)); ids.add(S.uid);
-    for (const id of ids) { const p = id === S.uid ? S.me : players[id]; if (p && p.gid === r.gid && p.day === r.day && (p.dayNet || p.plays)) contrib[id] = { n: Math.round(p.dayNet || 0), nick: String(p.nick || 'Jugador').slice(0, 16), c: p.color }; }
+    const bonus = early ? Math.floor(Math.max(0, r.dayEndsAt - Date.now()) / 60000) : 0;
+    const earned = (passed ? 2 + clamp(Math.floor((b / r.quota - 1) * 4), 0, 4) + (r.event === 'inflacion' ? 2 : 0) : 1) + bonus;
     let phase = 'summary';
     if (strikes >= MAX_STRIKES) phase = 'over';
     else if (r.day >= DAYS) phase = passed ? 'won' : 'over';
-    await roomUpdate({ phase, day: r.day + 1, dayStartBank: b, strikes, tickets: (r.tickets || 0) + earned, quota: QUOTAS[Math.min(r.day, DAYS - 1)], last: { day: r.day, bank: Math.round(b), quota: r.quota, passed, earned, contrib } });
+    const last = { day: r.day, bank: Math.round(b), quota: r.quota, passed, earned, contrib: contribOf(r, players) };
+    if (early) { last.early = true; last.bonus = bonus; last.by = String(S.me.nick || 'Alguien').slice(0, 16); }
+    last.event = r.event || null;
+    await roomUpdate({ phase, day: r.day + 1, dayStartBank: b, strikes, tickets: (r.tickets || 0) + earned, quota: QUOTAS[Math.min(r.day, DAYS - 1)], last, event: null, nextEvent: pickEvent(r.event) });
   } catch (e) { console.warn('finalize', e); S.finalizing = null; }
+}
+async function surrender() {
+  const r = S.room; if (!r || !['day', 'summary'].includes(r.phase)) return;
+  if (cur && cur.busy) { toast('Termina la ronda antes de rendirte.', 'bad'); return; }
+  const day = r.phase === 'day' ? r.day : r.day - 1;
+  const contrib = r.phase === 'day' ? contribOf(r, S.players) : (r.last && r.last.contrib) || {};
+  await roomUpdate({ phase: 'over', last: { day, bank: Math.round(bank()), quota: r.phase === 'day' ? r.quota : (r.last ? r.last.quota : r.quota), passed: false, earned: 0, contrib, surrender: true, by: String(S.me.nick || 'Alguien').slice(0, 16) } });
 }
 
 /* ================= entry screen ================= */
@@ -931,7 +1014,7 @@ async function leaveRoom() {
   S.mode = null; S.room = null; S.code = null;
   $('#game').hidden = true; $('#entry').hidden = false; renderNetStatus(); renderRoomList();
 }
-function showGame() { $('#entry').hidden = true; $('#game').hidden = false; Floor.resize(); Floor.spawn(); renderHud(); renderSide(); renderTray(); renderBanner(); }
+function showGame() { Floor.floor = 0; $('#entry').hidden = true; $('#game').hidden = false; Floor.resize(); Floor.spawn(); renderHud(); renderSide(); renderTray(); renderBanner(); }
 
 /* ================= HUD, side, tray ================= */
 let lastBeep = -1;
@@ -953,17 +1036,30 @@ function renderHud() {
   $('#hTix').textContent = r.tickets || 0;
   $('#hCode').textContent = S.mode === 'solo' ? 'SOLO' : r.code;
   $('#mcBank').textContent = fmt(b);
+  $('#btnGiveUp').hidden = !['day', 'summary'].includes(r.phase);
+  const evk = r.phase === 'day' ? r.event : r.nextEvent, evb = $('#hEvent');
+  evb.textContent = evk && EVENTS[evk] ? EVENTS[evk].n : '—'; evb.dataset.ev = evk || ''; $('#hEventK').textContent = r.phase === 'day' ? 'Evento de hoy' : 'Evento de mañana';
+  $('#hFloor').textContent = FLOORS[Floor.floor].name;
+  if (bannerState() !== bannerKey) renderBanner();
+  if (!$('#dayModal').hidden && $('#dayModal').dataset.mode === 'clinic') { const st = clinicState(), k = `${st.price}|${st.why}|${st.next && st.next.id}`; if (k !== clinicKey) { clinicKey = k; renderClinic(); } }
 }
 function renderBanner() {
   const r = S.room, bn = $('#phaseBanner'); if (!r) { bn.innerHTML = ''; return; }
   if (r.phase === 'lobby') {
-    bn.innerHTML = `<p>${S.mode === 'solo' ? 'Partida en solitario lista.' : `Sala <b class="num">${esc(r.code)}</b> esperando. ${window.MOROSO_WEB ? 'Pulsa el código de arriba para copiar el enlace de invitación.' : 'Pasa el código a tus amigos.'}`} Objetivo del día 1: <b class="num">${fmt(r.quota)}</b>.</p><button class="btn primary small" data-act="start">Empezar día 1</button>`;
+    bn.innerHTML = `<p>${S.mode === 'solo' ? 'Partida en solitario lista.' : `Sala <b class="num">${esc(r.code)}</b> esperando. ${window.MOROSO_WEB ? 'Pulsa el código de arriba para copiar el enlace de invitación.' : 'Pasa el código a tus amigos.'}`} Objetivo del día 1: <b class="num">${fmt(r.quota)}</b>.${r.nextEvent && EVENTS[r.nextEvent] ? ` Evento: <b>${EVENTS[r.nextEvent].n}</b>.` : ''}</p><button class="btn primary small" data-act="start">Empezar día 1</button>`;
   } else if (r.phase === 'summary') {
-    bn.innerHTML = `<p>Día ${r.day - 1} cerrado. Mañana el objetivo es <b class="num">${fmt(r.quota)}</b>.</p><button class="btn small" data-act="summary">Ver resumen</button><button class="btn primary small" data-act="start">Empezar día ${r.day}</button>`;
+    bn.innerHTML = `<p>Día ${r.day - 1} cerrado. Mañana el objetivo es <b class="num">${fmt(r.quota)}</b>.${r.nextEvent && EVENTS[r.nextEvent] ? ` Evento: <b>${EVENTS[r.nextEvent].n}</b>.` : ''}</p><button class="btn small" data-act="summary">Ver resumen</button><button class="btn primary small" data-act="start">Empezar día ${r.day}</button>`;
   } else if (r.phase === 'over' || r.phase === 'won') {
     bn.innerHTML = `<p>${r.phase === 'won' ? 'Deuda saldada. Sois libres.' : 'El Tiburón ha perdido la paciencia.'}</p><button class="btn small" data-act="summary">Ver resumen</button><button class="btn primary small" data-act="new">Nueva partida</button>`;
+  } else if (r.phase === 'day') {
+    const reached = bank() >= r.quota, mins = Math.floor(remaining() / 60000);
+    if (reached && remaining() > 0) bn.innerHTML = `<p><b>Objetivo cubierto.</b> Podéis pagar ya y cerrar el día${mins ? ` (+${mins} ticket${mins > 1 ? 's' : ''} por el tiempo que sobra)` : ''}, o seguir jugando para subir más.</p><button class="btn primary small" data-act="pay">Pagar y cerrar el día</button>`;
+    else bn.innerHTML = '';
   } else bn.innerHTML = '';
+  bannerKey = bannerState();
 }
+let bannerKey = '', clinicKey = '';
+function bannerState() { const r = S.room; if (!r) return ''; return [r.phase, r.day, r.gid, r.phase === 'day' && bank() >= r.quota, Math.floor(remaining() / 60000)].join(':'); }
 function onlineIds() { const s = new Set(); S.peers.forEach(p => { const u = p.by || (p.presence && p.presence.u); if (u) s.add(u); }); return s; }
 function renderSide() {
   const ul = $('#plist'); if (!ul || !S.room) return;
@@ -1017,6 +1113,7 @@ function useItem(id) {
     toast(`${ITEMS[id].name} activado.`, 'good'); Sound.chip(); Net.emit('feed', { k: 'item', i: id });
   }
   S.me.items[id] = n - 1; if (!S.me.items[id]) delete S.me.items[id];
+  S.me.used = (S.me.used || 0) + 1;
   addFeed({ cls: 'sys', text: `Usas ${ITEMS[id].name}.` });
   saveMe(); renderTray(); renderHud();
 }
@@ -1041,6 +1138,7 @@ function onRemoteFeed(m) {
   const a = Number(d.a) || 0, g = GAME_NAMES[d.g] || 'el casino';
   if (d.k === 'win') { addFeed({ cls: 'win', html: `<b>${who}</b> gana ${fmt(a)} en ${g}` }); toast(`${peerNick(m)} acaba de ganar ${fmt(a)} en ${g}`, 'good'); }
   else if (d.k === 'loss') addFeed({ cls: 'loss', html: `<b>${who}</b> pierde ${fmt(a)} en ${g}` });
+  else if (d.k === 'organ' && PART_IDS.includes(d.p)) { addFeed({ cls: 'loss', html: `<b>${who}</b> vende ${PARTS.find(x => x.id === d.p).n} en la clínica: +${fmt(a)}` }); toast(`${peerNick(m)} ha vendido ${PARTS.find(x => x.id === d.p).n}.`); }
   else if (d.k === 'item' && ITEMS[d.i]) addFeed({ cls: 'sys', html: `<b>${who}</b> usa ${ITEMS[d.i].name}${a ? ` (+${fmt(a)})` : ''}` });
 }
 let lastChat = 0;
@@ -1073,6 +1171,8 @@ function openStation(id) {
   if (cur) return;
   if (id === 'tienda') { openShop(); return; }
   if (id === 'tablon') { openBoard(); return; }
+  if (id === 'clinica') { openClinic(); return; }
+  if (id === 'ascensor') { openLift(); return; }
   const g = Games[id]; if (!g) return;
   cur = { id, g, busy: false };
   $('#mcTitle').textContent = GAME_NAMES[id];
@@ -1109,7 +1209,7 @@ function openShop() { $('#dayModal').dataset.mode = 'shop'; $('#dmTitle').textCo
 function shopHTML() {
   const t = S.room?.tickets || 0;
   return `<p class="note" style="margin:0 0 10px">Tickets del grupo: <span class="tix">${t}</span>. Lo que compras va a tu bolsillo; lo usas tú cuando quieras durante el día.</p>
-  <div class="shop-grid">${Object.entries(ITEMS).map(([id, it]) => `<div class="shop-item"><header>${ICON[id]}<div><h4>${it.name}</h4><span class="own">Tienes ${S.me.items[id] || 0}</span></div></header><p>${it.desc}</p><button class="btn small ${t >= it.cost ? 'primary' : ''}" data-buy="${id}" ${t >= it.cost ? '' : 'disabled'}>Comprar · ${it.cost} tickets</button></div>`).join('')}</div>`;
+  <div class="shop-grid">${Object.entries(ITEMS).map(([id, it]) => `<div class="shop-item"><header>${ICON[id]}<div><h4>${it.name}</h4><span class="own">Tienes ${S.me.items[id] || 0}</span></div></header><p>${it.desc}</p><button class="btn small ${t >= costOf(id) ? 'primary' : ''}" data-buy="${id}" ${t >= costOf(id) ? '' : 'disabled'}>Comprar · ${costOf(id)} ticket${costOf(id) > 1 ? 's' : ''}${costOf(id) < it.cost ? ' (rebajas)' : ''}</button></div>`).join('')}</div>`;
 }
 function renderShop() { if ($('#dayModal').dataset.mode !== 'shop') return; $('#dmBody').innerHTML = shopHTML(); }
 let buying = false;
@@ -1117,15 +1217,15 @@ async function buy(id) {
   const it = ITEMS[id]; if (!it || buying) return; buying = true;
   try {
     if (S.mode === 'solo') {
-      if ((S.room.tickets || 0) < it.cost) { toast('No hay tickets suficientes.', 'bad'); return; }
-      S.me.items[id] = (S.me.items[id] || 0) + 1; await roomUpdate({ tickets: S.room.tickets - it.cost });
+      if ((S.room.tickets || 0) < costOf(id)) { toast('No hay tickets suficientes.', 'bad'); return; }
+      S.me.items[id] = (S.me.items[id] || 0) + 1; await roomUpdate({ tickets: S.room.tickets - costOf(id) });
     } else {
       const ref = Net.roomRef();
       const l = await ref.acquire({ holder: S.uid + ':' + TAB, ttlMs: 4000 });
       if (!l.acquired) { toast('Otra persona está comprando. Prueba en un segundo.', 'bad'); return; }
       const s = await ref.get(); const t = s.data().tickets || 0;
-      if (t < it.cost) { toast('No hay tickets suficientes.', 'bad'); return; }
-      await ref.update({ tickets: t - it.cost });
+      const cost = costOf(id); if (t < cost) { toast('No hay tickets suficientes.', 'bad'); return; }
+      await ref.update({ tickets: t - cost });
       S.me.items[id] = (S.me.items[id] || 0) + 1;
     }
     saveMe(); Sound.chip(); toast(`Compras ${it.name}.`, "good"); renderTray(); refreshDayModal(); renderHud();
@@ -1136,7 +1236,7 @@ function openBoard() {
   const r = S.room; $('#dayModal').dataset.mode = 'board'; $('#dmTitle').textContent = 'Tablón del Tiburón';
   const rows = QUOTAS.map((q, i) => { const d = i + 1; const cls = d === r.day && r.phase !== 'summary' ? 'now' : d < r.day ? 'done' : (r.phase === 'summary' && d === r.day ? 'now' : ''); return `<tr class="${cls}"><td>Día ${d}</td><td class="num">${fmt(q)}</td><td class="num">${d === 1 ? '×2,0 desde 500' : '×' + (q / QUOTAS[i - 1]).toFixed(2).replace('.', ',')}</td></tr>`; }).join('');
   $('#dmBody').innerHTML = `<div class="gwrap"><div><table class="quota-table"><thead><tr><th>Día</th><th style="text-align:right">Objetivo del banco</th><th style="text-align:right">Subida</th></tr></thead><tbody>${rows}</tbody></table></div>
-  <div class="gside"><p style="margin:0">«El dinero no se paga: se enseña. Al cerrar cada día quiero ver el banco por encima de la cifra. Tres faltas y hablamos en serio.»</p><p class="note" style="margin:0">El banco no se descuenta al cumplir: lo que sobra os sirve para el día siguiente. Tickets por día cumplido: 2, más 1 por cada 25 % por encima del objetivo (máximo 6). Si falláis, 1 ticket y un aviso.</p><p class="note" style="margin:0">Pagos aproximados: tragaperras 99,9 %, plinko 99 %, blackjack 99,5 %, crash y minas 97 %, ruleta 97,3 %. A la larga la casa gana: necesitáis suerte, objetos y valor.</p></div></div>`;
+  <div class="gside">${(() => { const k = r.phase === 'day' ? r.event : r.nextEvent; return k && EVENTS[k] ? `<p class="evbox"><b>${r.phase === 'day' ? 'Evento de hoy' : 'Evento del próximo día'}: ${EVENTS[k].n}.</b> ${EVENTS[k].d}</p>` : ''; })()}<p style="margin:0">«El dinero no se paga: se enseña. Al cerrar cada día quiero ver el banco por encima de la cifra. Tres faltas y hablamos en serio.»</p><p class="note" style="margin:0">El banco no se descuenta al cumplir: lo que sobra os sirve para el día siguiente. Tickets por día cumplido: 2, más 1 por cada 25 % por encima del objetivo (máximo 6). Si pagáis antes de tiempo, +1 ticket por cada minuto entero que sobre. Si falláis, 1 ticket y un aviso.</p><p class="note" style="margin:0">Pagos aproximados: tragaperras 99,9 %, plinko 99 %, blackjack 99,5 %, crash y minas 97 %, ruleta 97,3 %. A la larga la casa gana: necesitáis suerte, objetos y valor.</p></div></div>`;
   $('#dayModal').hidden = false;
 }
 function maybeOpenDayModal() {
@@ -1152,12 +1252,14 @@ function openDayModal() {
   const contrib = Object.values(L.contrib || {}).sort((a, b) => b.n - a.n);
   let verdict = L.passed ? `<p class="verdict ok">Día ${L.day} superado</p>` : `<p class="verdict bad">Día ${L.day}: no llegasteis</p>`;
   if (won) verdict = `<p class="verdict ok">Diez días. Deuda pagada.</p>`;
-  if (over) verdict = `<p class="verdict bad">${L.passed ? 'Fin del camino' : 'Tercer aviso'}</p><p style="margin:0 0 12px">El Tiburón se queda con todo. Llegasteis hasta el día ${L.day}.</p>`;
+  if (over) verdict = L.surrender ? `<p class="verdict bad">Os habéis rendido</p><p style="margin:0 0 12px">${esc(L.by || 'Alguien')} tiró la toalla en el día ${L.day}. El Tiburón se queda con todo.</p>`
+    : `<p class="verdict bad">${L.passed ? 'Fin del camino' : 'Tercer aviso'}</p><p style="margin:0 0 12px">El Tiburón se queda con todo. Llegasteis hasta el día ${L.day}.</p>`;
+  if (L.early && !over) verdict += `<p style="margin:0 0 12px">${esc(L.by || 'Alguien')} pagó antes de tiempo${L.bonus ? `: +${L.bonus} ticket${L.bonus > 1 ? 's' : ''} extra por los minutos que sobraban` : ''}.</p>`;
   $('#dmBody').innerHTML = `${verdict}
     <div class="day-hero"><div><span class="k">Banco al cierre</span><b class="${L.passed ? 'pos' : 'neg'}">${fmt(L.bank)}</b></div><div><span class="k">Objetivo</span><b>${fmt(L.quota)}</b></div><div><span class="k">Tickets ganados</span><b class="tix">+${L.earned}</b></div></div>
     <div class="section-t">Quién aportó qué</div>
     <ul class="contrib">${contrib.length ? contrib.map(c => `<li><span class="cdot" style="background:${/^#[0-9a-f]{6}$/i.test(c.c) ? c.c : '#999'}"></span><span class="cn">${esc(c.nick)}</span><span class="num ${c.n > 0 ? 'pos' : c.n < 0 ? 'neg' : ''}">${sgn(c.n)}</span></li>`).join('') : '<li class="note">Nadie apostó este día.</li>'}</ul>
-    ${won || over ? `<button class="btn primary big" data-act="new">Nueva partida</button>` : `<div class="section-t">Mañana: objetivo ${fmt(r.quota)} · avisos ${r.strikes}/${MAX_STRIKES}</div>
+    ${won || over ? finalBoardHTML() + `<button class="btn primary big" data-act="new">Nueva partida</button>` : `<div class="section-t">Mañana: objetivo ${fmt(r.quota)} · avisos ${r.strikes}/${MAX_STRIKES}</div>${r.nextEvent && EVENTS[r.nextEvent] ? `<p class="evbox"><b>Evento de mañana: ${EVENTS[r.nextEvent].n}.</b> ${EVENTS[r.nextEvent].d}</p>` : ''}${r.day === FLOORS[1].from || r.day === FLOORS[2].from ? `<p class="evbox"><b>Planta nueva: ${FLOORS[r.day === FLOORS[1].from ? 1 : 2].name}.</b> Coged el ascensor (a la derecha). Apuesta mínima ${fmt(FLOORS[r.day === FLOORS[1].from ? 1 : 2].min)}.</p>` : ''}
     <div class="section-t">Ventanilla</div>${shopHTML()}
     <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary big" data-act="start">Empezar día ${r.day}</button></div>`}`;
   m.hidden = false;
@@ -1167,23 +1269,118 @@ function closeDayModal() { $('#dayModal').hidden = true; }
 function refreshDayModal() {
   const m = $('#dayModal'); if (m.hidden || !S.room) return;
   if (m.dataset.mode === 'shop') renderShop();
+  else if (m.dataset.mode === 'clinic') renderClinic();
   else if (m.dataset.mode === 'day' && ['summary', 'over', 'won'].includes(S.room.phase)) { const y = $('#dmBody').parentElement.scrollTop; openDayModal(); $('#dmBody').parentElement.scrollTop = y; }
+}
+
+/* ================= clínica ================= */
+function clinicState() {
+  const r = S.room, parts = S.me.parts || [], next = PARTS.find(p => !parts.includes(p.id));
+  const missing = r ? Math.max(0, r.quota - bank()) : 0;
+  const share = evNow() === 'clinica' ? .5 : 1 / 3;
+  const price = Math.max(25, Math.round(missing * share));
+  let why = '';
+  if (!r || r.phase !== 'day' || remaining() <= 0) why = 'La clínica solo atiende durante el día.';
+  else if (!next) why = 'Ya no te queda nada que vender.';
+  else if (missing <= 0) why = 'El banco ya cubre el objetivo. El doctor no compra por capricho.';
+  else if (S.me.soldDay === r.day && S.me.gid === r.gid) why = 'Hoy ya has pasado por quirófano. Vuelve mañana.';
+  return { next, price, missing, why, share };
+}
+function openClinic() {
+  const m = $('#dayModal'); m.dataset.mode = 'clinic'; $('#dmTitle').textContent = 'Clínica del Dr. Bisturí'; renderClinic(); m.hidden = false;
+}
+function renderClinic() {
+  if ($('#dayModal').dataset.mode !== 'clinic') return;
+  const st = clinicState(), parts = S.me.parts || [];
+  $('#dmBody').innerHTML = `<div class="gwrap"><div>
+    <p style="margin:0 0 12px">«Sin preguntas, sin anestesia de marca. Te pago <b>${st.share === .5 ? 'la mitad' : 'un tercio'}</b> de lo que le falta a tu grupo para el objetivo. Una visita al día por cabeza.»</p>
+    <ul class="contrib">${PARTS.map(p => `<li><span class="cn">${p.t}</span><span class="${parts.includes(p.id) ? 'neg' : 'note'}">${parts.includes(p.id) ? 'Vendido' : p === st.next ? 'Siguiente' : 'Disponible'}</span></li>`).join('')}</ul>
+    <p class="note" style="margin:0">Lo que vendas se queda marcado en tu personaje hasta el final de la partida. Vender cuenta como dinero tuyo en el resumen del día.</p></div>
+    <div class="gside"><div class="day-hero" style="grid-template-columns:1fr 1fr;margin:0"><div><span class="k">Falta para el objetivo</span><b>${fmt(st.missing)}</b></div><div><span class="k">Te pagan</span><b class="pos">${st.next && !st.why ? '+' + fmt(st.price) : '—'}</b></div></div>
+    ${st.why ? `<div class="msg">${st.why}</div>` : ''}
+    <button class="btn danger big" data-act="sell" ${st.why ? 'disabled' : ''}>${st.next ? 'Vender ' + st.next.n : 'Nada que vender'}</button></div></div>`;
+}
+function sellPart() {
+  const st = clinicState(); if (st.why || !st.next) { toast(st.why || 'No queda nada que vender.', 'bad'); return; }
+  ensureDay();
+  S.me.parts = (S.me.parts || []).concat(st.next.id); S.me.soldDay = S.room.day;
+  S.me.dayNet += st.price; S.me.totalNet += st.price; S.me.organCash = (S.me.organCash || 0) + st.price;
+  saveMe(); renderHud(); Sound.boom();
+  addFeed({ cls: 'loss', html: `<b>${esc(S.me.nick)}</b> vende ${st.next.n} en la clínica: +${fmt(st.price)}` });
+  Net.emit('feed', { k: 'organ', p: st.next.id, a: st.price });
+  toast(`Has vendido ${st.next.n}: +${fmt(st.price)} al banco.`, 'good');
+  Floor.lastPresence = ''; renderClinic();
+}
+
+/* ================= ascensor ================= */
+function openLift() {
+  const m = $('#dayModal'); m.dataset.mode = 'lift'; $('#dmTitle').textContent = 'Ascensor';
+  const day = S.room ? S.room.day : 1;
+  const desc = ['Las versiones clásicas: tragaperras, ruleta europea, blackjack, crash, plinko y minas 5×5.', 'Dados, rueda de la fortuna, tragaperras salvaje, ruleta relámpago, crash doble y minas 6×6.', 'Hi-Lo, keno, tragaperras del Tiburón (5 rodillos), ruleta de dos bolas, blackjack del Tiburón y plinko de 16 filas.'];
+  $('#dmBody').innerHTML = `<div class="shop-grid">${FLOORS.map((f, i) => { const open = day >= f.from; return `<div class="shop-item"><header><div><h4>${f.name}</h4><span class="own">${i === Floor.floor ? 'Estás aquí' : open ? 'Abierta' : `Se abre el día ${f.from}`}${f.min > 1 ? ` · mínimo ${fmt(f.min)}` : ''}</span></div></header><p>${desc[i]}</p><button class="btn small ${open && i !== Floor.floor ? 'primary' : ''}" data-floor="${i}" ${open && i !== Floor.floor ? '' : 'disabled'}>${i === Floor.floor ? 'Ya estás aquí' : open ? 'Ir a esta planta' : 'Cerrada'}</button></div>`; }).join('')}</div>`;
+  m.hidden = false;
+}
+
+/* ================= marcador final ================= */
+function finalBoardHTML() {
+  const r = S.room; const all = Object.assign({}, S.players); if (S.uid) all[S.uid] = S.me;
+  const ps = Object.values(all).filter(p => p && p.gid === r.gid && (p.plays || p.totalNet || (p.parts || []).length));
+  if (!ps.length) return '';
+  const pick = (f, cond = () => true) => { let best = null; for (const p of ps) if (cond(p) && (best === null || f(p) > f(best))) best = p; return best; };
+  const awards = [];
+  const add = (t, p, v) => { if (p) awards.push({ t, p, v }); };
+  add('El que más aportó', pick(p => p.totalNet || 0, p => (p.totalNet || 0) > 0), p => sgn(p.totalNet));
+  add('El que más perdió', pick(p => -(p.totalNet || 0), p => (p.totalNet || 0) < 0), p => sgn(p.totalNet));
+  add('Rey del all-in', pick(p => p.allins || 0, p => (p.allins || 0) > 0), p => `${p.allins} apuestas de medio banco o más`);
+  add('Golpe maestro', pick(p => p.best || 0, p => (p.best || 0) > 0), p => `+${fmt(p.best)} de una sola vez`);
+  add('Mano fría', pick(p => p.worst || 0, p => (p.worst || 0) > 0), p => `−${fmt(p.worst)} de una sola vez`);
+  add('Donante oficial', pick(p => (p.parts || []).length, p => (p.parts || []).length > 0), p => `${(p.parts || []).length} órgano${(p.parts || []).length > 1 ? 's' : ''} vendido${(p.parts || []).length > 1 ? 's' : ''}`);
+  add('No suelta la palanca', pick(p => p.plays || 0, p => (p.plays || 0) > 0), p => `${fmt(p.plays)} jugadas`);
+  add('Coleccionista', pick(p => p.used || 0, p => (p.used || 0) > 0), p => `${p.used} objetos usados`);
+  const dot = p => `<span class="cdot" style="background:${/^#[0-9a-f]{6}$/i.test(p.color) ? p.color : '#999'}"></span>`;
+  return `<div class="section-t">Marcador final</div>
+    <div class="awards">${awards.map(a => `<div class="award"><span class="k">${a.t}</span><b>${dot(a.p)}${esc(String(a.p.nick || 'Jugador').slice(0, 16))}</b><span class="note">${a.v(a.p)}</span></div>`).join('')}</div>
+    <div style="overflow-x:auto;margin-bottom:14px"><table class="quota-table"><thead><tr><th>Jugador</th><th style="text-align:right">Aportado</th><th style="text-align:right">Jugadas</th><th style="text-align:right">Mayor premio</th><th style="text-align:right">Órganos</th></tr></thead>
+    <tbody>${ps.sort((a, b) => (b.totalNet || 0) - (a.totalNet || 0)).map(p => `<tr><td>${dot(p)} ${esc(String(p.nick || 'Jugador').slice(0, 16))}</td><td class="num ${(p.totalNet || 0) >= 0 ? 'pos' : 'neg'}">${sgn(p.totalNet || 0)}</td><td class="num">${fmt(p.plays || 0)}</td><td class="num">${fmt(p.best || 0)}</td><td class="num">${(p.parts || []).length}</td></tr>`).join('')}</tbody></table></div>`;
 }
 
 /* ================= casino floor ================= */
 const WW = 1000, WH = 620;
+const FLOORS = [
+  { name: 'Planta baja', from: 1, carpet: '#3f0f1e', line: 'rgba(230,184,92,.13)', dot: 'rgba(79,214,164,.10)', rug: '#5c1428', min: 1 },
+  { name: 'Salón Terciopelo', from: 4, carpet: '#1a1d3f', line: 'rgba(177,151,252,.16)', dot: 'rgba(255,79,163,.12)', rug: '#2c2f66', min: 50 },
+  { name: 'Ático del Tiburón', from: 7, carpet: '#0f2f2a', line: 'rgba(92,225,230,.14)', dot: 'rgba(230,184,92,.14)', rug: '#16463e', min: 200 },
+];
+// fl: planta (sin fl = en todas)
 const STATIONS = [
-  { id: 'slots', x: 70, y: 74, w: 230, h: 96, spot: { x: 185, y: 205 } },
-  { id: 'ruleta', x: 390, y: 70, w: 220, h: 130, spot: { x: 500, y: 232 } },
-  { id: 'blackjack', x: 700, y: 72, w: 230, h: 108, spot: { x: 815, y: 212 } },
-  { id: 'crash', x: 70, y: 410, w: 200, h: 120, spot: { x: 170, y: 378 } },
-  { id: 'plinko', x: 420, y: 418, w: 160, h: 150, spot: { x: 500, y: 386 } },
-  { id: 'minas', x: 730, y: 410, w: 200, h: 120, spot: { x: 830, y: 378 } },
+  { id: 'slots', fl: 0, x: 70, y: 74, w: 230, h: 96, spot: { x: 185, y: 205 } },
+  { id: 'ruleta', fl: 0, x: 390, y: 70, w: 220, h: 130, spot: { x: 500, y: 232 } },
+  { id: 'blackjack', fl: 0, x: 700, y: 72, w: 230, h: 108, spot: { x: 815, y: 212 } },
+  { id: 'crash', fl: 0, x: 70, y: 410, w: 200, h: 120, spot: { x: 170, y: 378 } },
+  { id: 'plinko', fl: 0, x: 420, y: 418, w: 160, h: 150, spot: { x: 500, y: 386 } },
+  { id: 'minas', fl: 0, x: 700, y: 410, w: 200, h: 120, spot: { x: 800, y: 378 } },
+  { id: 'dados', fl: 1, x: 80, y: 78, w: 230, h: 110, spot: { x: 195, y: 220 } },
+  { id: 'rueda', fl: 1, x: 420, y: 66, w: 160, h: 150, spot: { x: 500, y: 248 } },
+  { id: 'slots2', fl: 1, x: 700, y: 74, w: 230, h: 96, spot: { x: 815, y: 205 } },
+  { id: 'crash2', fl: 1, x: 70, y: 410, w: 200, h: 120, spot: { x: 170, y: 378 } },
+  { id: 'ruleta2', fl: 1, x: 410, y: 420, w: 210, h: 124, spot: { x: 515, y: 388 } },
+  { id: 'minas2', fl: 1, x: 690, y: 410, w: 200, h: 124, spot: { x: 790, y: 378 } },
+  { id: 'hilo', fl: 2, x: 80, y: 78, w: 230, h: 110, spot: { x: 195, y: 220 } },
+  { id: 'keno', fl: 2, x: 410, y: 70, w: 180, h: 130, spot: { x: 500, y: 232 } },
+  { id: 'blackjack2', fl: 2, x: 700, y: 72, w: 230, h: 108, spot: { x: 815, y: 212 } },
+  { id: 'slots3', fl: 2, x: 70, y: 420, w: 200, h: 100, spot: { x: 170, y: 388 } },
+  { id: 'plinko2', fl: 2, x: 430, y: 418, w: 160, h: 150, spot: { x: 510, y: 386 } },
+  { id: 'ruleta3', fl: 2, x: 680, y: 416, w: 210, h: 124, spot: { x: 785, y: 384 } },
+  { id: 'clinica', x: 296, y: 440, w: 96, h: 100, spot: { x: 344, y: 410 } },
+  { id: 'ascensor', x: 946, y: 420, w: 46, h: 112, spot: { x: 918, y: 476 } },
   { id: 'tienda', x: 932, y: 250, w: 58, h: 120, spot: { x: 892, y: 310 } },
   { id: 'tablon', x: 10, y: 250, w: 58, h: 120, spot: { x: 108, y: 310 } },
 ];
-const LABEL = Object.assign({ tienda: 'Ventanilla', tablon: 'Tablón' }, GAME_NAMES);
+const DECOR = [];
+const LABEL = Object.assign({ tienda: 'Ventanilla', tablon: 'Tablón', clinica: 'Clínica', ascensor: 'Ascensor' }, GAME_NAMES);
 const PILLARS = [{ x: 318, y: 292, w: 28, h: 28 }, { x: 654, y: 292, w: 28, h: 28 }];
+const ST = () => STATIONS.filter(s => s.fl === undefined || s.fl === Floor.floor);
+const OBST = () => ST().concat(PILLARS, DECOR.filter(d => d.fl === Floor.floor));
 const ORDER = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
 const REDS = new Set([1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]);
 
@@ -1195,7 +1392,7 @@ function shade(hex, f) {
 }
 function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
 
-function drawAvatar(c, x, y, color, hat, fx, fy, walk, t, s = 1) {
+function drawAvatar(c, x, y, color, hat, fx, fy, walk, t, s = 1, parts = []) {
   c.save(); c.translate(x, y); c.scale(s, s);
   c.fillStyle = 'rgba(0,0,0,.35)'; c.beginPath(); c.ellipse(0, 15, 14, 5, 0, 0, Math.PI * 2); c.fill();
   const step = walk ? Math.sin(t * 14) * 3 : 0;
@@ -1208,6 +1405,11 @@ function drawAvatar(c, x, y, color, hat, fx, fy, walk, t, s = 1) {
   const ex = fx * 3.5, ey = fy * 2.5 - 2;
   c.fillStyle = '#fff'; c.beginPath(); c.ellipse(-5 + ex, ey, 3.6, 4.4, 0, 0, Math.PI * 2); c.ellipse(5 + ex, ey, 3.6, 4.4, 0, 0, Math.PI * 2); c.fill();
   c.fillStyle = '#1b1015'; c.beginPath(); c.arc(-5 + ex + fx * 1.4, ey + fy * 1.4, 1.9, 0, Math.PI * 2); c.arc(5 + ex + fx * 1.4, ey + fy * 1.4, 1.9, 0, Math.PI * 2); c.fill();
+  // marcas de la clínica
+  if (parts.includes('rinon')) { c.strokeStyle = '#5a1020'; c.lineWidth = 1.4; c.beginPath(); c.moveTo(-7, 8); c.lineTo(5, 10); c.stroke(); for (let i = 0; i < 4; i++) { const sx = -5.5 + i * 3.2; c.beginPath(); c.moveTo(sx, 7); c.lineTo(sx + .6, 11); c.stroke(); } }
+  if (parts.includes('dedo')) { c.save(); c.translate(-12, 5); c.rotate(-.5); c.fillStyle = '#f2d2a9'; c.fillRect(-5, -2.5, 10, 5); c.fillStyle = '#d9b48a'; c.fillRect(-1.5, -2.5, 3, 5); c.restore(); }
+  if (parts.includes('oreja')) { c.fillStyle = '#fff8ea'; c.strokeStyle = '#c9bfae'; c.lineWidth = 1; c.save(); c.translate(13, -3); c.rotate(.3); c.fillRect(-3, -6, 6, 12); c.strokeRect(-3, -6, 6, 12); c.restore(); }
+  if (parts.includes('ojo')) { c.strokeStyle = '#1b1015'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(-14, -8); c.lineTo(14, -1); c.stroke(); c.fillStyle = '#1b1015'; c.beginPath(); c.ellipse(-5 + fx * 3.5, fy * 2.5 - 2, 4.8, 5.4, 0, 0, Math.PI * 2); c.fill(); }
   // hats
   if (hat === 'top') { c.fillStyle = '#16121a'; c.fillRect(-11, -14, 22, 3.5); c.fillRect(-7, -27, 14, 14); c.fillStyle = '#e6b85c'; c.fillRect(-7, -17, 14, 3); }
   else if (hat === 'cap') { c.fillStyle = shade(color, -.55); c.beginPath(); c.arc(0, -10, 10, Math.PI, 0); c.fill(); c.fillRect(fx >= 0 ? 0 : -14, -11, 14, 3); }
@@ -1217,7 +1419,7 @@ function drawAvatar(c, x, y, color, hat, fx, fy, walk, t, s = 1) {
 }
 
 const Floor = {
-  cv: null, c: null, dpr: 1, k: 1, bg: null,
+  cv: null, c: null, dpr: 1, k: 1, bg: null, floor: 0,
   pos: { x: 500, y: 330 }, face: { x: 0, y: 1 }, walking: false, target: null, pending: null,
   keys: new Set(), near: null, at: null, others: new Map(), myEmote: null, lastSent: 0, lastPresence: '',
   init() {
@@ -1237,20 +1439,25 @@ const Floor = {
     this.cv.width = Math.round(r.width * this.dpr); this.cv.height = Math.round(r.width * WH / WW * this.dpr);
     this.buildBg();
   },
+  goFloor(n) {
+    if (n === this.floor) return; this.floor = n; this.buildBg();
+    const lift = STATIONS.find(s => s.id === 'ascensor'); this.pos = { x: lift.spot.x - 10, y: lift.spot.y }; this.target = null; this.pending = null; this.face = { x: -1, y: 0 };
+    this.lastPresence = ''; Sound.bell(); renderSide();
+  },
   spawn() { this.pos = { x: 500 + (rnd() - .5) * 160, y: 300 + rnd() * 40 }; this.target = null; this.pending = null; this.face = { x: 0, y: 1 }; },
   buildBg() {
     const b = document.createElement('canvas'); b.width = this.cv.width; b.height = this.cv.height;
     const c = b.getContext('2d'); c.scale(this.k * this.dpr, this.k * this.dpr);
     // carpet
-    c.fillStyle = '#3f0f1e'; c.fillRect(0, 0, WW, WH);
+    const FL = FLOORS[this.floor]; c.fillStyle = FL.carpet; c.fillRect(0, 0, WW, WH);
     for (let y = 40; y < WH; y += 48) for (let x = 0; x < WW + 48; x += 48) {
       const ox = (Math.floor(y / 48) % 2) * 24;
-      c.strokeStyle = 'rgba(230,184,92,.13)'; c.lineWidth = 1.2; c.beginPath();
+      c.strokeStyle = FL.line; c.lineWidth = 1.2; c.beginPath();
       c.moveTo(x + ox, y); c.lineTo(x + ox + 12, y + 12); c.lineTo(x + ox, y + 24); c.lineTo(x + ox - 12, y + 12); c.closePath(); c.stroke();
-      c.fillStyle = 'rgba(79,214,164,.10)'; c.beginPath(); c.arc(x + ox, y + 12, 2.2, 0, Math.PI * 2); c.fill();
+      c.fillStyle = FL.dot; c.beginPath(); c.arc(x + ox, y + 12, 2.2, 0, Math.PI * 2); c.fill();
     }
     // runner from the door
-    c.fillStyle = '#5c1428'; c.beginPath(); c.ellipse(500, 318, 150, 62, 0, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#c69a45'; c.lineWidth = 3; c.beginPath(); c.ellipse(500, 318, 142, 56, 0, 0, Math.PI * 2); c.stroke(); c.font = '13px Bungee, sans-serif'; c.textAlign = 'center'; c.fillStyle = 'rgba(230,184,92,.35)'; c.fillText('CASINO MOROSO', 500, 323);
+    c.fillStyle = FL.rug; c.beginPath(); c.ellipse(500, 318, 150, 62, 0, 0, Math.PI * 2); c.fill(); c.strokeStyle = '#c69a45'; c.lineWidth = 3; c.beginPath(); c.ellipse(500, 318, 142, 56, 0, 0, Math.PI * 2); c.stroke(); c.font = '13px Bungee, sans-serif'; c.textAlign = 'center'; c.fillStyle = 'rgba(230,184,92,.35)'; c.fillText(this.floor ? FL.name.toUpperCase() : 'CASINO MOROSO', 500, 323);
     // top wall
     const wg = c.createLinearGradient(0, 0, 0, 52); wg.addColorStop(0, '#24130f'); wg.addColorStop(1, '#3a2118'); c.fillStyle = wg; c.fillRect(0, 0, WW, 52);
     for (let x = 0; x < WW; x += 40) { c.fillStyle = 'rgba(0,0,0,.18)'; c.fillRect(x, 0, 2, 52); }
@@ -1279,7 +1486,7 @@ const Floor = {
   onPointer(e) {
     const r = this.cv.getBoundingClientRect(); const x = (e.clientX - r.left) / this.k, y = (e.clientY - r.top) / this.k;
     Sound.ac();
-    const st = STATIONS.find(s => x >= s.x - 6 && x <= s.x + s.w + 6 && y >= s.y - 24 && y <= s.y + s.h + 6);
+    const st = ST().find(s => x >= s.x - 6 && x <= s.x + s.w + 6 && y >= s.y - 24 && y <= s.y + s.h + 6);
     if (st) {
       if (Math.hypot(this.pos.x - st.spot.x, this.pos.y - st.spot.y) < 64) { openStation(st.id); return; }
       this.target = { ...st.spot }; this.pending = st.id;
@@ -1287,7 +1494,7 @@ const Floor = {
   },
   blocked(x, y) {
     if (x < 24 || x > WW - 24 || y < 64 || y > WH - 20) return true;
-    for (const s of STATIONS.concat(PILLARS)) { const cx = clamp(x, s.x, s.x + s.w), cy = clamp(y, s.y, s.y + s.h); if ((x - cx) ** 2 + (y - cy) ** 2 < 14 * 14) return true; }
+    for (const s of OBST()) { const cx = clamp(x, s.x, s.x + s.w), cy = clamp(y, s.y, s.y + s.h); if ((x - cx) ** 2 + (y - cy) ** 2 < 14 * 14) return true; }
     return false;
   },
   /* ---- frame ---- */
@@ -1312,19 +1519,19 @@ const Floor = {
       let moved = false;
       if (!this.blocked(nx, this.pos.y)) { this.pos.x = nx; moved = true; }
       if (!this.blocked(this.pos.x, ny)) { this.pos.y = ny; moved = true; }
-      if (!moved && this.target) { this.target = null; if (this.pending) { const st = STATIONS.find(s => s.id === this.pending); this.pending = null; if (st && Math.hypot(this.pos.x - st.spot.x, this.pos.y - st.spot.y) < 90) openStation(st.id); } }
+      if (!moved && this.target) { this.target = null; if (this.pending) { const st = ST().find(s => s.id === this.pending); this.pending = null; if (st && Math.hypot(this.pos.x - st.spot.x, this.pos.y - st.spot.y) < 90) openStation(st.id); } }
     }
     // proximity
     let near = null, nd = 64;
-    for (const s of STATIONS) { const d = Math.hypot(this.pos.x - s.spot.x, this.pos.y - s.spot.y); if (d < nd) { nd = d; near = s.id; } }
+    for (const s of ST()) { const d = Math.hypot(this.pos.x - s.spot.x, this.pos.y - s.spot.y); if (d < nd) { nd = d; near = s.id; } }
     this.near = near;
     const pr = $('#prompt');
-    if (near && !busy) { const s = STATIONS.find(x => x.id === near); pr.hidden = false; pr.style.left = (s.spot.x * this.k) + 'px'; pr.style.top = ((s.spot.y - 18) * this.k) + 'px'; pr.innerHTML = `<kbd>E</kbd>${near === 'tienda' ? 'Comprar' : near === 'tablon' ? 'Leer' : 'Jugar'} · ${LABEL[near]}`; }
+    if (near && !busy) { const s = ST().find(x => x.id === near); pr.hidden = false; const pw = pr.offsetWidth || 160; pr.style.left = clamp(s.spot.x * this.k, pw / 2 + 6, WW * this.k - pw / 2 - 6) + 'px'; pr.style.top = ((s.spot.y - 18) * this.k) + 'px'; pr.innerHTML = `<kbd>E</kbd>${{ tienda: 'Comprar', tablon: 'Leer', clinica: 'Entrar', ascensor: 'Subir o bajar' }[near] || 'Jugar'} · ${LABEL[near]}`; }
     else pr.hidden = true;
     // presence
     const now = performance.now();
     if (now - this.lastSent > 90) {
-      const p = { x: Math.round(this.pos.x), y: Math.round(this.pos.y), fx: Math.round(this.face.x * 10) / 10, fy: Math.round(this.face.y * 10) / 10, w: this.walking ? 1 : 0, c: S.me?.color, h: S.me?.hat, nk: S.me?.nick, u: S.uid, at: this.at, em: this.myEmote ? this.myEmote.e : null, emAt: this.myEmote ? this.myEmote.t : 0 };
+      const p = { x: Math.round(this.pos.x), y: Math.round(this.pos.y), fx: Math.round(this.face.x * 10) / 10, fy: Math.round(this.face.y * 10) / 10, w: this.walking ? 1 : 0, c: S.me?.color, h: S.me?.hat, nk: S.me?.nick, u: S.uid, at: this.at, em: this.myEmote ? this.myEmote.e : null, emAt: this.myEmote ? this.myEmote.t : 0, fl: this.floor, pt: (S.me?.parts || []).join(',') };
       const key = JSON.stringify(p);
       if (key !== this.lastPresence) { this.lastPresence = key; this.lastSent = now; Net.presence(p); }
     }
@@ -1341,24 +1548,25 @@ const Floor = {
   draw(dt, t) {
     const c = this.c; c.setTransform(1, 0, 0, 1, 0, 0); c.drawImage(this.bg, 0, 0);
     c.setTransform(this.k * this.dpr, 0, 0, this.k * this.dpr, 0, 0);
-    for (const s of STATIONS) this.drawStation(c, s, t);
+    for (const d of DECOR) if (d.fl === this.floor) this.drawDecor(c, d, t);
+    for (const s of ST()) this.drawStation(c, s, t);
     // collect avatars
     const list = [];
     const seen = new Set();
     for (const p of S.peers) {
       if (p.sameTab || p.kind !== 'viewer') continue; const pr = p.presence || {};
-      if (typeof pr.x !== 'number' || typeof pr.y !== 'number') continue;
+      if (typeof pr.x !== 'number' || typeof pr.y !== 'number' || (+pr.fl || 0) !== this.floor) continue;
       seen.add(p.peer);
       let o = this.others.get(p.peer); if (!o) { o = { x: pr.x, y: pr.y }; this.others.set(p.peer, o); }
       const a = Math.min(1, dt * 10); o.x = lerp(o.x, clamp(pr.x, 0, WW), a); o.y = lerp(o.y, clamp(pr.y, 0, WH), a);
       const col = /^#[0-9a-f]{6}$/i.test(pr.c) ? pr.c : '#999999';
-      list.push({ x: o.x, y: o.y, color: col, hat: pr.h, fx: +pr.fx || 0, fy: +pr.fy || 1, walk: !!pr.w, nick: typeof pr.nk === 'string' ? pr.nk.slice(0, 16) : 'Alguien', at: pr.at, em: typeof pr.em === 'string' ? pr.em : null, emAt: +pr.emAt || 0, me: false });
+      list.push({ x: o.x, y: o.y, color: col, hat: pr.h, fx: +pr.fx || 0, fy: +pr.fy || 1, walk: !!pr.w, nick: typeof pr.nk === 'string' ? pr.nk.slice(0, 16) : 'Alguien', at: pr.at, em: typeof pr.em === 'string' ? pr.em : null, emAt: +pr.emAt || 0, me: false, parts: typeof pr.pt === 'string' ? pr.pt.split(',').filter(x => PART_IDS.includes(x)) : [] });
     }
     for (const k of this.others.keys()) if (!seen.has(k)) this.others.delete(k);
-    if (S.me) list.push({ x: this.pos.x, y: this.pos.y, color: S.me.color, hat: S.me.hat, fx: this.face.x, fy: this.face.y, walk: this.walking, nick: S.me.nick, at: this.at, em: this.myEmote?.e, emAt: this.myEmote?.t || 0, me: true });
+    if (S.me) list.push({ x: this.pos.x, y: this.pos.y, color: S.me.color, hat: S.me.hat, fx: this.face.x, fy: this.face.y, walk: this.walking, nick: S.me.nick, at: this.at, em: this.myEmote?.e, emAt: this.myEmote?.t || 0, me: true, parts: S.me.parts || [] });
     list.sort((a, b) => a.y - b.y);
     for (const a of list) {
-      drawAvatar(c, a.x, a.y, a.color, a.hat, a.fx, a.fy, a.walk, t + (a.me ? 0 : a.x * .01));
+      drawAvatar(c, a.x, a.y, a.color, a.hat, a.fx, a.fy, a.walk, t + (a.me ? 0 : a.x * .01), 1, a.parts);
       c.font = '700 11px Figtree, sans-serif'; c.textAlign = 'center';
       const label = a.nick + (a.at && GAME_NAMES[a.at] ? ' · ' + GAME_NAMES[a.at] : '');
       const w = c.measureText(label).width + 12;
@@ -1380,15 +1588,15 @@ const Floor = {
     const f = this['st_' + s.id]; if (f) f.call(this, c, s, t);
     if (near) { c.strokeStyle = `rgba(230,184,92,${.55 + Math.sin(t * 5) * .3})`; c.lineWidth = 2.5; c.setLineDash([8, 6]); rr(c, s.x - 6, s.y - 6, s.w + 12, s.h + 12, 16); c.stroke(); c.setLineDash([]); }
     c.restore();
-    const lx = s.x + s.w / 2, ly = s.id === 'tienda' || s.id === 'tablon' ? s.y - 10 : s.y - 10;
-    const col = { slots: '#ffd76a', ruleta: '#ff6b81', blackjack: '#7cf0c5', crash: '#ff4fa3', plinko: '#b197fc', minas: '#5ce1e6', tienda: '#ffd76a', tablon: '#f6ead2' }[s.id];
+    const lx = s.x + s.w / 2, ly = s.y - 10;
+    const col = { slots: '#ffd76a', ruleta: '#ff6b81', blackjack: '#7cf0c5', crash: '#ff4fa3', plinko: '#b197fc', minas: '#5ce1e6', tienda: '#ffd76a', tablon: '#f6ead2', clinica: '#7cf0c5', ascensor: '#ffd76a', dados: '#ff8a5c', rueda: '#ffd76a', hilo: '#7cf0c5', keno: '#5ce1e6', slots2: '#c9a7ff', ruleta2: '#ffe066', crash2: '#5ce1e6', minas2: '#ffd76a', slots3: '#5ce1e6', ruleta3: '#ff6b81', blackjack2: '#9fb8ff', plinko2: '#ffd76a' }[s.id];
     this.neon(c, LABEL[s.id].toUpperCase(), lx, ly, col);
   },
-  st_slots(c, s, t) {
+  st_slots(c, s, t, pal) {
     const n = 3, gap = 10, w = (s.w - gap * (n - 1)) / n;
     for (let i = 0; i < n; i++) {
       const x = s.x + i * (w + gap), y = s.y;
-      const g = c.createLinearGradient(0, y, 0, y + s.h); g.addColorStop(0, '#9a2240'); g.addColorStop(1, '#4a0e1e');
+      const g = c.createLinearGradient(0, y, 0, y + s.h); g.addColorStop(0, pal ? pal[0] : '#9a2240'); g.addColorStop(1, pal ? pal[1] : '#4a0e1e');
       c.fillStyle = g; rr(c, x, y, w, s.h, 12); c.fill(); c.strokeStyle = '#e6b85c'; c.lineWidth = 2; c.stroke();
       c.fillStyle = '#e6b85c'; c.beginPath(); c.ellipse(x + w / 2, y + 6, w / 2 - 4, 9, 0, Math.PI, 0); c.fill();
       c.fillStyle = '#140a10'; rr(c, x + 8, y + 18, w - 16, 34, 5); c.fill();
@@ -1398,9 +1606,9 @@ const Floor = {
       c.strokeStyle = '#c0c0c0'; c.lineWidth = 3; c.beginPath(); c.moveTo(x + w - 2, y + 40); c.lineTo(x + w + 5, y + 30); c.stroke(); c.fillStyle = '#e63946'; c.beginPath(); c.arc(x + w + 5, y + 28, 4, 0, Math.PI * 2); c.fill();
     }
   },
-  st_ruleta(c, s, t) {
+  st_ruleta(c, s, t, felt) {
     c.fillStyle = '#5a3a20'; c.beginPath(); c.ellipse(s.x + s.w / 2, s.y + s.h / 2, s.w / 2, s.h / 2, 0, 0, Math.PI * 2); c.fill();
-    c.fillStyle = '#126848'; c.beginPath(); c.ellipse(s.x + s.w / 2, s.y + s.h / 2, s.w / 2 - 8, s.h / 2 - 8, 0, 0, Math.PI * 2); c.fill();
+    c.fillStyle = felt || '#126848'; c.beginPath(); c.ellipse(s.x + s.w / 2, s.y + s.h / 2, s.w / 2 - 8, s.h / 2 - 8, 0, 0, Math.PI * 2); c.fill();
     const cx = s.x + 62, cy = s.y + s.h / 2, R = 40, a0 = t * .8;
     c.fillStyle = '#3a2112'; c.beginPath(); c.arc(cx, cy, R + 5, 0, Math.PI * 2); c.fill();
     for (let i = 0; i < 37; i++) { const a = a0 + i / 37 * Math.PI * 2; c.fillStyle = ORDER[i] === 0 ? '#12a05a' : REDS.has(ORDER[i]) ? '#c0202e' : '#15151a'; c.beginPath(); c.moveTo(cx, cy); c.arc(cx, cy, R, a, a + Math.PI * 2 / 37 + .01); c.fill(); }
@@ -1411,25 +1619,25 @@ const Floor = {
     for (let i = 1; i < 6; i++) { c.beginPath(); c.moveTo(gx + i * gw / 6, gy); c.lineTo(gx + i * gw / 6, gy + gh); c.stroke(); }
     for (let j = 1; j < 3; j++) { c.beginPath(); c.moveTo(gx, gy + j * gh / 3); c.lineTo(gx + gw, gy + j * gh / 3); c.stroke(); }
   },
-  st_blackjack(c, s, t) {
+  st_blackjack(c, s, t, felt) {
     const cx = s.x + s.w / 2, top = s.y;
     c.fillStyle = '#5a3a20'; c.beginPath(); c.moveTo(s.x, top); c.lineTo(s.x + s.w, top); c.ellipse(cx, top, s.w / 2, s.h, 0, 0, Math.PI); c.closePath(); c.fill();
-    c.fillStyle = '#137452'; c.beginPath(); c.moveTo(s.x + 8, top + 4); c.lineTo(s.x + s.w - 8, top + 4); c.ellipse(cx, top + 4, s.w / 2 - 8, s.h - 12, 0, 0, Math.PI); c.closePath(); c.fill();
+    c.fillStyle = felt || '#137452'; c.beginPath(); c.moveTo(s.x + 8, top + 4); c.lineTo(s.x + s.w - 8, top + 4); c.ellipse(cx, top + 4, s.w / 2 - 8, s.h - 12, 0, 0, Math.PI); c.closePath(); c.fill();
     c.strokeStyle = 'rgba(230,184,92,.6)'; c.lineWidth = 1.5; c.beginPath(); c.ellipse(cx, top + 4, s.w / 2 - 30, s.h - 40, 0, .15, Math.PI - .15); c.stroke();
     for (let i = 0; i < 3; i++) { c.save(); c.translate(cx - 28 + i * 24, top + 34); c.rotate((i - 1) * .12); c.fillStyle = '#fffaf0'; rr(c, -9, -12, 18, 24, 3); c.fill(); c.fillStyle = i === 1 ? '#c4162c' : '#1b1b22'; c.font = '700 10px Chivo Mono, monospace'; c.textAlign = 'center'; c.fillText(['A', 'K', '7'][i], 0, 4); c.restore(); }
     c.fillStyle = '#7a1830'; for (let i = 0; i < 5; i++) { const a = Math.PI * (.12 + i * .19); c.beginPath(); c.arc(cx + Math.cos(a) * (s.w / 2 + 2), top + Math.sin(a) * (s.h + 4), 9, 0, Math.PI * 2); c.fill(); }
   },
-  st_crash(c, s, t) {
+  st_crash(c, s, t, line) {
     c.fillStyle = '#2a1830'; rr(c, s.x - 4, s.y - 4, s.w + 8, s.h + 8, 12); c.fill();
     c.fillStyle = '#0d0912'; rr(c, s.x, s.y, s.w, s.h, 9); c.fill();
     c.strokeStyle = 'rgba(255,79,163,.18)'; c.lineWidth = 1; for (let i = 1; i < 6; i++) { c.beginPath(); c.moveTo(s.x + i * s.w / 6, s.y); c.lineTo(s.x + i * s.w / 6, s.y + s.h); c.stroke(); }
     const cyc = (t % 5) / 4, crashed = cyc > 1; const p = Math.min(1, cyc);
-    c.strokeStyle = crashed ? '#ff5d73' : '#ff4fa3'; c.lineWidth = 3; c.beginPath();
+    c.strokeStyle = crashed ? '#ff5d73' : line || '#ff4fa3'; c.lineWidth = 3; c.beginPath();
     for (let i = 0; i <= 30; i++) { const q = i / 30 * p; const x = s.x + 12 + q * (s.w - 24), y = s.y + s.h - 14 - (Math.exp(q * 2.2) - 1) / (Math.exp(2.2) - 1) * (s.h - 34); i ? c.lineTo(x, y) : c.moveTo(x, y); } c.stroke();
     c.font = '18px Bungee, sans-serif'; c.textAlign = 'center'; c.fillStyle = crashed ? '#ff5d73' : '#f6ead2'; c.fillText('×' + Math.exp(p * 1.4).toFixed(2), s.x + s.w / 2, s.y + 32);
   },
-  st_plinko(c, s, t) {
-    const g = c.createLinearGradient(0, s.y, 0, s.y + s.h); g.addColorStop(0, '#3a1f50'); g.addColorStop(1, '#1a0d24'); c.fillStyle = g; rr(c, s.x, s.y, s.w, s.h, 12); c.fill(); c.strokeStyle = '#b197fc'; c.lineWidth = 2; c.stroke();
+  st_plinko(c, s, t, pal) {
+    const g = c.createLinearGradient(0, s.y, 0, s.y + s.h); g.addColorStop(0, pal ? pal[0] : '#3a1f50'); g.addColorStop(1, pal ? pal[1] : '#1a0d24'); c.fillStyle = g; rr(c, s.x, s.y, s.w, s.h, 12); c.fill(); c.strokeStyle = pal ? pal[2] : '#b197fc'; c.lineWidth = 2; c.stroke();
     const cx = s.x + s.w / 2; for (let r = 0; r < 7; r++) for (let j = 0; j <= r + 2; j++) { c.fillStyle = '#e8dcff'; c.beginPath(); c.arc(cx + (j - (r + 2) / 2) * 16, s.y + 18 + r * 15, 2, 0, Math.PI * 2); c.fill(); }
     const cols = ['#ff4fa3', '#ff8a5c', '#ffd76a', '#4fd6a4', '#ffd76a', '#ff8a5c', '#ff4fa3']; cols.forEach((col, i) => { c.fillStyle = col; rr(c, s.x + 10 + i * ((s.w - 20) / 7) + 1, s.y + s.h - 26, (s.w - 20) / 7 - 2, 14, 3); c.fill(); });
     const ph = (t % 2) / 2, step = Math.floor(ph * 7); let bx = cx; for (let i = 0; i < step; i++) bx += (Math.sin(i * 12.9 + Math.floor(t / 2) * 3.1) > 0 ? 8 : -8);
@@ -1446,6 +1654,93 @@ const Floor = {
     c.strokeStyle = '#a8812f'; c.lineWidth = 1.5; for (let i = 1; i < 4; i++) { c.beginPath(); c.moveTo(s.x + 8 + i * (s.w - 16) / 4, s.y + 12); c.lineTo(s.x + 8 + i * (s.w - 16) / 4, s.y + s.h / 2 - 10); c.stroke(); }
     c.fillStyle = '#ffd76a'; c.font = '9px Bungee, sans-serif'; c.textAlign = 'center'; c.fillText('TICKETS', s.x + s.w / 2, s.y + s.h - 26); c.fillText(String(S.room?.tickets ?? ''), s.x + s.w / 2, s.y + s.h - 12);
   },
+  st_slots2(c, s, t) { this.st_slots(c, s, t, ['#7a3ac0', '#2a0f4a']); },
+  st_slots3(c, s, t) {
+    const g = c.createLinearGradient(0, s.y, 0, s.y + s.h); g.addColorStop(0, '#1f6a80'); g.addColorStop(1, '#0b1f2a');
+    c.fillStyle = g; rr(c, s.x, s.y, s.w, s.h, 14); c.fill(); c.strokeStyle = '#5ce1e6'; c.lineWidth = 2; c.stroke();
+    c.fillStyle = '#0b1218'; rr(c, s.x + 12, s.y + 22, s.w - 24, 40, 6); c.fill();
+    for (let j = 0; j < 5; j++) { const k = Math.floor(t * 3 + j * 1.3) % 4; c.fillStyle = ['#e63946', '#ffd43b', '#38d9e8', '#f6ead2'][k]; c.beginPath(); c.arc(s.x + 12 + (s.w - 24) * (j + .5) / 5, s.y + 42, 7, 0, Math.PI * 2); c.fill(); }
+    c.fillStyle = '#7d8a99'; c.beginPath(); c.moveTo(s.x + s.w / 2 - 14, s.y + 4); c.lineTo(s.x + s.w / 2 + 6, s.y - 16); c.lineTo(s.x + s.w / 2 + 14, s.y + 4); c.fill();
+    for (let j = 0; j < 9; j++) { const on = (Math.floor(t * 5) + j) % 2; c.fillStyle = on ? '#a5f3fc' : '#1f4a5c'; c.beginPath(); c.arc(s.x + 16 + j * (s.w - 32) / 8, s.y + 78, 3, 0, Math.PI * 2); c.fill(); }
+  },
+  st_ruleta2(c, s, t) {
+    this.st_ruleta(c, s, t, '#1b3f6a');
+    if (Math.floor(t * 3) % 4 === 0) { c.strokeStyle = '#ffe066'; c.lineWidth = 3; c.shadowColor = '#ffe066'; c.shadowBlur = 12; c.beginPath(); const x = s.x + 150 + Math.sin(t * 7) * 30, y = s.y + 20; c.moveTo(x, y); c.lineTo(x - 10, y + 30); c.lineTo(x + 4, y + 30); c.lineTo(x - 6, y + 62); c.stroke(); c.shadowBlur = 0; }
+  },
+  st_ruleta3(c, s, t) {
+    this.st_ruleta(c, s, t, '#4a1028');
+    const cx = s.x + 62, cy = s.y + s.h / 2, ba = t * 2.6 + 2; c.fillStyle = '#ffd76a'; c.beginPath(); c.arc(cx + Math.cos(ba) * 34, cy + Math.sin(ba) * 34, 3, 0, Math.PI * 2); c.fill();
+  },
+  st_crash2(c, s, t) { this.st_crash(c, s, t, '#5ce1e6'); },
+  st_minas2(c, s, t) {
+    c.fillStyle = '#2e2410'; rr(c, s.x, s.y, s.w, s.h, 12); c.fill(); c.strokeStyle = '#ffd76a'; c.lineWidth = 2; c.stroke();
+    const sz = 14, gx = s.x + (s.w - 6 * (sz + 3)) / 2, gy = s.y + (s.h - 6 * (sz + 3)) / 2 + 2;
+    for (let i = 0; i < 36; i++) { const x = gx + (i % 6) * (sz + 3), y = gy + Math.floor(i / 6) * (sz + 3); const k = (i * 5 + Math.floor(t * 1.5)) % 13; c.fillStyle = k === 0 ? '#ffd76a' : k === 7 ? '#c0202e' : '#5a4a2a'; rr(c, x, y, sz, sz, 3); c.fill(); }
+  },
+  st_blackjack2(c, s, t) { this.st_blackjack(c, s, t, '#1b2f6a'); },
+  st_plinko2(c, s, t) { this.st_plinko(c, s, t, ['#4a3a10', '#1a1406', '#ffd76a']); },
+  st_clinica(c, s, t) {
+    c.fillStyle = '#e9f4f1'; rr(c, s.x, s.y, s.w, s.h, 8); c.fill(); c.strokeStyle = '#7cf0c5'; c.lineWidth = 2; c.stroke();
+    c.fillStyle = '#bcd9d2'; rr(c, s.x + 22, s.y + 34, s.w - 44, s.h - 34, 4); c.fill();
+    c.fillStyle = '#2a9c74'; c.fillRect(s.x + s.w / 2 - 4, s.y + 8, 8, 22); c.fillRect(s.x + s.w / 2 - 11, s.y + 15, 22, 8);
+    c.fillStyle = '#1b1015'; c.beginPath(); c.arc(s.x + s.w - 30, s.y + 70, 2.5, 0, Math.PI * 2); c.fill();
+    const on = Math.floor(t * 2) % 2; c.fillStyle = on ? '#ff5d73' : '#6a2030'; c.beginPath(); c.arc(s.x + 10, s.y + 10, 4, 0, Math.PI * 2); c.fill();
+  },
+  st_ascensor(c, s, t) {
+    c.fillStyle = '#8a6a2a'; rr(c, s.x, s.y, s.w, s.h, 4); c.fill();
+    c.fillStyle = '#c9a050'; c.fillRect(s.x + 4, s.y + 22, s.w / 2 - 5, s.h - 26); c.fillRect(s.x + s.w / 2 + 1, s.y + 22, s.w / 2 - 5, s.h - 26);
+    c.fillStyle = '#120a10'; rr(c, s.x + 6, s.y + 4, s.w - 12, 14, 3); c.fill();
+    c.fillStyle = '#ffd76a'; c.font = '700 10px Chivo Mono, monospace'; c.textAlign = 'center'; c.fillText(['B', 'V', 'Á'][this.floor], s.x + s.w / 2, s.y + 15);
+  },
+  st_dados(c, s, t) {
+    c.fillStyle = '#5a3a20'; rr(c, s.x, s.y, s.w, s.h, 30); c.fill(); c.fillStyle = '#0f6a4a'; rr(c, s.x + 8, s.y + 8, s.w - 16, s.h - 16, 24); c.fill();
+    c.strokeStyle = 'rgba(246,234,210,.55)'; c.lineWidth = 1.5; c.strokeRect(s.x + 30, s.y + 28, s.w - 60, s.h - 56);
+    c.fillStyle = 'rgba(246,234,210,.7)'; c.font = '11px Bungee, sans-serif'; c.textAlign = 'center'; c.fillText('PASS LINE', s.x + s.w / 2, s.y + s.h - 14);
+    for (let i = 0; i < 2; i++) { const a = t * 1.3 + i * 2; const x = s.x + s.w / 2 - 18 + i * 30, y = s.y + s.h / 2 - 6 + Math.sin(a) * 3; c.save(); c.translate(x, y); c.rotate(Math.sin(a) * .3); c.fillStyle = '#fff8ea'; rr(c, -9, -9, 18, 18, 4); c.fill(); c.fillStyle = '#c4162c'; c.beginPath(); c.arc(-4, -4, 2, 0, 7); c.arc(4, 4, 2, 0, 7); if (i) c.arc(0, 0, 2, 0, 7); c.fill(); c.restore(); }
+  },
+  st_rueda(c, s, t) {
+    const cx = s.x + s.w / 2, cy = s.y + 66, R = 62;
+    c.fillStyle = '#3a2112'; c.fillRect(cx - 8, cy, 16, s.h - 66); c.fillRect(cx - 40, s.y + s.h - 10, 80, 10);
+    c.fillStyle = '#e6b85c'; c.beginPath(); c.arc(cx, cy, R + 5, 0, Math.PI * 2); c.fill();
+    const cols = ['#ff4fa3', '#5ce1e6', '#ffd76a', '#7cf0c5', '#b197fc', '#ff8a5c'];
+    for (let i = 0; i < 20; i++) { const a = t * .5 + i / 20 * Math.PI * 2; c.fillStyle = cols[i % 6]; c.beginPath(); c.moveTo(cx, cy); c.arc(cx, cy, R, a, a + Math.PI / 10 + .01); c.fill(); }
+    c.fillStyle = '#2a1406'; c.beginPath(); c.arc(cx, cy, 10, 0, Math.PI * 2); c.fill();
+    c.fillStyle = '#fff8ea'; c.beginPath(); c.moveTo(cx - 6, cy - R - 8); c.lineTo(cx + 6, cy - R - 8); c.lineTo(cx, cy - R + 4); c.fill();
+  },
+  st_hilo(c, s, t) {
+    c.fillStyle = '#4a2a18'; rr(c, s.x, s.y, s.w, s.h, 14); c.fill(); c.fillStyle = '#1f4f6a'; rr(c, s.x + 8, s.y + 8, s.w - 16, s.h - 16, 10); c.fill();
+    const cards = ['7', 'Q', '3']; cards.forEach((r, i) => { c.save(); c.translate(s.x + s.w / 2 - 44 + i * 44, s.y + s.h / 2 + (i === 1 ? -4 : 2)); c.rotate((i - 1) * .1); c.fillStyle = '#fffaf0'; rr(c, -15, -21, 30, 42, 4); c.fill(); c.fillStyle = i === 1 ? '#c4162c' : '#1b1b22'; c.font = '700 15px Chivo Mono, monospace'; c.textAlign = 'center'; c.fillText(r, 0, 6); c.restore(); });
+    c.fillStyle = '#7cf0c5'; c.font = '13px Bungee, sans-serif'; c.textAlign = 'center'; c.fillText(Math.floor(t) % 2 ? '▲' : '▼', s.x + s.w - 26, s.y + 30);
+  },
+  st_keno(c, s, t) {
+    c.fillStyle = '#2a1830'; rr(c, s.x - 4, s.y - 4, s.w + 8, s.h + 8, 12); c.fill(); c.fillStyle = '#0d0912'; rr(c, s.x, s.y, s.w, s.h, 9); c.fill();
+    for (let i = 0; i < 40; i++) { const x = s.x + 12 + (i % 8) * 20.5, y = s.y + 14 + Math.floor(i / 8) * 22; const lit = (i * 7 + Math.floor(t * 2)) % 9 === 0; c.fillStyle = lit ? '#5ce1e6' : '#24304a'; c.beginPath(); c.arc(x + 6, y + 6, 7, 0, Math.PI * 2); c.fill(); }
+  },
+  drawDecor(c, d, t) {
+    c.save(); c.fillStyle = 'rgba(0,0,0,.3)'; rr(c, d.x + 4, d.y + 8, d.w, d.h, 12); c.fill();
+    if (d.kind === 'bar') {
+      c.fillStyle = '#4a2a18'; rr(c, d.x, d.y, d.w, d.h, 10); c.fill(); c.fillStyle = '#e6b85c'; c.fillRect(d.x, d.y + d.h - 14, d.w, 4);
+      for (let i = 0; i < 9; i++) { c.fillStyle = ['#7cf0c5', '#ff8a5c', '#b197fc', '#ffd76a'][i % 4]; rr(c, d.x + 14 + i * 25, d.y + 10, 9, 26, 3); c.fill(); }
+      this.neon(c, 'BAR', d.x + d.w / 2, d.y - 10, '#b197fc');
+    } else if (d.kind === 'sofa') {
+      c.fillStyle = '#6b1e3a'; rr(c, d.x, d.y, d.w, d.h, 16); c.fill(); c.fillStyle = '#8a2a4c'; rr(c, d.x + 10, d.y + 14, d.w - 20, d.h - 22, 10); c.fill();
+    } else if (d.kind === 'piano') {
+      c.fillStyle = '#111'; c.beginPath(); c.moveTo(d.x, d.y); c.lineTo(d.x + d.w, d.y); c.quadraticCurveTo(d.x + d.w, d.y + d.h, d.x + d.w * .45, d.y + d.h); c.lineTo(d.x, d.y + d.h * .6); c.closePath(); c.fill();
+      c.fillStyle = '#fff'; c.fillRect(d.x + 6, d.y + 4, d.w - 12, 10); c.fillStyle = '#111'; for (let i = 0; i < 12; i++) c.fillRect(d.x + 10 + i * 8.5, d.y + 4, 4, 6);
+    } else if (d.kind === 'desk') {
+      c.fillStyle = '#3a2112'; rr(c, d.x, d.y, d.w, d.h, 8); c.fill(); c.fillStyle = '#5a3a20'; rr(c, d.x + 8, d.y + 8, d.w - 16, d.h - 16, 6); c.fill();
+      c.fillStyle = '#e6b85c'; c.font = '11px Bungee, sans-serif'; c.textAlign = 'center'; c.fillText('DESPACHO DEL TIBURÓN', d.x + d.w / 2, d.y + d.h / 2 + 4);
+    } else if (d.kind === 'tank') {
+      const g = c.createLinearGradient(0, d.y, 0, d.y + d.h); g.addColorStop(0, '#2fa3c4'); g.addColorStop(1, '#0d3a5c'); c.fillStyle = g; rr(c, d.x, d.y, d.w, d.h, 10); c.fill(); c.strokeStyle = '#c9e9f2'; c.lineWidth = 3; c.stroke();
+      const sx = d.x + d.w / 2 + Math.sin(t * .7) * (d.w / 2 - 34), dir = Math.cos(t * .7) > 0 ? 1 : -1, sy = d.y + d.h / 2;
+      c.fillStyle = '#7d8a99'; c.beginPath(); c.ellipse(sx, sy, 26, 9, 0, 0, Math.PI * 2); c.fill(); c.beginPath(); c.moveTo(sx - 4, sy - 8); c.lineTo(sx + 4 * dir, sy - 20); c.lineTo(sx + 8 * dir, sy - 8); c.fill();
+      c.beginPath(); c.moveTo(sx - 24 * dir, sy); c.lineTo(sx - 36 * dir, sy - 10); c.lineTo(sx - 36 * dir, sy + 10); c.fill(); c.fillStyle = '#111'; c.beginPath(); c.arc(sx + 16 * dir, sy - 2, 1.8, 0, 7); c.fill();
+    } else if (d.kind === 'pool') {
+      c.fillStyle = '#5a3a20'; rr(c, d.x, d.y, d.w, d.h, 12); c.fill(); c.fillStyle = '#1b6e9a'; rr(c, d.x + 10, d.y + 10, d.w - 20, d.h - 20, 6); c.fill();
+      [[.3, .5, '#ffd76a'], [.62, .4, '#c4162c'], [.66, .6, '#1b1b22'], [.7, .5, '#fff']].forEach(([px, py, col]) => { c.fillStyle = col; c.beginPath(); c.arc(d.x + d.w * px, d.y + d.h * py, 5, 0, 7); c.fill(); });
+    }
+    c.restore();
+  },
   st_tablon(c, s, t) {
     c.fillStyle = '#7a5530'; rr(c, s.x, s.y, s.w, s.h, 6); c.fill(); c.fillStyle = '#b08a5a'; rr(c, s.x + 5, s.y + 5, s.w - 10, s.h - 10, 4); c.fill();
     c.fillStyle = '#f6ead2'; c.save(); c.translate(s.x + s.w / 2, s.y + s.h / 2); c.rotate(-.04); c.fillRect(-20, -42, 40, 58); c.fillStyle = '#c0202e'; c.beginPath(); c.arc(0, -40, 3, 0, Math.PI * 2); c.fill();
@@ -1458,7 +1753,7 @@ function drawPreview() {
   const cv = $('#avatarPreview'), c = cv.getContext('2d'); const t = performance.now() / 1000;
   c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, cv.width, cv.height); c.scale(cv.width / 120, cv.height / 120);
   c.fillStyle = '#3f0f1e'; c.beginPath(); c.arc(60, 60, 56, 0, Math.PI * 2); c.fill();
-  drawAvatar(c, 60, 66, prefs.color, prefs.hat, Math.sin(t) * .6, .7, false, t, 2);
+  drawAvatar(c, 60, 66, prefs.color, prefs.hat, Math.sin(t) * .6, .7, false, t, 2, []);
   if (!$('#entry').hidden) requestAnimationFrame(drawPreview);
 }
 
@@ -1478,51 +1773,66 @@ const symSvg = s => `<svg viewBox="0 0 64 64" aria-hidden="true">${SYM_SVG[s]}</
 function pickSym() { let r = rnd() * 28, a = 0; for (const s of SYM) { a += SYM_W[s]; if (r < a) return s; } return 'cherry'; }
 const fmtx = m => '×' + String(Math.round(m * 100) / 100).replace('.', ',');
 
-Games.slots = {
-  mount(body, ctx) {
-    const rows = SYM.map(s => `<tr><td><span class="icons">${symSvg(s).repeat(3)}</span></td><td>${fmtx(PAY3[s])}</td></tr>`).join('') +
-      `<tr><td><span class="icons">${symSvg('cherry').repeat(2)}</span></td><td>×2</td></tr><tr><td><span class="icons">${symSvg('cherry')}</span> una cereza</td><td>×0,3</td></tr>`;
-    body.innerHTML = `<div class="gwrap"><div><div class="slot-cab"><div class="slot-lights" id="slLights">${'<i></i>'.repeat(14)}</div><div class="reels" id="slReels">${[0, 1, 2].map(i => `<div class="reel"><div class="strip" id="slStrip${i}"></div></div>`).join('')}<div class="payline"></div></div></div></div>
-      <div class="gside"><div class="msg" id="slMsg">Tres iguales en la línea rosa para cobrar.</div><div id="slBet"></div><button class="btn primary big" id="slSpin">Tirar</button><table class="paytable"><tbody>${rows}</tbody></table></div></div>`;
-    const bet = betControl('slots', 20); $('#slBet').replaceWith(bet.el);
-    this.vis = [0, 1, 2].map(() => [pickSym(), pickSym(), pickSym()]);
-    const paint = i => { const st = $('#slStrip' + i); st.innerHTML = this.vis[i].map(s => `<div class="sym">${symSvg(s)}</div>`).join(''); st.style.transition = 'none'; st.style.transform = 'translateY(0)'; };
-    [0, 1, 2].forEach(paint);
-    let lt = 0; this.lights = setInterval(() => { lt++; $$('#slLights i').forEach((e, i) => e.classList.toggle('on', (i + lt) % 3 === 0 || (ctx.busy && (i + lt) % 2 === 0))); }, 180);
-    const spin = async () => {
-      if (ctx.busy) return;
-      const t = placeBet(bet.get(), 'slots'); if (!t) return;
-      ctx.busy = true; bet.disable(true); $('#slSpin').disabled = true; $('#slReels').classList.remove('won');
-      const msg = $('#slMsg'); msg.className = 'msg'; msg.textContent = 'Girando…';
-      const res = [pickSym(), pickSym(), pickSym()];
-      const h = $('#slStrip0').firstElementChild.offsetHeight;
-      const tk = setInterval(() => Sound.tick(), 70);
-      const finals = [];
-      for (let i = 0; i < 3; i++) {
-        const st = $('#slStrip' + i); const fin = [pickSym(), res[i], pickSym()]; finals.push(fin);
-        const items = [...this.vis[i]]; for (let k = 0; k < 16 + i * 7; k++) items.push(pickSym()); items.push(...fin);
-        st.innerHTML = items.map(s => `<div class="sym">${symSvg(s)}</div>`).join('');
-        st.style.transition = 'none'; st.style.transform = 'translateY(0)'; st.offsetHeight;
-        st.style.transition = `transform ${1 + i * .45}s cubic-bezier(.12,.8,.22,1.04)`; st.style.transform = `translateY(${-(items.length - 3) * h}px)`;
-        setTimeout(() => Sound.click(), (1 + i * .45) * 1000 - 60);
-      }
-      await sleep(1000 + 2 * 450 + 120); clearInterval(tk);
-      for (let i = 0; i < 3; i++) { this.vis[i] = finals[i]; paint(i); }
-      const [a, b, c] = res; let mult = 0;
-      if (a === b && b === c) mult = PAY3[a];
-      else { const ch = res.filter(s => s === 'cherry').length; mult = ch === 2 ? 2 : ch === 1 ? .3 : 0; }
-      const r = settle(t, t.amount * mult);
-      if (r.net > 0) { msg.className = 'msg win'; msg.textContent = `${fmtx(mult)} · ganas ${fmt(r.net)}`; $('#slReels').classList.add('won'); }
-      else if (r.credit > 0) { msg.className = 'msg'; msg.textContent = `Recuperas ${fmt(r.credit)}`; }
-      else { msg.className = 'msg loss'; msg.textContent = 'Nada esta vez'; }
-      ctx.busy = false; bet.disable(false); $('#slSpin').disabled = false;
-    };
-    $('#slSpin').onclick = spin;
-    this.key = e => { if (e.key === ' ' && !/INPUT|BUTTON|SELECT|TEXTAREA/.test(e.target.tagName)) { e.preventDefault(); spin(); } };
-    addEventListener('keydown', this.key);
-  },
-  unmount() { clearInterval(this.lights); removeEventListener('keydown', this.key); },
+const SLOT_CFG = {
+  slots: { n: 3, w: SYM_W, pay: res => { const [a, b, c] = res; if (a === b && b === c) return PAY3[a]; const ch = res.filter(s => s === 'cherry').length; return ch === 2 ? 2 : ch === 1 ? .3 : 0; },
+    rows: () => SYM.map(s => `<tr><td><span class="icons">${symSvg(s).repeat(3)}</span></td><td>${fmtx(PAY3[s])}</td></tr>`).join('') + `<tr><td><span class="icons">${symSvg('cherry').repeat(2)}</span></td><td>×2</td></tr><tr><td><span class="icons">${symSvg('cherry')}</span> una cereza</td><td>×0,3</td></tr>`,
+    hint: 'Tres iguales en la línea rosa para cobrar.' },
+  slots2: { n: 3, w: SYM_W, cab: 'linear-gradient(180deg,#5a2a9a,#2a0f4a)', pay: res => { const P = { cherry: 2, lemon: 5, bell: 8, bar: 12, gem: 100, seven: 60 }; const nw = res.filter(s => s !== 'gem'); if (!nw.length) return P.gem; if (nw.every(s => s === nw[0])) return P[nw[0]]; return res.filter(s => s === 'cherry').length === 2 ? 2 : 0; },
+    rows: () => { const P = { seven: 60, bar: 12, bell: 8, lemon: 5, cherry: 2 }; return `<tr><td><span class="icons">${symSvg('gem').repeat(3)}</span></td><td>×100</td></tr>` + Object.entries(P).map(([s, m]) => `<tr><td><span class="icons">${symSvg(s).repeat(3)}</span></td><td>${fmtx(m)}</td></tr>`).join('') + `<tr><td><span class="icons">${symSvg('cherry').repeat(2)}</span></td><td>×2</td></tr>`; },
+    hint: 'El diamante es comodín: sustituye a cualquier símbolo.' },
+  slots3: { n: 5, w: { cherry: 8, lemon: 7, bell: 6, bar: 4, gem: 3, seven: 2 }, cab: 'linear-gradient(180deg,#1f4a5c,#0b1f2a)',
+    pay: res => { const P = { cherry: [8, 20, 70], lemon: [10, 35, 100], bell: [15, 55, 200], bar: [30, 100, 500], gem: [40, 200, 1500], seven: [75, 400, 3500] }; let k = 1; while (k < 5 && res[k] === res[0]) k++; return k >= 3 ? P[res[0]][k - 3] : 0; },
+    rows: () => { const P = { seven: [75, 400, 3500], gem: [40, 200, 1500], bar: [30, 100, 500], bell: [15, 55, 200], lemon: [10, 35, 100], cherry: [8, 20, 70] }; return `<tr><td class="note">Iguales desde la izquierda</td><td>3 · 4 · 5</td></tr>` + Object.entries(P).map(([s, m]) => `<tr><td><span class="icons">${symSvg(s)}</span></td><td>${m.map(fmtx).join(' · ')}</td></tr>`).join(''); },
+    hint: 'Cinco rodillos: cobras con 3, 4 o 5 iguales seguidos desde la izquierda.' },
 };
+function makeSlots(id) {
+  const cfg = SLOT_CFG[id], N = cfg.n, idx = [...Array(N).keys()];
+  const tot = Object.values(cfg.w).reduce((a, b) => a + b, 0);
+  const pick = () => { let r = rnd() * tot, a = 0; for (const s of SYM) { a += cfg.w[s]; if (r < a) return s; } return 'cherry'; };
+  return {
+    mount(body, ctx) {
+      body.innerHTML = `<div class="gwrap"><div><div class="slot-cab" style="${cfg.cab ? 'background:' + cfg.cab : ''}"><div class="slot-lights" id="slLights">${'<i></i>'.repeat(14)}</div><div class="reels" id="slReels" style="grid-template-columns:repeat(${N},1fr);${N > 3 ? '--cell:66px;gap:6px' : ''}">${idx.map(i => `<div class="reel"><div class="strip" id="slStrip${i}"></div></div>`).join('')}<div class="payline"></div></div></div></div>
+        <div class="gside"><div class="msg" id="slMsg">${cfg.hint}</div><div id="slBet"></div>${GAME_MIN[id] ? minNote(id) : ''}<button class="btn primary big" id="slSpin">Tirar</button><table class="paytable"><tbody>${cfg.rows()}</tbody></table></div></div>`;
+      const bet = betControl(id, GAME_MIN[id] || 20); $('#slBet').replaceWith(bet.el);
+      this.vis = idx.map(() => [pick(), pick(), pick()]);
+      const paint = i => { const st = $('#slStrip' + i); st.innerHTML = this.vis[i].map(s => `<div class="sym">${symSvg(s)}</div>`).join(''); st.style.transition = 'none'; st.style.transform = 'translateY(0)'; };
+      idx.forEach(paint);
+      let lt = 0; this.lights = setInterval(() => { lt++; $$('#slLights i').forEach((e, i) => e.classList.toggle('on', (i + lt) % 3 === 0 || (ctx.busy && (i + lt) % 2 === 0))); }, 180);
+      const spin = async () => {
+        if (ctx.busy) return;
+        const t = placeBet(bet.get(), id); if (!t) return;
+        ctx.busy = true; bet.disable(true); $('#slSpin').disabled = true; $('#slReels').classList.remove('won');
+        const msg = $('#slMsg'); msg.className = 'msg'; msg.textContent = 'Girando…';
+        const res = idx.map(() => pick());
+        const h = $('#slStrip0').firstElementChild.offsetHeight;
+        const tk = setInterval(() => Sound.tick(), 70);
+        const finals = [], step = N > 3 ? .3 : .45;
+        for (const i of idx) {
+          const st = $('#slStrip' + i); const fin = [pick(), res[i], pick()]; finals.push(fin);
+          const items = [...this.vis[i]]; for (let k = 0; k < 16 + i * 6; k++) items.push(pick()); items.push(...fin);
+          st.innerHTML = items.map(s => `<div class="sym">${symSvg(s)}</div>`).join('');
+          st.style.transition = 'none'; st.style.transform = 'translateY(0)'; st.offsetHeight;
+          st.style.transition = `transform ${1 + i * step}s cubic-bezier(.12,.8,.22,1.04)`; st.style.transform = `translateY(${-(items.length - 3) * h}px)`;
+          setTimeout(() => Sound.click(), (1 + i * step) * 1000 - 60);
+        }
+        await sleep(1000 + (N - 1) * step * 1000 + 120); clearInterval(tk);
+        for (const i of idx) { this.vis[i] = finals[i]; paint(i); }
+        let mult = cfg.pay(res);
+        if (mult >= 3 && evNow() === 'hora_feliz') mult *= 1.5;
+        const r = settle(t, t.amount * mult);
+        if (r.net > 0) { msg.className = 'msg win'; msg.textContent = `${fmtx(mult)} · ganas ${fmt(r.net)}`; $('#slReels').classList.add('won'); }
+        else if (r.credit > 0) { msg.className = 'msg'; msg.textContent = `Recuperas ${fmt(r.credit)}`; }
+        else { msg.className = 'msg loss'; msg.textContent = 'Nada esta vez'; }
+        ctx.busy = false; bet.disable(false); $('#slSpin').disabled = false;
+      };
+      $('#slSpin').onclick = spin;
+      this.key = e => { if (e.key === ' ' && !/INPUT|BUTTON|SELECT|TEXTAREA/.test(e.target.tagName)) { e.preventDefault(); spin(); } };
+      addEventListener('keydown', this.key);
+    },
+    unmount() { clearInterval(this.lights); removeEventListener('keydown', this.key); },
+  };
+}
+Games.slots = makeSlots('slots'); Games.slots2 = makeSlots('slots2'); Games.slots3 = makeSlots('slots3');
 
 /* ================= RULETA ================= */
 const RL_BETS = {
@@ -1532,7 +1842,7 @@ const RL_BETS = {
 };
 for (let n = 0; n <= 36; n++) RL_BETS['n' + n] = { l: 'Pleno al ' + n, m: 36, w: x => x === n };
 const numColor = n => n === 0 ? 'z' : REDS.has(n) ? 'r' : 'b';
-function drawRoulette(c, S, wa, ba, br) {
+function drawRoulette(c, S, wa, balls) {
   const R = S / 2, step = Math.PI * 2 / 37;
   c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, S, S); c.translate(R, R);
   let g = c.createRadialGradient(0, 0, R * .8, 0, 0, R); g.addColorStop(0, '#6a4325'); g.addColorStop(1, '#2e1a0e');
@@ -1557,28 +1867,36 @@ function drawRoulette(c, S, wa, ba, br) {
   c.fillStyle = '#e6b85c'; for (let i = 0; i < 4; i++) { c.save(); c.rotate(i * Math.PI / 2); c.fillRect(-R * .015, -R * .3, R * .03, R * .3); c.beginPath(); c.arc(0, -R * .3, R * .035, 0, Math.PI * 2); c.fill(); c.restore(); }
   c.beginPath(); c.arc(0, 0, R * .08, 0, Math.PI * 2); c.fill();
   c.restore();
-  if (ba != null) {
+  for (const [ba, br] of balls) {
     const x = Math.cos(ba) * R * br, y = Math.sin(ba) * R * br;
     c.fillStyle = 'rgba(0,0,0,.35)'; c.beginPath(); c.arc(x + R * .01, y + R * .015, R * .032, 0, Math.PI * 2); c.fill();
     g = c.createRadialGradient(x - R * .01, y - R * .01, 1, x, y, R * .032); g.addColorStop(0, '#fff'); g.addColorStop(1, '#bfbfbf');
     c.fillStyle = g; c.beginPath(); c.arc(x, y, R * .03, 0, Math.PI * 2); c.fill();
   }
 }
-Games.ruleta = {
+const RL_MODES = {
+  ruleta: { name: 'Ruleta europea', hint: 'Elige una apuesta y gira.' },
+  ruleta2: { name: 'Ruleta relámpago', hint: 'Antes de cada tirada caen rayos sobre 1 a 3 números: si aciertas un pleno con rayo, paga ×50 a ×250. Los plenos normales pagan ×30.' },
+  ruleta3: { name: 'Ruleta de dos bolas', hint: 'Giran dos bolas. Cobras más si aciertan las dos: pleno ×18 o ×36, sencillas ×1 o ×2, docenas ×1,5 o ×3.' },
+};
+const rlDouble = m => m === 36 ? [0, 18, 36] : m === 3 ? [0, 1.5, 3] : [0, 1, 2];
+function makeRoulette(id) {
+  const mode = id; return {
   mount(body, ctx) {
     const outs = ['red', 'black', 'even', 'odd', 'low', 'high', 'd1', 'd2', 'd3'].map(k => `<button type="button" data-b="${k}" class="${RL_BETS[k].c || ''}">${RL_BETS[k].l}</button>`).join('');
     let nums = `<button type="button" class="z rl-zero" data-b="n0">0</button>`;
     for (let row = 0; row < 3; row++) for (let col = 0; col < 12; col++) { const n = 3 * (col + 1) - row; nums += `<button type="button" class="${numColor(n)}" data-b="n${n}">${n}</button>`; }
-    body.innerHTML = `<div class="gwrap"><div class="rl-wheel"><canvas id="rlCv" width="640" height="640" aria-label="Ruleta europea"></canvas></div>
-      <div class="gside"><div class="msg" id="rlMsg">Elige una apuesta y gira.</div><div class="rl-out" id="rlOut">${outs}</div><div class="rl-board" id="rlBoard">${nums}</div>
-      <p class="rl-pick" id="rlPick"></p><div id="rlBet"></div><button class="btn primary big" id="rlSpin">Girar</button><div class="hist" id="rlHist"></div></div></div>`;
-    const bet = betControl('ruleta', 25); $('#rlBet').replaceWith(bet.el);
+    body.innerHTML = `<div class="gwrap"><div class="rl-wheel"><canvas id="rlCv" width="640" height="640" aria-label="${RL_MODES[mode].name}"></canvas></div>
+      <div class="gside"><div class="msg" id="rlMsg">${RL_MODES[mode].hint}</div><div class="rl-out" id="rlOut">${outs}</div><div class="rl-board" id="rlBoard">${nums}</div>
+      <p class="rl-pick" id="rlPick"></p><div id="rlBet"></div>${GAME_MIN[mode] ? minNote(mode) : ''}<button class="btn primary big" id="rlSpin">Girar</button><div class="hist" id="rlHist"></div></div></div>`;
+    const bet = betControl(mode, GAME_MIN[mode] || 25); $('#rlBet').replaceWith(bet.el);
     let pick = S.lastBet.rlPick && RL_BETS[S.lastBet.rlPick] ? S.lastBet.rlPick : 'red';
-    const showPick = () => { $$('[data-b]', body).forEach(b => b.setAttribute('aria-pressed', b.dataset.b === pick)); $('#rlPick').innerHTML = `Apuesta: <b>${RL_BETS[pick].l}</b> · paga ${fmtx(RL_BETS[pick].m)} la apuesta`; };
+    const payTxt = k => { const m = RL_BETS[k].m; if (mode === 'ruleta3') return rlDouble(m).slice(1).map(fmtx).join(' o '); if (mode === 'ruleta2' && k.startsWith('n')) return '×30 (con rayo, ×50 a ×250)'; return fmtx(k.startsWith('n') && evNow() === 'ruleta' && mode === 'ruleta' ? 40 : m) + (k.startsWith('n') && evNow() === 'ruleta' && mode === 'ruleta' ? ' (Noche de ruleta)' : ''); };
+    const showPick = () => { $$('[data-b]', body).forEach(b => b.setAttribute('aria-pressed', b.dataset.b === pick)); $('#rlPick').innerHTML = `Apuesta: <b>${RL_BETS[pick].l}</b> · paga ${payTxt(pick)}`; };
     body.addEventListener('click', e => { const b = e.target.closest('[data-b]'); if (!b || ctx.busy) return; pick = b.dataset.b; S.lastBet.rlPick = pick; store('moroso.bets', S.lastBet); showPick(); Sound.click(); });
     showPick();
     const cv = $('#rlCv'), c = cv.getContext('2d');
-    const st = this.st = { wa: rnd() * 6, rel: -Math.PI / 2, br: .61, anim: null, run: true, hist: [] };
+    const st = this.st = { wa: rnd() * 6, rel: -Math.PI / 2, br: .61, rel2: Math.PI / 2, br2: .61, anim: null, run: true, hist: [] };
     let last = performance.now();
     const loop = now => {
       if (!st.run) return; const dt = Math.min(.05, (now - last) / 1000); last = now;
@@ -1586,31 +1904,47 @@ Games.ruleta = {
         const A = st.anim, p = clamp((now - A.t0) / A.dur, 0, 1);
         st.wa += dt * (.35 + 2.6 * (1 - p) ** 2);
         const e = 1 - (1 - p) ** 3; st.rel = A.r0 + (A.r1 - A.r0) * e;
-        if (p < .6) st.br = .865 + Math.sin(now / 90) * .004;
-        else { const s = clamp((p - .6) / .25, 0, 1), sm = s * s * (3 - 2 * s); st.br = lerp(.865, .61, sm) + Math.abs(Math.sin((p - .6) * 38)) * .05 * (1 - sm); }
+        const rad = (pp, k) => { if (pp < .6) return .865 + Math.sin(now / 90 + k) * .004; const s = clamp((pp - .6) / .25, 0, 1), sm = s * s * (3 - 2 * s); return lerp(.865, .61, sm) + Math.abs(Math.sin((pp - .6) * 38 + k)) * .05 * (1 - sm); };
+        st.br = rad(p, 0);
+        if (A.b0 !== undefined) { const p2 = clamp((now - A.t0) / (A.dur * .93), 0, 1), e2 = 1 - (1 - p2) ** 3; st.rel2 = A.b0 + (A.b1 - A.b0) * e2; st.br2 = rad(p2, 1.7); }
         for (const q of [.66, .72, .78, .83]) if (A.lp < q && p >= q) Sound.tick();
         A.lp = p;
         if (p >= 1) { st.anim = null; A.done(); }
       } else st.wa += dt * .35;
-      drawRoulette(c, 640, st.wa, st.wa + st.rel, st.br);
+      drawRoulette(c, 640, st.wa, mode === 'ruleta3' ? [[st.wa + st.rel, st.br], [st.wa + st.rel2, st.br2]] : [[st.wa + st.rel, st.br]]);
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
     $('#rlSpin').onclick = () => {
       if (ctx.busy) return;
-      const t = placeBet(bet.get(), 'ruleta'); if (!t) return;
+      const t = placeBet(bet.get(), mode); if (!t) return;
       ctx.busy = true; bet.disable(true); $('#rlSpin').disabled = true;
       const msg = $('#rlMsg'); msg.className = 'msg'; msg.textContent = 'No va más…';
       const n = rint(37), idx = ORDER.indexOf(n), step = Math.PI * 2 / 37, th = -Math.PI / 2 + idx * step;
       const r0 = st.rel, m = Math.round((r0 - th) / (Math.PI * 2) - 6), r1 = th + Math.PI * 2 * m;
       const myPick = pick;
+      // relámpago: números con rayo antes de girar
+      let lucky = {};
+      $$('#rlBoard .lucky').forEach(b => { b.classList.remove('lucky'); b.removeAttribute('data-x'); });
+      if (mode === 'ruleta2') {
+        const k = 1 + rint(3); while (Object.keys(lucky).length < k) lucky[rint(37)] = [50, 100, 150, 200, 250][rint(5)];
+        Object.entries(lucky).forEach(([num, x]) => { const b = $(`#rlBoard [data-b=n${num}]`); if (b) { b.classList.add('lucky'); b.dataset.x = '×' + x; } });
+        msg.textContent = 'Rayos: ' + Object.entries(lucky).map(([num, x]) => `${num} ×${x}`).join(', '); Sound.boom();
+      }
+      // dos bolas: segunda bola independiente
+      let n2 = null, b0, b1;
+      if (mode === 'ruleta3') { n2 = rint(37); const th2 = -Math.PI / 2 + ORDER.indexOf(n2) * step; b0 = st.rel2; b1 = th2 + Math.PI * 2 * Math.round((b0 - th2) / (Math.PI * 2) - 7); }
       st.anim = {
-        t0: performance.now(), dur: 4600, r0, r1, lp: 0, done: () => {
+        t0: performance.now(), dur: 4600, r0, r1, b0, b1, lp: 0, done: () => {
           st.rel = ((r1 % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-          const B = RL_BETS[myPick], win = B.w(n);
-          const r = settle(t, win ? t.amount * B.m : 0);
-          const cname = n === 0 ? 'verde' : REDS.has(n) ? 'rojo' : 'negro';
-          msg.className = 'msg ' + (r.net > 0 ? 'win' : 'loss'); msg.textContent = `${n} ${cname} · ${r.net > 0 ? 'ganas ' + fmt(r.net) : r.credit > 0 ? 'recuperas ' + fmt(r.credit) : 'pierdes'}`;
+          if (n2 !== null) st.rel2 = ((b1 % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+          const B = RL_BETS[myPick]; let mm = 0;
+          if (mode === 'ruleta3') mm = rlDouble(B.m)[(B.w(n) ? 1 : 0) + (B.w(n2) ? 1 : 0)];
+          else if (B.w(n)) mm = mode === 'ruleta2' ? (myPick.startsWith('n') ? (lucky[n] || 30) : B.m) : (myPick.startsWith('n') && evNow() === 'ruleta' ? 40 : B.m);
+          const r = settle(t, t.amount * mm);
+          const cn = x => x === 0 ? 'verde' : REDS.has(x) ? 'rojo' : 'negro';
+          msg.className = 'msg ' + (r.net > 0 ? 'win' : 'loss'); msg.textContent = `${n2 !== null ? `${n} ${cn(n)} y ${n2} ${cn(n2)}` : `${n} ${cn(n)}`}${lucky[n] && myPick === 'n' + n ? ' ¡con rayo!' : ''} · ${r.net > 0 ? 'ganas ' + fmt(r.net) : r.credit > 0 ? 'recuperas ' + fmt(r.credit) : 'pierdes'}`;
+          if (n2 !== null) st.hist.unshift(n2);
           st.hist.unshift(n); st.hist = st.hist.slice(0, 12);
           $('#rlHist').innerHTML = st.hist.map(x => `<span style="background:${x === 0 ? '#127a4c' : REDS.has(x) ? '#a8202d' : '#1b1b22'}">${x}</span>`).join('');
           ctx.busy = false; bet.disable(false); $('#rlSpin').disabled = false;
@@ -1619,22 +1953,24 @@ Games.ruleta = {
     };
   },
   unmount() { if (this.st) this.st.run = false; },
-};
+}; }
+Games.ruleta = makeRoulette('ruleta'); Games.ruleta2 = makeRoulette('ruleta2'); Games.ruleta3 = makeRoulette('ruleta3');
 
 /* ================= BLACKJACK ================= */
 const SUITS = ['♠', '♥', '♦', '♣'], RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 const drawCard = () => ({ r: RANKS[rint(13)], s: SUITS[rint(4)] });
 function handVal(h) { let t = 0, a = 0; for (const c of h) { if (c.r === 'A') { a++; t += 11; } else t += ['J', 'Q', 'K'].includes(c.r) ? 10 : +c.r; } while (t > 21 && a) { t -= 10; a--; } return { t, soft: a > 0 }; }
 function cardEl(c, hidden) { const d = el('div', 'card-p' + (hidden ? ' back' : '') + (c.s === '♥' || c.s === '♦' ? ' red' : '')); d.innerHTML = `<span class="tl">${c.r}<br>${c.s}</span><span class="mid">${c.s}</span>`; return d; }
-Games.blackjack = {
+function makeBJ(id) {
+  const expo = id === 'blackjack2'; return {
   mount(body, ctx) {
     body.innerHTML = `<div class="gwrap"><div class="bj-table"><div class="bj-row"><span class="k">Crupier <span class="bj-total" id="bjDT">–</span></span><div class="hand" id="bjD"></div></div>
       <div class="msg" id="bjMsg" style="background:rgba(0,0,0,.3)">Haz tu apuesta y reparte.</div>
       <div class="bj-row"><div class="hand" id="bjP"></div><span class="k">Tú <span class="bj-total" id="bjPT">–</span></span></div></div>
       <div class="gside"><div id="bjBet"></div><button class="btn primary big" id="bjDeal">Repartir</button>
       <div class="bj-actions"><button class="btn" id="bjHit" disabled>Pedir</button><button class="btn" id="bjStand" disabled>Plantarse</button><button class="btn" id="bjDouble" disabled>Doblar</button></div>
-      <p class="note">Blackjack paga 3 a 2. El crupier pide hasta 16 y se planta en 17. Empate devuelve la apuesta. Atajos: H pedir, S plantarse, D doblar.</p></div></div>`;
-    const bet = betControl('blackjack', 25); $('#bjBet').replaceWith(bet.el);
+      ${GAME_MIN[id] ? minNote(id) : ''}<p class="note">${expo ? 'Mesa del Tiburón: ves las dos cartas del crupier desde el principio, pero los empates los gana la banca.' : 'El crupier pide hasta 16 y se planta en 17. Empate devuelve la apuesta.'} Blackjack paga 3 a 2. Atajos: H pedir, S plantarse, D doblar.</p></div></div>`;
+    const bet = betControl(id, GAME_MIN[id] || 25); $('#bjBet').replaceWith(bet.el);
     let P = [], D = [], t = null, hole = null;
     const msg = (s, k = '') => { const m = $('#bjMsg'); m.className = 'msg ' + k; m.style.background = 'rgba(0,0,0,.3)'; m.textContent = s; };
     const totals = (showD) => { $('#bjPT').textContent = P.length ? handVal(P).t : '–'; $('#bjDT').textContent = D.length ? (showD ? handVal(D).t : handVal([D[0]]).t) : '–'; };
@@ -1652,86 +1988,95 @@ Games.blackjack = {
       const p = handVal(P).t, d = handVal(D).t;
       if (d > 21) finish(t.amount * 2, `El crupier se pasa con ${d}`);
       else if (p > d) finish(t.amount * 2, `${p} contra ${d}: ganas la mano`);
-      else if (p === d) finish(t.amount, `Empate a ${p}`);
+      else if (p === d) finish(expo ? 0 : t.amount, expo ? `Empate a ${p}: en esta mesa gana la banca` : `Empate a ${p}`);
       else finish(0, `${d} contra ${p}: gana la banca`);
     };
     const deal = async () => {
-      if (ctx.busy) return; t = placeBet(bet.get(), 'blackjack'); if (!t) return;
+      if (ctx.busy) return; t = placeBet(bet.get(), id); if (!t) return;
       ctx.busy = true; bet.disable(true); $('#bjDeal').disabled = true; P = []; D = []; $('#bjP').innerHTML = ''; $('#bjD').innerHTML = ''; msg('Repartiendo…');
-      await give(P, '#bjP'); await give(D, '#bjD'); await give(P, '#bjP'); hole = await give(D, '#bjD', true); totals(false);
+      await give(P, '#bjP'); await give(D, '#bjD'); await give(P, '#bjP'); hole = await give(D, '#bjD', !expo); if (expo) hole = null; totals(expo);
       const pv = handVal(P).t, dv = handVal(D).t;
-      if (pv === 21 || dv === 21) { reveal(); await sleep(300); if (pv === 21 && dv === 21) finish(t.amount, 'Dos blackjacks: empate'); else if (pv === 21) finish(t.amount * 2.5, '¡Blackjack!'); else finish(0, 'El crupier tiene blackjack'); return; }
+      if (pv === 21 || dv === 21) { reveal(); await sleep(300); if (pv === 21 && dv === 21) finish(t.amount, 'Dos blackjacks: empate'); else if (pv === 21) finish(t.amount * (evNow() === 'bj' ? 3 : 2.5), evNow() === 'bj' ? '¡Blackjack dorado! Paga 2 a 1' : '¡Blackjack!'); else finish(0, 'El crupier tiene blackjack'); return; }
       msg('¿Pides o te plantas?'); btns(true);
     };
-    const hit = async () => { if (!t || $('#bjHit').disabled) return; btns(false); await give(P, '#bjP'); totals(false); const v = handVal(P).t; if (v > 21) { reveal(); finish(0, `Te pasas con ${v}`); } else if (v === 21) dealerPlay(); else btns(true); };
+    const hit = async () => { if (!t || $('#bjHit').disabled) return; btns(false); await give(P, '#bjP'); totals(expo); const v = handVal(P).t; if (v > 21) { reveal(); finish(0, `Te pasas con ${v}`); } else if (v === 21) dealerPlay(); else btns(true); };
     const stand = () => { if (!t || $('#bjStand').disabled) return; dealerPlay(); };
-    const dbl = async () => { if (!t || $('#bjDouble').disabled) return; if (!addStake(t, t.amount)) return; btns(false); msg('Doblas: una carta más'); await give(P, '#bjP'); totals(false); const v = handVal(P).t; if (v > 21) { reveal(); finish(0, `Te pasas con ${v}`); } else dealerPlay(); };
+    const dbl = async () => { if (!t || $('#bjDouble').disabled) return; if (!addStake(t, t.amount)) return; btns(false); msg('Doblas: una carta más'); await give(P, '#bjP'); totals(expo); const v = handVal(P).t; if (v > 21) { reveal(); finish(0, `Te pasas con ${v}`); } else dealerPlay(); };
     $('#bjDeal').onclick = deal; $('#bjHit').onclick = hit; $('#bjStand').onclick = stand; $('#bjDouble').onclick = dbl;
     this.key = e => { if (/INPUT|BUTTON|SELECT|TEXTAREA/.test(e.target.tagName) && e.key === ' ') return; if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return; const k = e.key.toLowerCase(); if (k === 'h') hit(); else if (k === 's') stand(); else if (k === 'd') dbl(); else if (k === ' ' && !ctx.busy) { e.preventDefault(); deal(); } };
     addEventListener('keydown', this.key);
   },
   unmount() { removeEventListener('keydown', this.key); },
-};
+}; }
+Games.blackjack = makeBJ('blackjack'); Games.blackjack2 = makeBJ('blackjack2');
 
 /* ================= CRASH ================= */
 const CR_K = .11;
-Games.crash = {
+function makeCrash(id) {
+  const split = id === 'crash2';
+  return {
   mount(body, ctx) {
     body.innerHTML = `<div class="gwrap"><div class="crash-screen"><canvas id="crCv" width="1120" height="600" aria-label="Gráfica del multiplicador"></canvas></div>
-      <div class="gside"><div class="msg" id="crMsg">Apuesta y retírate antes de que se estrelle.</div><div id="crBet"></div>
-      <div class="autorow"><label for="crAuto">Retiro automático ×</label><input id="crAuto" type="number" step="0.1" min="1.01" value="${S.lastBet.crAuto || 2}"></div>
-      <button class="btn primary big" id="crGo">Apostar</button><p class="note">Deja el retiro automático vacío o en 0 para retirarte a mano. Atajo: espacio.</p><div class="hist" id="crHist"></div></div></div>`;
-    const bet = betControl('crash', 25); $('#crBet').replaceWith(bet.el);
+      <div class="gside"><div class="msg" id="crMsg">${split ? 'Tu apuesta se parte en dos mitades, cada una con su propio retiro automático. «Retirar» cobra lo que quede.' : 'Apuesta y retírate antes de que se estrelle.'}</div><div id="crBet"></div>${GAME_MIN[id] ? minNote(id) : ''}
+      <div class="autorow"><label for="crAuto">${split ? 'Mitad A ×' : 'Retiro automático ×'}</label><input id="crAuto" type="number" step="0.1" min="1.01" value="${(split ? S.lastBet.cr2A : S.lastBet.crAuto) || (split ? 1.5 : 2)}"></div>
+      ${split ? `<div class="autorow"><label for="crAuto2">Mitad B ×</label><input id="crAuto2" type="number" step="0.1" min="1.01" value="${S.lastBet.cr2B || 5}"></div>` : ''}
+      <button class="btn primary big" id="crGo">Apostar</button><p class="note">${split ? 'Deja una mitad vacía o en 0 para retirarla a mano.' : 'Deja el retiro automático vacío o en 0 para retirarte a mano.'} Atajo: espacio.</p><div class="hist" id="crHist"></div></div></div>`;
+    const bet = betControl(id, GAME_MIN[id] || 25); $('#crBet').replaceWith(bet.el);
     const cv = $('#crCv'), c = cv.getContext('2d'); const W = 560, H = 300;
-    const st = this.st = { state: 'idle', run: true, t0: 0, crashAt: 0, cashAt: 0, t: null, hist: [], endAt: 0 };
+    const st = this.st = { k: CR_K, state: 'idle', run: true, t0: 0, crashAt: 0, t: null, legs: [], hist: [], endAt: 0, paid: false };
     const go = $('#crGo'), msg = $('#crMsg');
+    const curM = () => Math.floor(Math.exp(st.k * (performance.now() - st.t0) / 1000) * 100) / 100;
     const setBtn = () => {
-      if (st.state === 'idle') { go.textContent = 'Apostar'; go.disabled = false; go.className = 'btn primary big'; }
-      else if (st.state === 'run') { go.textContent = 'Retirar'; go.disabled = false; go.className = 'btn primary big'; }
+      if (st.state === 'idle') { go.textContent = 'Apostar'; go.disabled = false; }
+      else if (st.state === 'run') { go.textContent = split && st.legs.some(l => l.at) ? 'Retirar el resto' : 'Retirar'; go.disabled = false; }
       else { go.textContent = 'Esperando…'; go.disabled = true; }
     };
-    const cash = m => { if (st.state !== 'run') return; st.state = 'cashed'; st.cashAt = m; const r = settle(st.t, st.t.amount * m); msg.className = 'msg win'; msg.textContent = `Retirado en ${fmtx(m)} · ${r.net >= 0 ? 'ganas ' + fmt(r.net) : 'recuperas ' + fmt(r.credit)}`; ctx.busy = false; setBtn(); };
+    const payout = () => st.legs.reduce((s, l) => s + st.t.amount * l.f * (l.at || 0), 0);
+    const finishPay = () => { if (st.paid) return; st.paid = true; const r = settle(st.t, payout()); ctx.busy = false; return r; };
+    const cashLeg = (l, m) => { if (l.at) return; l.at = m; Sound.tone(900, .1, 'triangle', .08); if (st.legs.every(x => x.at)) { st.state = 'cashed'; const r = finishPay(); msg.className = 'msg win'; msg.textContent = `Retirado ${st.legs.map(x => fmtx(x.at)).join(' y ')} · ${r.net >= 0 ? 'ganas ' + fmt(r.net) : 'recuperas ' + fmt(r.credit)}`; } else { msg.className = 'msg'; msg.textContent = `Mitad retirada en ${fmtx(m)}. La otra sigue subiendo…`; } setBtn(); };
     go.onclick = () => {
       if (st.state === 'idle') {
-        const auto = +$('#crAuto').value || 0; S.lastBet.crAuto = auto; store('moroso.bets', S.lastBet);
-        const t = placeBet(bet.get(), 'crash'); if (!t) return;
+        const a1 = +$('#crAuto').value || 0, a2 = split ? (+$('#crAuto2').value || 0) : 0;
+        if (split) { S.lastBet.cr2A = a1; S.lastBet.cr2B = a2; } else S.lastBet.crAuto = a1; store('moroso.bets', S.lastBet);
+        const t = placeBet(bet.get(), id); if (!t) return;
         const u = rnd(); st.crashAt = Math.min(500, Math.max(1, Math.floor(97 / (1 - u)) / 100));
-        st.t = t; st.state = 'run'; st.t0 = performance.now(); st.cashAt = 0; st.auto = auto > 1 ? auto : 0; ctx.busy = true; bet.disable(true); msg.className = 'msg'; msg.textContent = 'Subiendo…'; setBtn();
-      } else if (st.state === 'run') { const m = Math.exp(CR_K * (performance.now() - st.t0) / 1000); cash(Math.floor(m * 100) / 100); }
+        st.k = evNow() === 'turbo' ? CR_K * 2 : CR_K; st.t = t; st.paid = false;
+        st.legs = split ? [{ f: .5, auto: a1 > 1 ? a1 : 0, at: 0 }, { f: .5, auto: a2 > 1 ? a2 : 0, at: 0 }] : [{ f: 1, auto: a1 > 1 ? a1 : 0, at: 0 }];
+        st.state = 'run'; st.t0 = performance.now(); ctx.busy = true; bet.disable(true); msg.className = 'msg'; msg.textContent = 'Subiendo…'; setBtn();
+      } else if (st.state === 'run') { const m = curM(); st.legs.forEach(l => cashLeg(l, m)); }
     };
     let last = 0;
     const loop = now => {
       if (!st.run) return;
       let el2 = 0, m = 1, crashed = false;
       if (st.state === 'run' || st.state === 'cashed') {
-        el2 = (now - st.t0) / 1000; m = Math.exp(CR_K * el2);
-        if (st.state === 'run' && st.auto && m >= st.auto && st.auto <= st.crashAt) cash(st.auto);
+        el2 = (now - st.t0) / 1000; m = Math.exp(st.k * el2);
+        if (st.state === 'run') for (const l of st.legs) if (!l.at && l.auto && m >= l.auto && l.auto <= st.crashAt) cashLeg(l, l.auto);
         if (m >= st.crashAt) {
           m = st.crashAt; crashed = true;
-          if (st.state === 'run') { settle(st.t, 0); msg.className = 'msg loss'; msg.textContent = `Se estrelló en ${fmtx(st.crashAt)}`; ctx.busy = false; }
-          else if (st.state === 'cashed') { msg.textContent += ` · se estrelló en ${fmtx(st.crashAt)}`; }
+          if (!st.paid) { const r = finishPay(); const any = st.legs.some(l => l.at); msg.className = 'msg ' + (r.net > 0 ? 'win' : 'loss'); msg.textContent = `Se estrelló en ${fmtx(st.crashAt)}${any ? ` · cobras ${fmt(r.credit)}` : ''}`; }
+          else msg.textContent += ` · se estrelló en ${fmtx(st.crashAt)}`;
           Sound.boom(); st.hist.unshift(st.crashAt); st.hist = st.hist.slice(0, 10);
           $('#crHist').innerHTML = st.hist.map(x => `<span style="color:${x >= 2 ? 'var(--win)' : 'var(--loss)'}">${fmtx(x)}</span>`).join('');
-          st.state = 'boom'; st.endAt = now; st.lastEl = Math.log(st.crashAt) / CR_K; bet.disable(false); setBtn();
+          st.state = 'boom'; st.endAt = now; st.lastEl = Math.log(st.crashAt) / st.k; bet.disable(false); setBtn();
         } else if (now - last > 120 && st.state === 'run') { last = now; Sound.tone(300 + m * 60, .03, 'sine', .02); }
       }
       if (st.state === 'boom') { el2 = st.lastEl; m = st.crashAt; crashed = true; if (now - st.endAt > 1400) { st.state = 'idle'; setBtn(); } }
-      // draw
       c.setTransform(2, 0, 0, 2, 0, 0); c.clearRect(0, 0, W, H);
       const xmax = Math.max(10, el2 * 1.15), ymax = Math.max(2, m * 1.2);
       const X = s => 46 + s / xmax * (W - 66), Y = v => H - 32 - (v - 1) / (ymax - 1) * (H - 64);
-      c.strokeStyle = 'rgba(255,79,163,.12)'; c.fillStyle = 'rgba(246,234,210,.45)'; c.font = '600 10px Chivo Mono, monospace'; c.lineWidth = 1;
+      c.strokeStyle = split ? 'rgba(92,225,230,.12)' : 'rgba(255,79,163,.12)'; c.fillStyle = 'rgba(246,234,210,.45)'; c.font = '600 10px Chivo Mono, monospace'; c.lineWidth = 1;
       const ys = ymax <= 3 ? .5 : ymax <= 6 ? 1 : ymax <= 15 ? 2 : ymax <= 40 ? 5 : ymax <= 120 ? 20 : 100;
       c.textAlign = 'right'; for (let v = 1; v <= ymax; v += ys) { c.beginPath(); c.moveTo(46, Y(v)); c.lineTo(W - 20, Y(v)); c.stroke(); c.fillText(fmtx(v), 40, Y(v) + 3); }
       const xs = xmax <= 12 ? 2 : xmax <= 30 ? 5 : 10; c.textAlign = 'center'; for (let s = 0; s <= xmax; s += xs) c.fillText(s + ' s', X(s), H - 12);
       if (st.state !== 'idle') {
-        const col = crashed ? '#ff5d73' : '#ff4fa3';
-        c.beginPath(); c.moveTo(X(0), Y(1)); for (let i = 1; i <= 60; i++) { const s = el2 * i / 60; c.lineTo(X(s), Y(Math.exp(CR_K * s))); }
-        const gr = c.createLinearGradient(0, Y(m), 0, Y(1)); gr.addColorStop(0, crashed ? 'rgba(255,93,115,.35)' : 'rgba(255,79,163,.35)'); gr.addColorStop(1, 'rgba(255,79,163,0)');
+        const col = crashed ? '#ff5d73' : split ? '#5ce1e6' : '#ff4fa3';
+        c.beginPath(); c.moveTo(X(0), Y(1)); for (let i = 1; i <= 60; i++) { const s = el2 * i / 60; c.lineTo(X(s), Y(Math.exp(st.k * s))); }
+        const gr = c.createLinearGradient(0, Y(m), 0, Y(1)); gr.addColorStop(0, crashed ? 'rgba(255,93,115,.35)' : split ? 'rgba(92,225,230,.3)' : 'rgba(255,79,163,.35)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
         c.lineTo(X(el2), Y(1)); c.closePath(); c.fillStyle = gr; c.fill();
-        c.beginPath(); c.moveTo(X(0), Y(1)); for (let i = 1; i <= 60; i++) { const s = el2 * i / 60; c.lineTo(X(s), Y(Math.exp(CR_K * s))); } c.strokeStyle = col; c.lineWidth = 3; c.stroke();
+        c.beginPath(); c.moveTo(X(0), Y(1)); for (let i = 1; i <= 60; i++) { const s = el2 * i / 60; c.lineTo(X(s), Y(Math.exp(st.k * s))); } c.strokeStyle = col; c.lineWidth = 3; c.stroke();
         c.fillStyle = col; c.shadowColor = col; c.shadowBlur = 16; c.beginPath(); c.arc(X(el2), Y(m), crashed ? 8 : 5, 0, Math.PI * 2); c.fill(); c.shadowBlur = 0;
-        if (st.cashAt) { c.strokeStyle = '#4fd6a4'; c.setLineDash([5, 4]); c.beginPath(); c.moveTo(46, Y(st.cashAt)); c.lineTo(W - 20, Y(st.cashAt)); c.stroke(); c.setLineDash([]); }
+        c.strokeStyle = '#4fd6a4'; c.setLineDash([5, 4]); for (const l of st.legs) if (l.at) { c.beginPath(); c.moveTo(46, Y(l.at)); c.lineTo(W - 20, Y(l.at)); c.stroke(); } c.setLineDash([]);
       }
       c.textAlign = 'center'; c.font = '44px Bungee, sans-serif'; c.fillStyle = crashed ? '#ff5d73' : st.state === 'idle' ? 'rgba(246,234,210,.35)' : '#f6ead2';
       c.fillText(st.state === 'idle' ? 'LISTO' : fmtx(Math.floor(m * 100) / 100), W / 2 + 10, 74);
@@ -1743,7 +2088,9 @@ Games.crash = {
     addEventListener('keydown', this.key);
   },
   unmount() { if (this.st) this.st.run = false; removeEventListener('keydown', this.key); },
-};
+  };
+}
+Games.crash = makeCrash('crash'); Games.crash2 = makeCrash('crash2');
 
 /* ================= PLINKO ================= */
 const PL_ROWS = 12;
@@ -1752,49 +2099,58 @@ const PL_MULT = {
   medio: [33, 11, 4, 2, 1.1, .6, .3, .6, 1.1, 2, 4, 11, 33],
   alto: [170, 24, 8.1, 2, .7, .2, .2, .2, .7, 2, 8.1, 24, 170],
 };
-Games.plinko = {
+const PL16 = {
+  bajo: [16, 9, 2, 1.4, 1.4, 1.2, 1.1, 1, .5, 1, 1.1, 1.2, 1.4, 1.4, 2, 9, 16],
+  medio: [110, 41, 10, 5, 3, 1.5, 1, .5, .3, .5, 1, 1.5, 3, 5, 10, 41, 110],
+  alto: [1000, 130, 26, 9, 4, 2, .2, .2, .2, .2, .2, 2, 4, 9, 26, 130, 1000],
+};
+function makePlinko(id) {
+  const big = id === 'plinko2', ROWS = big ? 16 : PL_ROWS, MULT = big ? PL16 : PL_MULT, RK = big ? 'pl2Risk' : 'plRisk';
+  const W = 460, dx = big ? 26 : 32, dy = big ? 20 : 26, top = 34, H = top + ROWS * dy + 46;
+  return {
   mount(body, ctx) {
-    body.innerHTML = `<div class="gwrap"><div class="plinko-board"><canvas id="plCv" width="920" height="784" aria-label="Tablero de plinko"></canvas></div>
+    body.innerHTML = `<div class="gwrap"><div class="plinko-board"><canvas id="plCv" width="920" height="${H * 2}" style="aspect-ratio:460/${H}" aria-label="Tablero de plinko"></canvas></div>
       <div class="gside"><div class="msg" id="plMsg">Suelta bolas: cada una es una apuesta.</div><div id="plBet"></div>
       <div><div class="label">Riesgo</div><div class="seg" id="plRisk"><button type="button" data-r="bajo">Bajo</button><button type="button" data-r="medio">Medio</button><button type="button" data-r="alto">Alto</button></div></div>
-      <button class="btn primary big" id="plGo">Soltar bola</button><p class="note">Con riesgo alto, las esquinas pagan ×170 y el centro ×0,2. Atajo: espacio.</p><div class="hist" id="plHist"></div></div></div>`;
-    const bet = betControl('plinko', 10); $('#plBet').replaceWith(bet.el);
-    let risk = PL_MULT[S.lastBet.plRisk] ? S.lastBet.plRisk : 'medio';
-    const showRisk = () => $$('#plRisk button').forEach(b => b.setAttribute('aria-pressed', b.dataset.r === risk));
-    $('#plRisk').onclick = e => { const b = e.target.closest('button'); if (!b || this.st.balls.length) { if (b) toast('Espera a que caigan las bolas para cambiar el riesgo.', 'bad'); return; } risk = b.dataset.r; S.lastBet.plRisk = risk; store('moroso.bets', S.lastBet); showRisk(); };
+      <button class="btn primary big" id="plGo">Soltar bola</button><p class="note">${big ? 'Dieciséis filas: con riesgo alto, las esquinas pagan ×1.000.' : 'Con riesgo alto, las esquinas pagan ×170 y el centro ×0,2.'} Atajo: espacio.</p><div class="hist" id="plHist"></div></div></div>`;
+    const bet = betControl(id, GAME_MIN[id] || 10); $('#plBet').replaceWith(bet.el); if (GAME_MIN[id]) bet.el.insertAdjacentHTML('afterend', minNote(id));
+    let risk = MULT[S.lastBet[RK]] ? S.lastBet[RK] : 'medio';
+    const showRisk = () => $$('#plRisk button').forEach(b => { b.setAttribute('aria-pressed', b.dataset.r === risk); if (b.dataset.r === 'alto') { const shut = evNow() === 'vigila'; b.disabled = shut; b.title = shut ? 'Cerrado hoy: el Tiburón vigila' : ''; if (shut && risk === 'alto') { risk = 'medio'; S.lastBet[RK] = 'medio'; b.setAttribute('aria-pressed', false); $('#plRisk [data-r=medio]').setAttribute('aria-pressed', true); } } });
+    $('#plRisk').onclick = e => { const b = e.target.closest('button'); if (!b || this.st.balls.length) { if (b) toast('Espera a que caigan las bolas para cambiar el riesgo.', 'bad'); return; } risk = b.dataset.r; S.lastBet[RK] = risk; store('moroso.bets', S.lastBet); showRisk(); };
     showRisk();
-    const cv = $('#plCv'), c = cv.getContext('2d'); const W = 460, H = 392, cx = W / 2, dx = 32, dy = 26, top = 34, SEG = .085;
+    const cv = $('#plCv'), c = cv.getContext('2d'); const cx = W / 2, SEG = big ? .07 : .085;
     const st = this.st = { run: true, balls: [], flash: {}, hist: [] };
     const pos = (b, now) => {
       const el2 = (now - b.t0) / 1000; const k = Math.floor(el2 / SEG), u = (el2 % SEG) / SEG;
-      const P = i => { if (i <= 0) return [cx, top - 30]; if (i <= PL_ROWS) { const r = b.rights[i - 1]; return [cx + (r - (i - 1) / 2) * dx, top + (i - 1) * dy - 9]; } return [cx + (b.rights[PL_ROWS] - PL_ROWS / 2) * dx, top + PL_ROWS * dy + 16]; };
-      if (k > PL_ROWS) return { x: P(PL_ROWS + 1)[0], y: P(PL_ROWS + 1)[1], done: true };
+      const P = i => { if (i <= 0) return [cx, top - 30]; if (i <= ROWS) { const r = b.rights[i - 1]; return [cx + (r - (i - 1) / 2) * dx, top + (i - 1) * dy - 9]; } return [cx + (b.rights[ROWS] - ROWS / 2) * dx, top + ROWS * dy + 16]; };
+      if (k > ROWS) return { x: P(ROWS + 1)[0], y: P(ROWS + 1)[1], done: true };
       const a = P(k), z = P(k + 1); return { x: lerp(a[0], z[0], u), y: lerp(a[1], z[1], u) - (k > 0 ? Math.sin(Math.PI * u) * 9 : 0), k };
     };
     const drop = () => {
-      const t = placeBet(bet.get(), 'plinko'); if (!t) return;
-      const rights = [0]; for (let i = 0; i < PL_ROWS; i++) rights.push(rights[i] + (rnd() < .5 ? 1 : 0));
+      if (evNow() === 'vigila' && risk === 'alto') { toast('Hoy el Tiburón vigila: el riesgo alto está cerrado.', 'bad'); return; }
+      const t = placeBet(bet.get(), id); if (!t) return;
+      const rights = [0]; for (let i = 0; i < ROWS; i++) rights.push(rights[i] + (rnd() < .5 ? 1 : 0));
       st.balls.push({ t, rights, risk, t0: performance.now() + rnd() * 30, lk: -1, hue: rint(3) }); ctx.busy = true;
     };
     $('#plGo').onclick = drop;
     const loop = now => {
       if (!st.run) return;
       c.setTransform(2, 0, 0, 2, 0, 0); c.clearRect(0, 0, W, H);
-      for (let i = 0; i < PL_ROWS; i++) for (let j = 0; j <= i + 2; j++) { const x = cx + (j - (i + 2) / 2) * dx, y = top + i * dy; c.fillStyle = '#efe6ff'; c.shadowColor = '#b197fc'; c.shadowBlur = 6; c.beginPath(); c.arc(x, y, 3.4, 0, Math.PI * 2); c.fill(); }
+      for (let i = 0; i < ROWS; i++) for (let j = 0; j <= i + 2; j++) { const x = cx + (j - (i + 2) / 2) * dx, y = top + i * dy; c.fillStyle = '#efe6ff'; c.shadowColor = '#b197fc'; c.shadowBlur = 6; c.beginPath(); c.arc(x, y, 3.4, 0, Math.PI * 2); c.fill(); }
       c.shadowBlur = 0;
-      const mults = PL_MULT[risk];
+      const mults = MULT[risk];
       mults.forEach((m, b) => {
-        const x = cx + (b - PL_ROWS / 2) * dx, y = top + PL_ROWS * dy + 6; const d = Math.abs(b - 6) / 6;
+        const x = cx + (b - ROWS / 2) * dx, y = top + ROWS * dy + 6; const d = Math.abs(b - ROWS / 2) / (ROWS / 2);
         const col = d > .8 ? '#ff4fa3' : d > .55 ? '#ff8a5c' : d > .3 ? '#ffd76a' : '#4fd6a4';
         const fl = st.flash[b] && now - st.flash[b] < 400 ? 1 - (now - st.flash[b]) / 400 : 0;
-        c.fillStyle = col; rr(c, x - dx / 2 + 1.5, y + fl * 5, dx - 3, 24, 5); c.fill();
-        c.fillStyle = '#1a0d24'; c.font = `700 ${m >= 100 ? 8.5 : 9.5}px Chivo Mono, monospace`; c.textAlign = 'center'; c.fillText(String(m).replace('.', ','), x, y + 16 + fl * 5);
+        c.fillStyle = col; rr(c, x - dx / 2 + 1.5, y + fl * 5, dx - 3, big ? 20 : 24, 5); c.fill();
+        c.fillStyle = '#1a0d24'; c.font = `700 ${big ? (m >= 100 ? 7 : 8) : (m >= 100 ? 8.5 : 9.5)}px Chivo Mono, monospace`; c.textAlign = 'center'; c.fillText(String(m).replace('.', ','), x, y + 16 + fl * 5);
       });
       for (let i = st.balls.length - 1; i >= 0; i--) {
         const b = st.balls[i]; if (now < b.t0) continue; const p = pos(b, now);
         if (p.k !== undefined && p.k !== b.lk) { b.lk = p.k; if (p.k > 0) Sound.tick(); }
         if (p.done) {
-          const bucket = b.rights[PL_ROWS], m = PL_MULT[b.risk][bucket]; st.flash[bucket] = now; st.balls.splice(i, 1);
+          const bucket = b.rights[ROWS], m = MULT[b.risk][bucket]; st.flash[bucket] = now; st.balls.splice(i, 1);
           const r = settle(b.t, b.t.amount * m); st.hist.unshift(m); st.hist = st.hist.slice(0, 14);
           $('#plHist').innerHTML = st.hist.map(x => `<span style="color:${x >= 1 ? 'var(--win)' : 'var(--loss)'}">${fmtx(x)}</span>`).join('');
           const msg = $('#plMsg'); msg.className = 'msg ' + (r.net > 0 ? 'win' : 'loss'); msg.textContent = `${fmtx(m)} · ${r.net >= 0 ? 'ganas ' + fmt(r.net) : 'recuperas ' + fmt(r.credit)}`;
@@ -1810,39 +2166,42 @@ Games.plinko = {
     addEventListener('keydown', this.key);
   },
   unmount() { if (this.st) this.st.run = false; removeEventListener('keydown', this.key); },
-};
+}; }
+Games.plinko = makePlinko('plinko'); Games.plinko2 = makePlinko('plinko2');
 
 /* ================= MINAS ================= */
 const GEM = '<svg viewBox="0 0 64 64"><polygon points="32,6 56,24 32,58 8,24" fill="#22b8cf"/><polygon points="32,6 43,24 32,58 21,24" fill="#a5f3fc"/><polygon points="8,24 56,24 32,6" fill="#67e8f9" opacity=".8"/></svg>';
 const MINE = '<svg viewBox="0 0 64 64"><circle cx="32" cy="36" r="18" fill="#1b1b22"/><path d="M32 18V8M46 22l6-6M50 36h8M18 22l-6-6" stroke="#1b1b22" stroke-width="5" stroke-linecap="round"/><circle cx="26" cy="30" r="5" fill="#ff5d73"/><path d="M52 8l3 3" stroke="#ffd76a" stroke-width="4" stroke-linecap="round"/></svg>';
-const mnMult = (k, m) => { let x = .97; for (let i = 0; i < k; i++) x *= (25 - i) / (25 - m - i); return x; };
-Games.minas = {
+const mnMultN = (k, m, N) => { let x = evNow() === 'minas' ? .97 * 1.08 : .97; for (let i = 0; i < k; i++) x *= (N - i) / (N - m - i); return x; };
+function makeMines(id) {
+  const N = id === 'minas2' ? 36 : 25, SIDE = Math.sqrt(N), COUNTS = N === 36 ? [3, 6, 10, 15, 25] : [1, 3, 5, 10, 15, 20], mnMult = (k, m) => mnMultN(k, m, N);
+  return {
   mount(body, ctx) {
-    body.innerHTML = `<div class="gwrap"><div class="mines-grid" id="mnGrid"></div>
+    body.innerHTML = `<div class="gwrap"><div class="mines-grid${N === 36 ? ' gold' : ''}" id="mnGrid" style="grid-template-columns:repeat(${SIDE},minmax(0,1fr))"></div>
       <div class="gside"><div class="mult-big num" id="mnMult">×1,00</div><div class="msg" id="mnMsg">Elige cuántas minas y empieza.</div><div id="mnBet"></div>
-      <div><div class="label">Minas en el tablero</div><div class="seg" id="mnCount">${[1, 3, 5, 10, 15, 20].map(n => `<button type="button" data-m="${n}">${n}</button>`).join('')}</div></div>
+      <div><div class="label">Minas en el tablero</div><div class="seg" id="mnCount">${COUNTS.map(n => `<button type="button" data-m="${n}">${n}</button>`).join('')}</div></div>
       <button class="btn primary big" id="mnGo">Empezar</button><p class="note" id="mnNext"></p></div></div>`;
-    const bet = betControl('minas', 25); $('#mnBet').replaceWith(bet.el);
-    let mines = [3, 1, 5, 10, 15, 20].includes(S.lastBet.mnCount) ? S.lastBet.mnCount : 3;
+    const bet = betControl(id, GAME_MIN[id] || 25); $('#mnBet').replaceWith(bet.el); if (GAME_MIN[id]) bet.el.insertAdjacentHTML('afterend', minNote(id));
+    let mines = COUNTS.includes(S.lastBet[id + 'Count']) ? S.lastBet[id + 'Count'] : (N === 36 ? 6 : 3);
     let state = 'idle', t = null, set = new Set(), open = new Set();
     const grid = $('#mnGrid'), go = $('#mnGo'), msg = $('#mnMsg');
     const showCount = () => $$('#mnCount button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.m === mines));
-    $('#mnCount').onclick = e => { const b = e.target.closest('button'); if (!b || state === 'play') return; mines = +b.dataset.m; S.lastBet.mnCount = mines; store('moroso.bets', S.lastBet); showCount(); info(); };
+    $('#mnCount').onclick = e => { const b = e.target.closest('button'); if (!b || state === 'play') return; mines = +b.dataset.m; S.lastBet[id + 'Count'] = mines; store('moroso.bets', S.lastBet); showCount(); info(); };
     const info = () => {
       const k = open.size; $('#mnMult').textContent = fmtx(k ? mnMult(k, mines) : 1);
-      $('#mnNext').textContent = state === 'play' && k < 25 - mines ? `Siguiente gema: ${fmtx(mnMult(k + 1, mines))} · probabilidad de mina ${Math.round(mines / (25 - k) * 100)} %` : `Con ${mines} minas, la primera gema paga ${fmtx(mnMult(1, mines))}.`;
+      $('#mnNext').textContent = state === 'play' && k < N - mines ? `Siguiente gema: ${fmtx(mnMult(k + 1, mines))} · probabilidad de mina ${Math.round(mines / (N - k) * 100)} %` : `Con ${mines} minas, la primera gema paga ${fmtx(mnMult(1, mines))}.`;
       if (state === 'play') { go.textContent = k ? `Retirar ${fmt(t.amount * mnMult(k, mines))}` : 'Elige una casilla'; go.disabled = !k; }
       else { go.textContent = 'Empezar'; go.disabled = false; }
     };
-    const build = () => { grid.innerHTML = ''; for (let i = 0; i < 25; i++) { const b = el('button', 'tile'); b.type = 'button'; b.dataset.i = i; b.setAttribute('aria-label', 'Casilla ' + (i + 1)); b.disabled = state !== 'play'; grid.append(b); } };
+    const build = () => { grid.innerHTML = ''; for (let i = 0; i < N; i++) { const b = el('button', 'tile'); b.type = 'button'; b.dataset.i = i; b.setAttribute('aria-label', 'Casilla ' + (i + 1)); b.disabled = state !== 'play'; grid.append(b); } };
     const revealAll = hit => { $$('.tile', grid).forEach(b => { const i = +b.dataset.i; b.disabled = true; if (!open.has(i)) { b.innerHTML = set.has(i) ? MINE : GEM; b.classList.add(set.has(i) ? 'mine' : 'gem'); if (i !== hit) b.classList.add('dim'); } }); };
     const end = () => { state = 'idle'; ctx.busy = false; bet.disable(false); $$('#mnCount button').forEach(b => b.disabled = false); t = null; info(); };
     const cash = () => { const k = open.size; if (state !== 'play' || !k) return; const m = mnMult(k, mines); const r = settle(t, t.amount * m); msg.className = 'msg win'; msg.textContent = `Retirado en ${fmtx(m)} · ${r.net >= 0 ? 'ganas ' + fmt(r.net) : 'recuperas ' + fmt(r.credit)}`; revealAll(-1); end(); };
     go.onclick = () => {
       if (state === 'play') return cash();
-      t = placeBet(bet.get(), 'minas'); if (!t) return;
+      t = placeBet(bet.get(), id); if (!t) return;
       state = 'play'; ctx.busy = true; bet.disable(true); $$('#mnCount button').forEach(b => b.disabled = true);
-      set = new Set(); while (set.size < mines) set.add(rint(25)); open = new Set();
+      set = new Set(); while (set.size < mines) set.add(rint(N)); open = new Set();
       build(); msg.className = 'msg'; msg.textContent = 'Destapa casillas. Retírate cuando quieras.'; info();
     };
     grid.onclick = e => {
@@ -1850,10 +2209,178 @@ Games.minas = {
       b.disabled = true;
       if (set.has(i)) { b.innerHTML = MINE; b.classList.add('mine'); Sound.boom(); settle(t, 0); msg.className = 'msg loss'; msg.textContent = 'Mina. Se pierde la apuesta.'; open.add(i); revealAll(i); open.delete(i); end(); $('#mnMult').textContent = '×0'; return; }
       open.add(i); b.innerHTML = GEM; b.classList.add('gem'); Sound.tone(900 + open.size * 70, .12, 'triangle', .09);
-      if (open.size === 25 - mines) { cash(); return; }
+      if (open.size === N - mines) { cash(); return; }
       info();
     };
     showCount(); build(); info();
+  },
+  unmount() { },
+  };
+}
+Games.minas = makeMines('minas'); Games.minas2 = makeMines('minas2');
+
+/* ================= DADOS (Salón Terciopelo) ================= */
+const DICE_BETS = {
+  bajo: { l: 'Menos de 7', m: 2.35, w: (a, b) => a + b < 7 },
+  siete: { l: 'Siete justo', m: 5.9, w: (a, b) => a + b === 7 },
+  alto: { l: 'Más de 7', m: 2.35, w: (a, b) => a + b > 7 },
+  dobles: { l: 'Dobles', m: 5.9, w: (a, b) => a === b },
+};
+const PIPS = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
+const dieHTML = v => `<div class="die">${Array.from({ length: 9 }, (_, i) => `<i class="${PIPS[v].includes(i) ? 'on' : ''}"></i>`).join('')}</div>`;
+const minNote = g => `<p class="note" style="margin:0">Apuesta mínima en esta planta: <b>${fmt(GAME_MIN[g])}</b>.</p>`;
+Games.dados = {
+  mount(body, ctx) {
+    body.innerHTML = `<div class="gwrap"><div class="dice-table"><div class="dice-row" id="dcDice">${dieHTML(3)}${dieHTML(4)}</div><div class="dice-sum" id="dcSum">Suma 7</div></div>
+      <div class="gside"><div class="msg" id="dcMsg">Elige a qué apuestas y tira los dados.</div>
+      <div class="rl-out" id="dcBets" style="grid-template-columns:repeat(2,minmax(0,1fr))">${Object.entries(DICE_BETS).map(([k, b]) => `<button type="button" data-d="${k}">${b.l} · ${fmtx(b.m)}</button>`).join('')}</div>
+      <div id="dcBet"></div>${minNote('dados')}<button class="btn primary big" id="dcGo">Tirar dados</button><div class="hist" id="dcHist"></div></div></div>`;
+    const bet = betControl('dados', GAME_MIN.dados); $('#dcBet').replaceWith(bet.el);
+    let pick = DICE_BETS[S.lastBet.dcPick] ? S.lastBet.dcPick : 'bajo'; const hist = [];
+    const show = () => $$('#dcBets button').forEach(b => b.setAttribute('aria-pressed', b.dataset.d === pick));
+    $('#dcBets').onclick = e => { const b = e.target.closest('button'); if (!b || ctx.busy) return; pick = b.dataset.d; S.lastBet.dcPick = pick; store('moroso.bets', S.lastBet); show(); Sound.click(); };
+    show();
+    $('#dcGo').onclick = async () => {
+      if (ctx.busy) return; const t = placeBet(bet.get(), 'dados'); if (!t) return;
+      ctx.busy = true; bet.disable(true); $('#dcGo').disabled = true; const msg = $('#dcMsg'); msg.className = 'msg'; msg.textContent = 'Rodando…';
+      const a = 1 + rint(6), b = 1 + rint(6), box = $('#dcDice');
+      box.classList.add('rolling');
+      for (let i = 0; i < 12; i++) { box.innerHTML = dieHTML(1 + rint(6)) + dieHTML(1 + rint(6)); Sound.click(); await sleep(60 + i * 8); }
+      box.classList.remove('rolling'); box.innerHTML = dieHTML(a) + dieHTML(b); $('#dcSum').textContent = `Suma ${a + b}${a === b ? ' · dobles' : ''}`;
+      const B = DICE_BETS[pick], r = settle(t, B.w(a, b) ? t.amount * B.m : 0);
+      msg.className = 'msg ' + (r.net > 0 ? 'win' : 'loss'); msg.textContent = r.net > 0 ? `${B.l}: ganas ${fmt(r.net)}` : r.credit > 0 ? `Recuperas ${fmt(r.credit)}` : `${a} y ${b}: pierdes`;
+      hist.unshift(a + b); $('#dcHist').innerHTML = hist.slice(0, 14).map(x => `<span>${x}</span>`).join('');
+      ctx.busy = false; bet.disable(false); $('#dcGo').disabled = false;
+    };
+  },
+  unmount() { },
+};
+
+/* ================= RUEDA DE LA FORTUNA ================= */
+const WHEEL = (() => { // 40 casillas: 25 vacías y 15 premios repartidos
+  const prizes = [10, 1.5, 2, 1.5, 3, 1.5, 2, 1.5, 5, 1.5, 2, 1.5, 3, 1.5, 2]; const w = Array(40).fill(0);
+  prizes.forEach((v, i) => { w[Math.round(i * 40 / 15)] = v; }); return w;
+})();
+const WHEEL_COL = { 0: '#2a2133', 1.5: '#3bc9db', 2: '#69db7c', 3: '#ffd76a', 5: '#ff8a5c', 10: '#ff4fa3' };
+Games.rueda = {
+  mount(body, ctx) {
+    body.innerHTML = `<div class="gwrap"><div class="rl-wheel" style="background:radial-gradient(circle at 50% 45%,#2e1f4a,#140d22);border-color:#4a2a5a"><canvas id="whCv" width="640" height="640" aria-label="Rueda de la fortuna"></canvas></div>
+      <div class="gside"><div class="msg" id="whMsg">Gira la rueda: paga lo que marque la flecha.</div><div id="whBet"></div>${minNote('rueda')}
+      <button class="btn primary big" id="whGo">Girar la rueda</button>
+      <table class="paytable"><tbody>${[10, 5, 3, 2, 1.5, 0].map(v => `<tr><td><span class="cdot" style="display:inline-block;background:${WHEEL_COL[v]};margin-right:6px"></span>${v ? fmtx(v) : 'Vacía'}</td><td>${WHEEL.filter(x => x === v).length} de 40</td></tr>`).join('')}</tbody></table></div></div>`;
+    const bet = betControl('rueda', GAME_MIN.rueda); $('#whBet').replaceWith(bet.el);
+    const cv = $('#whCv'), c = cv.getContext('2d'), N = WHEEL.length, step = Math.PI * 2 / N;
+    const st = this.st = { a: rnd() * 6, run: true, anim: null };
+    const draw = () => {
+      const S2 = 640, R = 290; c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, S2, S2); c.translate(S2 / 2, S2 / 2);
+      c.fillStyle = '#e6b85c'; c.beginPath(); c.arc(0, 0, R + 16, 0, Math.PI * 2); c.fill();
+      for (let i = 0; i < N; i++) { const a0 = st.a - Math.PI / 2 + (i - .5) * step; c.fillStyle = WHEEL_COL[WHEEL[i]]; c.beginPath(); c.moveTo(0, 0); c.arc(0, 0, R, a0, a0 + step + .004); c.fill(); }
+      c.strokeStyle = 'rgba(255,248,234,.35)'; c.lineWidth = 2; for (let i = 0; i < N; i++) { const a0 = st.a - Math.PI / 2 + (i - .5) * step; c.beginPath(); c.moveTo(0, 0); c.lineTo(Math.cos(a0) * R, Math.sin(a0) * R); c.stroke(); }
+      c.fillStyle = '#1a0d24'; c.font = '700 22px Chivo Mono, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle';
+      for (let i = 0; i < N; i++) { if (!WHEEL[i]) continue; c.save(); c.rotate(st.a + i * step); c.fillText(String(WHEEL[i]).replace('.', ','), 0, -R + 34); c.restore(); }
+      for (let i = 0; i < N; i++) { const a0 = st.a - Math.PI / 2 + (i - .5) * step; c.fillStyle = '#fff3c4'; c.beginPath(); c.arc(Math.cos(a0) * (R + 8), Math.sin(a0) * (R + 8), 4, 0, Math.PI * 2); c.fill(); }
+      c.fillStyle = '#2a1406'; c.beginPath(); c.arc(0, 0, 46, 0, Math.PI * 2); c.fill(); c.fillStyle = '#e6b85c'; c.font = '20px Bungee, sans-serif'; c.fillText('×', 0, 2);
+      c.fillStyle = '#fff8ea'; c.strokeStyle = '#2a1406'; c.lineWidth = 4; c.beginPath(); c.moveTo(-20, -R - 30); c.lineTo(20, -R - 30); c.lineTo(0, -R + 6); c.closePath(); c.fill(); c.stroke();
+    };
+    let last = performance.now();
+    const loop = now => {
+      if (!st.run) return;
+      if (st.anim) {
+        const A = st.anim, p = clamp((now - A.t0) / A.dur, 0, 1), e = 1 - (1 - p) ** 4; const prev = st.a; st.a = A.a0 + (A.a1 - A.a0) * e;
+        if (Math.floor(prev / step) !== Math.floor(st.a / step)) Sound.tick();
+        if (p >= 1) { st.anim = null; A.done(); }
+      }
+      last = now; draw(); requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+    $('#whGo').onclick = () => {
+      if (ctx.busy) return; const t = placeBet(bet.get(), 'rueda'); if (!t) return;
+      ctx.busy = true; bet.disable(true); $('#whGo').disabled = true; const msg = $('#whMsg'); msg.className = 'msg'; msg.textContent = 'Girando…';
+      const idx = rint(N); // casilla i queda arriba cuando a ≡ -i·step
+      const target = -idx * step, a0 = st.a; let a1 = target; while (a1 < a0 + Math.PI * 2 * 5) a1 += Math.PI * 2;
+      st.anim = { t0: performance.now(), dur: 4800, a0, a1, done: () => {
+        const v = WHEEL[idx], r = settle(t, t.amount * v);
+        msg.className = 'msg ' + (r.net > 0 ? 'win' : 'loss'); msg.textContent = v ? `${fmtx(v)} · ${r.net > 0 ? 'ganas ' + fmt(r.net) : 'recuperas ' + fmt(r.credit)}` : (r.credit > 0 ? `Vacía · recuperas ${fmt(r.credit)}` : 'Casilla vacía');
+        ctx.busy = false; bet.disable(false); $('#whGo').disabled = false;
+      } };
+    };
+  },
+  unmount() { if (this.st) this.st.run = false; },
+};
+
+/* ================= HI-LO (Ático) ================= */
+const HL_RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+const hlFactor = p => p > 0 ? .98 / p : 0;
+Games.hilo = {
+  mount(body, ctx) {
+    body.innerHTML = `<div class="gwrap"><div class="hl-table"><div class="hl-cards" id="hlCards"></div><div class="mult-big num" id="hlMult">×1,00</div></div>
+      <div class="gside"><div class="msg" id="hlMsg">Apuesta y adivina si la siguiente carta es mayor o menor. Retírate cuando quieras.</div><div id="hlBet"></div>${minNote('hilo')}
+      <button class="btn primary big" id="hlGo">Empezar</button>
+      <div class="bj-actions"><button class="btn" id="hlHi" disabled>Mayor</button><button class="btn" id="hlLo" disabled>Menor</button></div>
+      <button class="btn small" id="hlSkip" disabled>Cambiar carta (quedan 2)</button>
+      <p class="note">El as es la carta más baja y la K la más alta. Si sale una carta igual, pierdes.</p></div></div>`;
+    const bet = betControl('hilo', GAME_MIN.hilo); $('#hlBet').replaceWith(bet.el);
+    let t = null, rank = 0, mult = 1, skips = 2, steps = 0; const msg = $('#hlMsg');
+    const card = (r, s) => { const red = s === '♥' || s === '♦'; const d = el('div', 'card-p' + (red ? ' red' : '')); d.innerHTML = `<span class="tl">${HL_RANKS[r - 1]}<br>${s}</span><span class="mid">${s}</span>`; return d; };
+    const deal = () => { const r = 1 + rint(13), s = SUITS[rint(4)]; const box = $('#hlCards'); box.append(card(r, s)); while (box.children.length > 6) box.firstChild.remove(); Sound.click(); return r; };
+    const pHi = () => (13 - rank) / 13, pLo = () => (rank - 1) / 13;
+    const ui = () => {
+      const play = !!t; $('#hlMult').textContent = fmtx(mult);
+      $('#hlHi').disabled = !play || pHi() === 0; $('#hlLo').disabled = !play || pLo() === 0; $('#hlSkip').disabled = !play || !skips;
+      $('#hlHi').textContent = play && pHi() ? `Mayor · ${fmtx(hlFactor(pHi()))}` : 'Mayor'; $('#hlLo').textContent = play && pLo() ? `Menor · ${fmtx(hlFactor(pLo()))}` : 'Menor';
+      $('#hlSkip').textContent = `Cambiar carta (quedan ${skips})`;
+      const go = $('#hlGo'); if (play) { go.textContent = steps ? `Retirar ${fmt(t.amount * mult)}` : 'Adivina una carta'; go.disabled = !steps; } else { go.textContent = 'Empezar'; go.disabled = false; }
+    };
+    const end = () => { t = null; ctx.busy = false; bet.disable(false); ui(); };
+    $('#hlGo').onclick = () => {
+      if (t) { if (!steps) return; const r = settle(t, t.amount * mult); msg.className = 'msg win'; msg.textContent = `Retirado en ${fmtx(mult)} · ${r.net >= 0 ? 'ganas ' + fmt(r.net) : 'recuperas ' + fmt(r.credit)}`; return end(); }
+      t = placeBet(bet.get(), 'hilo'); if (!t) return;
+      ctx.busy = true; bet.disable(true); mult = 1; skips = 2; steps = 0; $('#hlCards').innerHTML = ''; rank = deal(); msg.className = 'msg'; msg.textContent = '¿Mayor o menor?'; ui();
+    };
+    const guess = hi => {
+      if (!t) return; const p = hi ? pHi() : pLo(); if (!p) return;
+      const nx = deal(); const ok = hi ? nx > rank : nx < rank;
+      if (!ok) { settle(t, 0); msg.className = 'msg loss'; msg.textContent = nx === rank ? 'Carta igual: pierdes.' : 'Fallaste. Se pierde la apuesta.'; rank = nx; mult = 0; ui(); return end(); }
+      mult *= hlFactor(p); steps++; rank = nx; Sound.tone(700 + steps * 60, .1, 'triangle', .08); msg.className = 'msg'; msg.textContent = `Acierto ${steps}. Sigue o retírate.`; ui();
+    };
+    $('#hlHi').onclick = () => guess(true); $('#hlLo').onclick = () => guess(false);
+    $('#hlSkip').onclick = () => { if (!t || !skips) return; skips--; rank = deal(); ui(); };
+    ui();
+  },
+  unmount() { },
+};
+
+/* ================= KENO (Ático) ================= */
+const KENO_PAY = { 1: { 1: 3.9 }, 2: { 1: 1.8, 2: 5 }, 3: { 1: 1, 2: 2.8, 3: 12 }, 4: { 2: 2.2, 3: 9, 4: 70 }, 5: { 2: 1.5, 3: 4, 4: 20, 5: 150 }, 6: { 2: 1, 3: 2.4, 4: 10, 5: 50, 6: 350 }, 7: { 3: 2, 4: 7, 5: 35, 6: 250, 7: 1000 }, 8: { 3: 1.5, 4: 4, 5: 16, 6: 100, 7: 600, 8: 2000 } };
+Games.keno = {
+  mount(body, ctx) {
+    body.innerHTML = `<div class="gwrap"><div class="keno-grid" id="knGrid">${Array.from({ length: 40 }, (_, i) => `<button type="button" class="kn" data-n="${i + 1}">${i + 1}</button>`).join('')}</div>
+      <div class="gside"><div class="msg" id="knMsg">Marca de 1 a 8 números. Salen 10 bolas de 40.</div><div id="knBet"></div>${minNote('keno')}
+      <div class="bj-actions"><button class="btn small" id="knRand">Al azar</button><button class="btn small" id="knClear">Borrar</button></div>
+      <button class="btn primary big" id="knGo">Sortear</button><table class="paytable"><tbody id="knPay"></tbody></table></div></div>`;
+    const bet = betControl('keno', GAME_MIN.keno); $('#knBet').replaceWith(bet.el);
+    let picks = new Set((S.lastBet.knPicks || []).filter(n => n >= 1 && n <= 40).slice(0, 8));
+    const grid = $('#knGrid');
+    const paint = (drawn = new Set()) => {
+      $$('.kn', grid).forEach(b => { const n = +b.dataset.n; b.classList.toggle('pick', picks.has(n)); b.classList.toggle('drawn', drawn.has(n)); b.classList.toggle('hit', drawn.has(n) && picks.has(n)); });
+      const tb = KENO_PAY[picks.size] || {}; $('#knPay').innerHTML = picks.size ? Object.entries(tb).reverse().map(([h, m]) => `<tr><td>${h} aciertos de ${picks.size}</td><td>${fmtx(m)}</td></tr>`).join('') : '<tr><td class="note">Marca números para ver los premios</td><td></td></tr>';
+    };
+    const save = () => { S.lastBet.knPicks = [...picks]; store('moroso.bets', S.lastBet); };
+    grid.onclick = e => { const b = e.target.closest('.kn'); if (!b || ctx.busy) return; const n = +b.dataset.n; if (picks.has(n)) picks.delete(n); else if (picks.size < 8) picks.add(n); else toast('Máximo 8 números.', 'bad'); save(); paint(); Sound.click(); };
+    $('#knRand').onclick = () => { if (ctx.busy) return; const k = picks.size || 5; picks = new Set(); while (picks.size < k) picks.add(1 + rint(40)); save(); paint(); };
+    $('#knClear').onclick = () => { if (ctx.busy) return; picks = new Set(); save(); paint(); };
+    $('#knGo').onclick = async () => {
+      if (ctx.busy) return; if (!picks.size) { toast('Marca al menos un número.', 'bad'); return; }
+      const t = placeBet(bet.get(), 'keno'); if (!t) return;
+      ctx.busy = true; bet.disable(true); $('#knGo').disabled = true; const msg = $('#knMsg'); msg.className = 'msg'; msg.textContent = 'Sorteando…';
+      const pool = Array.from({ length: 40 }, (_, i) => i + 1); const drawn = new Set();
+      for (let i = 0; i < 10; i++) { const j = rint(pool.length); drawn.add(pool.splice(j, 1)[0]); paint(drawn); picks.has([...drawn].pop()) ? Sound.tone(900 + i * 40, .1, 'triangle', .09) : Sound.tick(); await sleep(170); }
+      const hits = [...picks].filter(n => drawn.has(n)).length, m = (KENO_PAY[picks.size] || {})[hits] || 0;
+      const r = settle(t, t.amount * m);
+      msg.className = 'msg ' + (r.net > 0 ? 'win' : 'loss'); msg.textContent = `${hits} acierto${hits === 1 ? '' : 's'}${m ? ' · ' + fmtx(m) : ''} · ${r.net > 0 ? 'ganas ' + fmt(r.net) : r.credit > 0 ? 'recuperas ' + fmt(r.credit) : 'pierdes'}`;
+      ctx.busy = false; bet.disable(false); $('#knGo').disabled = false;
+    };
+    paint();
   },
   unmount() { },
 };
@@ -1878,21 +2405,31 @@ function boot() {
   if (window.MOROSO_WEB) $('#hCode').title = 'Copiar enlace de invitación';
   const sb = $('#btnSound'); const paintSound = () => { sb.innerHTML = Sound.on ? ICON.sound : ICON.mute; sb.setAttribute('aria-label', Sound.on ? 'Silenciar sonido' : 'Activar sonido'); };
   sb.onclick = () => { Sound.on = !Sound.on; store('moroso.sound', Sound.on); paintSound(); if (Sound.on) Sound.chip(); }; paintSound();
+  let giveUpTimer = null;
+  $('#btnGiveUp').onclick = e => {
+    const b = e.currentTarget;
+    if (!b.dataset.armed) { b.dataset.armed = '1'; b.textContent = '¿Seguro? Pulsa otra vez'; clearTimeout(giveUpTimer); giveUpTimer = setTimeout(() => { delete b.dataset.armed; b.textContent = 'Rendirse'; }, 4000); return; }
+    clearTimeout(giveUpTimer); delete b.dataset.armed; b.textContent = 'Rendirse'; surrender();
+  };
   $('#btnLeave').onclick = () => leaveRoom().then(() => requestAnimationFrame(drawPreview));
   $('#mcClose').onclick = () => closeMachine();
   $('#dmClose').onclick = closeDayModal;
   $('#machine').addEventListener('pointerdown', e => { if (e.target.id === 'machine') closeMachine(); });
   $('#dayModal').addEventListener('pointerdown', e => { if (e.target.id === 'dayModal') closeDayModal(); });
   const act = e => {
-    const b = e.target.closest('[data-buy],[data-act]'); if (!b) return;
+    const b = e.target.closest('[data-buy],[data-act],[data-floor]'); if (!b) return;
     if (b.dataset.buy) return buy(b.dataset.buy);
+    if (b.dataset.floor) { Floor.goFloor(+b.dataset.floor); closeDayModal(); toast(`Bienvenido a ${FLOORS[+b.dataset.floor].name}.`, 'good'); return; }
     const a = b.dataset.act;
     if (a === 'start') { startDay(); closeDayModal(); }
     else if (a === 'new') { newGame(); closeDayModal(); }
     else if (a === 'summary') openDayModal();
+    else if (a === 'sell') sellPart();
+    else if (a === 'pay') { b.disabled = true; finalizeDay(true).finally(() => { b.disabled = false; }); }
   };
   $('#dmBody').addEventListener('click', act); $('#phaseBanner').addEventListener('click', act);
   $('#chatForm').onsubmit = sendChat;
+  $('#hEvent').onclick = e => { const k = e.currentTarget.dataset.ev; if (k && EVENTS[k]) toast(`${EVENTS[k].n}: ${EVENTS[k].d}`, 'good'); };
   const rx = $('#reacts'); EMOTES.forEach(em => { const b = el('button', 'react', em); b.type = 'button'; b.setAttribute('aria-label', 'Reacción ' + em); b.onclick = () => { Floor.myEmote = { e: em, t: Date.now() }; Sound.click(); }; rx.append(b); });
   addEventListener('pointerdown', () => Sound.ac(), { once: true });
   Floor.init();
