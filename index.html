@@ -1210,6 +1210,7 @@ let cur = null;
 const Games = {};
 function openStation(id) {
   if (cur) return;
+  Floor.release();
   if (id === 'tienda') { openShop(); return; }
   if (id === 'tablon') { openBoard(); return; }
   if (id === 'clinica') { openClinic(); return; }
@@ -1469,7 +1470,11 @@ const Floor = {
     this.cv.addEventListener('pointerdown', e => this.onPointer(e));
     addEventListener('keydown', e => this.onKey(e, true));
     addEventListener('keyup', e => this.onKey(e, false));
-    addEventListener('blur', () => this.keys.clear());
+    // el control nunca se queda «pegado»: se suelta todo al perder el foco, al escribir o al abrir una ventana
+    addEventListener('blur', () => this.release());
+    document.addEventListener('visibilitychange', () => { if (document.hidden) this.release(); });
+    document.addEventListener('focusin', e => { if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) this.release(); });
+    addEventListener('contextmenu', () => this.release());
     let last = performance.now();
     const loop = now => { const dt = Math.min(.05, (now - last) / 1000); last = now; this.frame(dt, now / 1000); requestAnimationFrame(loop); };
     requestAnimationFrame(loop);
@@ -1514,15 +1519,23 @@ const Floor = {
     this.bg = b;
   },
   /* ---- input ---- */
+  release() { this.keys.clear(); this.target = null; this.pending = null; this.walking = false; },
+  dirOf(e) {
+    const byCode = { ArrowUp: 'up', KeyW: 'up', ArrowDown: 'down', KeyS: 'down', ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right' }[e.code];
+    if (byCode) return byCode;
+    return { arrowup: 'up', w: 'up', arrowdown: 'down', s: 'down', arrowleft: 'left', a: 'left', arrowright: 'right', d: 'right' }[(e.key || '').toLowerCase()] || null;
+  },
   onKey(e, down) {
+    const dir = this.dirOf(e);
+    this.lastKeyAt = performance.now();
+    // soltar una tecla siempre cuenta, aunque estés escribiendo o tengas una máquina abierta
+    if (!down) { if (dir) this.keys.delete(dir); return; }
     const tag = (e.target && e.target.tagName) || '';
     if (/INPUT|TEXTAREA|SELECT/.test(tag)) return;
-    if (!$('#machine').hidden || !$('#dayModal').hidden) { if (down && e.key === 'Escape') { if (!$('#machine').hidden) closeMachine(); else closeDayModal(); } return; }
+    if (!$('#machine').hidden || !$('#dayModal').hidden) { if (e.key === 'Escape') { if (!$('#machine').hidden) closeMachine(); else closeDayModal(); } return; }
     if ($('#game').hidden) return;
-    const k = e.key.toLowerCase();
-    if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'].includes(k)) {
-      e.preventDefault(); if (down) { this.keys.add(k); this.target = null; this.pending = null; } else this.keys.delete(k);
-    } else if (down && (k === 'e' || k === 'enter' || k === ' ') && this.near) { e.preventDefault(); openStation(this.near); }
+    if (dir) { e.preventDefault(); this.keys.add(dir); this.target = null; this.pending = null; }
+    else if ((e.key === 'e' || e.key === 'E' || e.key === 'Enter' || e.key === ' ') && this.near && tag !== 'BUTTON' && tag !== 'A') { e.preventDefault(); this.release(); openStation(this.near); }
   },
   onPointer(e) {
     const r = this.cv.getBoundingClientRect(); const x = (e.clientX - r.left) / this.k, y = (e.clientY - r.top) / this.k;
@@ -1543,16 +1556,24 @@ const Floor = {
     if ($('#game').hidden || !this.bg) return;
     // movement
     let vx = 0, vy = 0;
+    const busy = !$('#machine').hidden || !$('#dayModal').hidden;
+    if (busy && (this.keys.size || this.target)) this.release();
+    // red de seguridad: si una tecla lleva 3 s sin dar señales, se suelta
+    if (this.keys.size && (performance.now() - (this.lastKeyAt || 0) > 3000 || !document.hasFocus())) this.keys.clear();
     if (this.keys.size) {
-      if (this.keys.has('arrowleft') || this.keys.has('a')) vx -= 1; if (this.keys.has('arrowright') || this.keys.has('d')) vx += 1;
-      if (this.keys.has('arrowup') || this.keys.has('w')) vy -= 1; if (this.keys.has('arrowdown') || this.keys.has('s')) vy += 1;
+      if (this.keys.has('left')) vx -= 1; if (this.keys.has('right')) vx += 1;
+      if (this.keys.has('up')) vy -= 1; if (this.keys.has('down')) vy += 1;
     } else if (this.target) {
       const dx = this.target.x - this.pos.x, dy = this.target.y - this.pos.y, d = Math.hypot(dx, dy);
-      if (d < 4) { this.target = null; if (this.pending) { const p = this.pending; this.pending = null; openStation(p); } }
-      else { vx = dx / d; vy = dy / d; }
+      if (d < 4) { this.target = null; this.prog = null; if (this.pending) { const p = this.pending; this.pending = null; openStation(p); } }
+      else {
+        vx = dx / d; vy = dy / d;
+        // si no se acerca al destino en medio segundo (atascado contra algo), se para
+        const now = performance.now();
+        if (!this.prog || this.prog.tgt !== this.target) this.prog = { tgt: this.target, d, t: now };
+        else if (now - this.prog.t > 500) { if (this.prog.d - d < 6) { const p = this.pending; this.target = null; this.pending = null; this.prog = null; const st = p && ST().find(s => s.id === p); if (st && Math.hypot(this.pos.x - st.spot.x, this.pos.y - st.spot.y) < 90) openStation(st.id); } else this.prog = { tgt: this.target, d, t: now }; }
+      }
     }
-    const busy = !$('#machine').hidden;
-    if (busy) { vx = vy = 0; }
     const len = Math.hypot(vx, vy); this.walking = len > 0;
     if (len) {
       vx /= len; vy /= len; this.face = { x: vx, y: vy };
