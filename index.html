@@ -267,6 +267,47 @@ label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu
 .kn.drawn{box-shadow:0 0 0 3px #5ce1e6 inset}
 .kn.hit{background:#4fd6a4;color:#0b2a20;transform:scale(1.08);box-shadow:0 0 14px rgba(79,214,164,.7)}
 
+/* Tapete de ruleta */
+.rl-wrap{grid-template-columns:minmax(0,.75fr) minmax(0,1.35fr)}
+.rlt-scroll{overflow-x:auto;padding:16px 4px 4px}
+.rlt{display:grid;grid-template-columns:46px minmax(0,1fr) 50px;grid-template-rows:auto 38px 38px;min-width:520px;background:#0f5c43;border:6px solid #5a3a20;border-radius:12px;box-shadow:inset 0 0 0 2px var(--brass-d);padding:8px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.rlt.locked{pointer-events:none;opacity:.92}
+.rlt .rz{grid-row:1;grid-column:1;border:1px solid rgba(246,234,210,.55);border-radius:22px 0 0 22px;display:grid;place-items:center;position:relative;cursor:pointer;background:#127a4c}
+.rlt-nums{grid-row:1;grid-column:2;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:repeat(3,44px);position:relative}
+.rlt .rc{border:1px solid rgba(246,234,210,.55);display:grid;place-items:center;position:relative;cursor:pointer;font-family:var(--f-num);font-weight:700;font-size:14px}
+.rlt .rc span,.rlt .rz span{pointer-events:none}
+.rlt-nums .rc.r > span:first-child{background:#b5222c;border-radius:50%;width:28px;height:28px;display:grid;place-items:center}
+.rlt-nums .rc.b > span:first-child{background:#17171d;border-radius:50%;width:28px;height:28px;display:grid;place-items:center}
+.rlt .rz > span:first-child{font-family:var(--f-num);font-weight:700;font-size:16px}
+.rcols{grid-row:1;grid-column:3;display:grid;grid-template-rows:repeat(3,44px)}
+.rcols .rc{font-size:11px}
+.rdoz{grid-row:2;grid-column:2;display:grid;grid-template-columns:repeat(3,1fr)}
+.routs{grid-row:3;grid-column:2;display:grid;grid-template-columns:repeat(6,1fr)}
+.rdoz .rc,.routs .rc{font-family:var(--f-body);font-size:12px;letter-spacing:.06em}
+.rc.rdia > span:first-child{width:22px;height:22px;transform:rotate(45deg);border-radius:3px;display:block}
+.rc.rdia.r > span:first-child{background:#b5222c}.rc.rdia.b > span:first-child{background:#17171d;outline:1px solid rgba(255,255,255,.35)}
+.rlt .rc:hover,.rlt .rz:hover{background-color:rgba(255,224,102,.12)}
+.rlt .cov{box-shadow:inset 0 0 0 100px rgba(255,224,102,.22)}
+.rlt .hitn{box-shadow:inset 0 0 0 3px #ffe066,0 0 16px rgba(255,224,102,.7)!important;z-index:2}
+.rlt-hot{position:absolute;inset:0;pointer-events:none}
+.rh{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;border:0;background:transparent;padding:0;z-index:5;cursor:pointer;border-radius:8px}
+.rh.v{width:14px;height:26px}.rh.h{width:26px;height:14px}.rh.d{width:16px;height:16px;border-radius:50%;z-index:6}
+.rh:hover{background:rgba(255,224,102,.45)}
+.rchip{--c:#999;width:26px;height:26px;border-radius:50%;border:0;padding:0;display:grid;place-items:center;font-family:var(--f-num);font-weight:700;font-size:9px;background:radial-gradient(circle,var(--c) 0 54%,transparent 55%),repeating-conic-gradient(var(--c) 0 30deg,#f6ead2 30deg 60deg);box-shadow:0 2px 0 rgba(0,0,0,.45),inset 0 0 0 2px rgba(0,0,0,.2)}
+.rchip span{width:68%;height:68%;border-radius:50%;border:1px dashed rgba(255,255,255,.55);display:grid;place-items:center;line-height:1}
+.rchip.placed{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:7;animation:chipin .18s ease-out}
+.rh .rchip.placed{width:22px;height:22px;font-size:8px}
+@keyframes chipin{from{transform:translate(-50%,-90%) scale(1.3);opacity:0}}
+.rchip.big{width:48px;height:48px;font-size:12px;cursor:pointer;transition:transform .12s}
+.rchip.big[aria-pressed=true]{transform:translateY(-6px);box-shadow:0 0 0 3px var(--brass),0 8px 16px rgba(0,0,0,.4)}
+.rack{display:flex;gap:10px;flex-wrap:wrap;padding-top:6px}
+.rl-tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.rl-total{margin-left:auto;font-size:13px;color:var(--muted)} .rl-total b{color:var(--cream);font-size:17px}
+.rl-info{font-size:13px;color:var(--muted);min-height:20px}
+.rl-info b{color:var(--cream)}
+.rlt .lucky{box-shadow:inset 0 0 0 100px rgba(255,224,102,.55),0 0 14px #ffe066}
+.rlt .lucky::after{content:attr(data-x);position:absolute;left:50%;top:-12px;transform:translateX(-50%);font-size:9px;background:#2a1406;color:#ffe066;padding:0 3px;border-radius:3px;white-space:nowrap;z-index:8}
+
 /* Shop / board / day */
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
 .shop-item{background:#160d13;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
@@ -309,7 +350,7 @@ label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu
   .entry-grid{grid-template-columns:1fr}
   .marquee{grid-template-columns:1fr;gap:12px}
   .game-main{grid-template-columns:1fr}
-  .gwrap{grid-template-columns:1fr}
+  .gwrap,.rl-wrap{grid-template-columns:1fr}
   .chat{min-height:0}
   .feed{max-height:220px}
 }
@@ -1875,26 +1916,97 @@ function drawRoulette(c, S, wa, balls) {
   }
 }
 const RL_MODES = {
-  ruleta: { name: 'Ruleta europea', hint: 'Elige una apuesta y gira.' },
-  ruleta2: { name: 'Ruleta relámpago', hint: 'Antes de cada tirada caen rayos sobre 1 a 3 números: si aciertas un pleno con rayo, paga ×50 a ×250. Los plenos normales pagan ×30.' },
-  ruleta3: { name: 'Ruleta de dos bolas', hint: 'Giran dos bolas. Cobras más si aciertan las dos: pleno ×18 o ×36, sencillas ×1 o ×2, docenas ×1,5 o ×3.' },
+  ruleta: { name: 'Ruleta europea', hint: 'Elige ficha y ponla en el tapete. Puedes repartir fichas en tantas casillas como quieras.' },
+  ruleta2: { name: 'Ruleta relámpago', hint: 'Antes de cada tirada caen rayos sobre 1 a 3 números: un pleno con rayo paga ×50 a ×250. Los plenos sin rayo pagan ×30.' },
+  ruleta3: { name: 'Ruleta de dos bolas', hint: 'Giran dos bolas. Cada apuesta cobra la mitad de su premio por cada bola que acierte, y el premio entero si aciertan las dos.' },
 };
-const rlDouble = m => m === 36 ? [0, 18, 36] : m === 3 ? [0, 1.5, 3] : [0, 1, 2];
+/* ---- tapete: definición de todas las apuestas posibles ---- */
+const RLT_DEFS = new Map();
+const rltNum = (c, r) => 3 * (c + 1) - r; // columna 0..11, fila 0..2 (arriba = 3, 6, 9…)
+(function buildDefs() {
+  const add = (key, nums, m, label) => { if (!RLT_DEFS.has(key)) RLT_DEFS.set(key, { key, nums: new Set(nums), m, label }); };
+  const sk = (p, ns) => p + '-' + [...ns].sort((a, b) => a - b).join('-');
+  for (let n = 0; n <= 36; n++) add('n-' + n, [n], 36, `Pleno al ${n}`);
+  for (let c = 0; c < 12; c++) for (let r = 0; r < 3; r++) {
+    if (c < 11) { const ns = [rltNum(c, r), rltNum(c + 1, r)]; add(sk('sp', ns), ns, 18, `Caballo ${ns.join('/')}`); }
+    if (r < 2) { const ns = [rltNum(c, r), rltNum(c, r + 1)]; add(sk('sp', ns), ns, 18, `Caballo ${ns.sort((a, b) => a - b).join('/')}`); }
+    if (c < 11 && r < 2) { const ns = [rltNum(c, r), rltNum(c + 1, r), rltNum(c, r + 1), rltNum(c + 1, r + 1)].sort((a, b) => a - b); add(sk('c', ns), ns, 9, `Cuadro ${ns.join('-')}`); }
+  }
+  for (let c = 0; c < 12; c++) { const ns = [rltNum(c, 2), rltNum(c, 1), rltNum(c, 0)]; add('st-' + c, ns, 12, `Transversal ${ns[0]}-${ns[2]}`); if (c < 11) { const s6 = ns.concat([rltNum(c + 1, 2), rltNum(c + 1, 1), rltNum(c + 1, 0)]); add('sl-' + c, s6, 6, `Seisena ${s6[0]}-${s6[5]}`); } }
+  for (let r = 0; r < 3; r++) add(sk('sp', [0, rltNum(0, r)]), [0, rltNum(0, r)], 18, `Caballo 0/${rltNum(0, r)}`);
+  add('tr-0-2-3', [0, 2, 3], 12, 'Trío 0-2-3'); add('tr-0-1-2', [0, 1, 2], 12, 'Trío 0-1-2'); add('bk', [0, 1, 2, 3], 9, 'Cuatro primeros 0-1-2-3');
+  const range = (a, b, f = () => true) => { const o = []; for (let i = a; i <= b; i++) if (f(i)) o.push(i); return o; };
+  add('col-1', range(1, 36, n => n % 3 === 1), 3, 'Columna 1 (1, 4, 7…)'); add('col-2', range(1, 36, n => n % 3 === 2), 3, 'Columna 2 (2, 5, 8…)'); add('col-3', range(1, 36, n => n % 3 === 0), 3, 'Columna 3 (3, 6, 9…)');
+  add('dz-1', range(1, 12), 3, '1ª docena (1-12)'); add('dz-2', range(13, 24), 3, '2ª docena (13-24)'); add('dz-3', range(25, 36), 3, '3ª docena (25-36)');
+  add('low', range(1, 18), 2, 'Falta (1-18)'); add('high', range(19, 36), 2, 'Pasa (19-36)'); add('even', range(1, 36, n => n % 2 === 0), 2, 'Par');
+  add('odd', range(1, 36, n => n % 2 === 1), 2, 'Impar'); add('red', [...REDS], 2, 'Rojo'); add('black', range(1, 36, n => !REDS.has(n)), 2, 'Negro');
+})();
+const RACKS = { 1: [1, 5, 25, 100, 500], 50: [10, 50, 100, 500, 1000], 200: [50, 100, 500, 1000, 5000] };
+const CHIP_COL = { 1: '#e9e4d6', 5: '#c0392b', 10: '#2f62b3', 25: '#23824f', 50: '#e67e22', 100: '#1b1b1f', 500: '#6b3fa0', 1000: '#d4ae5c', 5000: '#c2185b' };
+const shortN = v => v >= 1e6 ? (v / 1e6).toFixed(v % 1e6 ? 1 : 0).replace('.', ',') + 'M' : v >= 1000 ? (v / 1000).toFixed(v % 1000 ? 1 : 0).replace('.', ',') + 'k' : String(v);
+function chipStyle(v) { const den = Object.keys(CHIP_COL).map(Number).filter(d => d <= v).pop() || 1; const col = CHIP_COL[den]; return `--c:${col};color:${den === 1 || den === 1000 ? '#2a1406' : '#fff'}`; }
+
 function makeRoulette(id) {
   const mode = id; return {
   mount(body, ctx) {
-    const outs = ['red', 'black', 'even', 'odd', 'low', 'high', 'd1', 'd2', 'd3'].map(k => `<button type="button" data-b="${k}" class="${RL_BETS[k].c || ''}">${RL_BETS[k].l}</button>`).join('');
-    let nums = `<button type="button" class="z rl-zero" data-b="n0">0</button>`;
-    for (let row = 0; row < 3; row++) for (let col = 0; col < 12; col++) { const n = 3 * (col + 1) - row; nums += `<button type="button" class="${numColor(n)}" data-b="n${n}">${n}</button>`; }
-    body.innerHTML = `<div class="gwrap"><div class="rl-wheel"><canvas id="rlCv" width="640" height="640" aria-label="${RL_MODES[mode].name}"></canvas></div>
-      <div class="gside"><div class="msg" id="rlMsg">${RL_MODES[mode].hint}</div><div class="rl-out" id="rlOut">${outs}</div><div class="rl-board" id="rlBoard">${nums}</div>
-      <p class="rl-pick" id="rlPick"></p><div id="rlBet"></div>${GAME_MIN[mode] ? minNote(mode) : ''}<button class="btn primary big" id="rlSpin">Girar</button><div class="hist" id="rlHist"></div></div></div>`;
-    const bet = betControl(mode, GAME_MIN[mode] || 25); $('#rlBet').replaceWith(bet.el);
-    let pick = S.lastBet.rlPick && RL_BETS[S.lastBet.rlPick] ? S.lastBet.rlPick : 'red';
-    const payTxt = k => { const m = RL_BETS[k].m; if (mode === 'ruleta3') return rlDouble(m).slice(1).map(fmtx).join(' o '); if (mode === 'ruleta2' && k.startsWith('n')) return '×30 (con rayo, ×50 a ×250)'; return fmtx(k.startsWith('n') && evNow() === 'ruleta' && mode === 'ruleta' ? 40 : m) + (k.startsWith('n') && evNow() === 'ruleta' && mode === 'ruleta' ? ' (Noche de ruleta)' : ''); };
-    const showPick = () => { $$('[data-b]', body).forEach(b => b.setAttribute('aria-pressed', b.dataset.b === pick)); $('#rlPick').innerHTML = `Apuesta: <b>${RL_BETS[pick].l}</b> · paga ${payTxt(pick)}`; };
-    body.addEventListener('click', e => { const b = e.target.closest('[data-b]'); if (!b || ctx.busy) return; pick = b.dataset.b; S.lastBet.rlPick = pick; store('moroso.bets', S.lastBet); showPick(); Sound.click(); });
-    showPick();
+    const min = GAME_MIN[mode] || 1, rack = RACKS[min] || RACKS[1];
+    // tapete
+    let cells = '';
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 12; c++) { const n = rltNum(c, r); cells += `<div class="rc ${numColor(n)}" data-k="n-${n}" data-n="${n}" style="grid-column:${c + 1};grid-row:${r + 1}"><span>${n}</span></div>`; }
+    let hot = '';
+    const hs = (x, y, key, cls) => { hot += `<button type="button" class="rh ${cls}" data-k="${key}" style="left:${x}%;top:${y}%" aria-label="${RLT_DEFS.get(key).label}"></button>`; };
+    const sk = (p, ns) => p + '-' + [...ns].sort((a, b) => a - b).join('-');
+    for (let c = 0; c < 12; c++) for (let r = 0; r < 3; r++) {
+      if (c < 11) hs((c + 1) / 12 * 100, (r + .5) / 3 * 100, sk('sp', [rltNum(c, r), rltNum(c + 1, r)]), 'v');
+      if (r < 2) hs((c + .5) / 12 * 100, (r + 1) / 3 * 100, sk('sp', [rltNum(c, r), rltNum(c, r + 1)]), 'h');
+      if (c < 11 && r < 2) hs((c + 1) / 12 * 100, (r + 1) / 3 * 100, sk('c', [rltNum(c, r), rltNum(c + 1, r), rltNum(c, r + 1), rltNum(c + 1, r + 1)]), 'd');
+    }
+    for (let c = 0; c < 12; c++) { hs((c + .5) / 12 * 100, 100, 'st-' + c, 'h'); if (c < 11) hs((c + 1) / 12 * 100, 100, 'sl-' + c, 'd'); }
+    for (let r = 0; r < 3; r++) hs(0, (r + .5) / 3 * 100, sk('sp', [0, rltNum(0, r)]), 'v');
+    hs(0, 100 / 3, 'tr-0-2-3', 'd'); hs(0, 200 / 3, 'tr-0-1-2', 'd'); hs(0, 100, 'bk', 'd');
+    const outs = [['low', '1-18'], ['even', 'PAR'], ['red', ''], ['black', ''], ['odd', 'IMPAR'], ['high', '19-36']];
+    body.innerHTML = `<div class="gwrap rl-wrap"><div class="gside"><div class="rl-wheel"><canvas id="rlCv" width="640" height="640" aria-label="${RL_MODES[mode].name}"></canvas></div>
+        <div class="msg" id="rlMsg">${RL_MODES[mode].hint}</div><div class="hist" id="rlHist"></div></div>
+      <div class="gside">
+        <div class="rlt-scroll"><div class="rlt" id="rlt">
+          <div class="rz z" data-k="n-0" data-n="0"><span>0</span></div>
+          <div class="rlt-nums">${cells}<div class="rlt-hot">${hot}</div></div>
+          <div class="rcols">${[3, 2, 1].map(k => `<div class="rc out" data-k="col-${k}"><span>2 a 1</span></div>`).join('')}</div>
+          <div class="rdoz">${[1, 2, 3].map(k => `<div class="rc out" data-k="dz-${k}"><span>${k}ª docena</span></div>`).join('')}</div>
+          <div class="routs">${outs.map(([k, l]) => `<div class="rc out ${k === 'red' ? 'rdia r' : k === 'black' ? 'rdia b' : ''}" data-k="${k}"><span>${l}</span></div>`).join('')}</div>
+        </div></div>
+        <div class="rl-info" id="rlInfo">Pasa el ratón por el tapete para ver qué cubre cada casilla. Clic derecho (o mantener pulsado) quita la apuesta.</div>
+        <div class="rack" id="rlRack">${rack.map(v => `<button type="button" class="rchip big" data-v="${v}" style="${chipStyle(v)}" aria-label="Ficha de ${v}"><span>${shortN(v)}</span></button>`).join('')}</div>
+        <div class="rl-tools"><button type="button" class="btn small" id="rlUndo">Deshacer</button><button type="button" class="btn small" id="rlClear">Borrar</button><button type="button" class="btn small" id="rlRepeat">Repetir</button><button type="button" class="btn small" id="rlDouble">Doblar</button>
+          <span class="rl-total">En la mesa <b class="num" id="rlTotal">0</b></span></div>
+        ${min > 1 ? minNote(mode) : ''}<button class="btn primary big" id="rlSpin">Girar</button></div></div>`;
+    const tbl = $('#rlt'), info = $('#rlInfo');
+    // estado de apuestas
+    const bets = new Map(); const undo = []; let chip = S.lastBet[mode + 'Chip'] && rack.includes(S.lastBet[mode + 'Chip']) ? S.lastBet[mode + 'Chip'] : rack[1];
+    const lastKey = mode + 'Bets';
+    const total = () => [...bets.values()].reduce((a, b) => a + b, 0);
+    const paint = () => {
+      $$('.rchip.placed', tbl).forEach(e => e.remove());
+      for (const [k, v] of bets) { const host = tbl.querySelector(`[data-k="${k}"]`); if (!host) continue; const ch = el('span', 'rchip placed'); ch.setAttribute('style', chipStyle(v)); ch.innerHTML = `<span>${shortN(v)}</span>`; host.append(ch); }
+      $('#rlTotal').textContent = fmt(total());
+      $$('#rlRack .rchip').forEach(b => b.setAttribute('aria-pressed', +b.dataset.v === chip));
+    };
+    const apply = (ops, record = true) => { for (const [k, v] of ops) { const nv = (bets.get(k) || 0) + v; if (nv > 0) bets.set(k, nv); else bets.delete(k); } if (record) undo.push(ops); paint(); };
+    const payFor = d => { if (mode === 'ruleta3') return `${fmtx(d.m / 2)} con una bola, ${fmtx(d.m)} con las dos`; if (mode === 'ruleta2' && d.nums.size === 1) return '×30, o el rayo si lo tiene'; return fmtx(d.nums.size === 1 && mode === 'ruleta' && evNow() === 'ruleta' ? 40 : d.m) + ' la apuesta'; };
+    tbl.addEventListener('pointerover', e => { const h = e.target.closest('[data-k]'); if (!h) return; const d = RLT_DEFS.get(h.dataset.k); $$('.rc.cov, .rz.cov', tbl).forEach(x => x.classList.remove('cov')); d.nums.forEach(n => { const cell = tbl.querySelector(`[data-n="${n}"]`); if (cell) cell.classList.add('cov'); }); info.innerHTML = `<b>${d.label}</b> · paga ${payFor(d)}${bets.get(d.key) ? ` · tienes ${fmt(bets.get(d.key))}` : ''}`; });
+    tbl.addEventListener('pointerleave', () => $$('.cov', tbl).forEach(x => x.classList.remove('cov')));
+    tbl.addEventListener('click', e => { const h = e.target.closest('[data-k]'); if (!h || ctx.busy) return; if (total() + chip > bank() && !(S.me.fx.gratis > 0)) { toast(`No hay tanto en el banco común (quedan ${fmt(bank())}).`, 'bad'); return; } apply([[h.dataset.k, chip]]); Sound.chip(); });
+    const removeAt = h => { if (!h || ctx.busy) return; const v = bets.get(h.dataset.k); if (!v) return; apply([[h.dataset.k, -v]]); Sound.click(); };
+    tbl.addEventListener('contextmenu', e => { e.preventDefault(); removeAt(e.target.closest('[data-k]')); });
+    let lp = null; tbl.addEventListener('touchstart', e => { const h = e.target.closest('[data-k]'); lp = setTimeout(() => { removeAt(h); lp = 'done'; }, 550); }, { passive: true });
+    tbl.addEventListener('touchend', e => { if (lp === 'done') e.preventDefault(); clearTimeout(lp); lp = null; });
+    $('#rlRack').onclick = e => { const b = e.target.closest('.rchip'); if (!b) return; chip = +b.dataset.v; S.lastBet[mode + 'Chip'] = chip; store('moroso.bets', S.lastBet); paint(); Sound.click(); };
+    $('#rlUndo').onclick = () => { if (ctx.busy || !undo.length) return; const ops = undo.pop(); apply(ops.map(([k, v]) => [k, -v]), false); };
+    $('#rlClear').onclick = () => { if (ctx.busy || !bets.size) return; apply([...bets].map(([k, v]) => [k, -v])); };
+    $('#rlDouble').onclick = () => { if (ctx.busy || !bets.size) return; if (total() * 2 > bank()) { toast('No hay suficiente en el banco para doblar.', 'bad'); return; } apply([...bets].map(([k, v]) => [k, v])); Sound.chip(); };
+    $('#rlRepeat').onclick = () => { if (ctx.busy) return; const prev = S.lastBet[lastKey]; if (!prev || !prev.length) { toast('Todavía no hay apuesta anterior.', 'bad'); return; } const ops = prev.filter(([k]) => RLT_DEFS.has(k)); apply([...bets].map(([k, v]) => [k, -v]).concat(ops)); Sound.chip(); };
+    paint();
+    // rueda
     const cv = $('#rlCv'), c = cv.getContext('2d');
     const st = this.st = { wa: rnd() * 6, rel: -Math.PI / 2, br: .61, rel2: Math.PI / 2, br2: .61, anim: null, run: true, hist: [] };
     let last = performance.now();
@@ -1915,44 +2027,51 @@ function makeRoulette(id) {
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
+    const lock = on => { ctx.busy = on; $('#rlSpin').disabled = on; tbl.classList.toggle('locked', on); ['#rlUndo', '#rlClear', '#rlRepeat', '#rlDouble'].forEach(s => $(s).disabled = on); };
     $('#rlSpin').onclick = () => {
       if (ctx.busy) return;
-      const t = placeBet(bet.get(), mode); if (!t) return;
-      ctx.busy = true; bet.disable(true); $('#rlSpin').disabled = true;
+      if (!bets.size) { toast('Pon al menos una ficha en el tapete.', 'bad'); return; }
+      const t = placeBet(total(), mode); if (!t) return;
+      const snapshot = [...bets]; S.lastBet[lastKey] = snapshot; store('moroso.bets', S.lastBet);
+      lock(true); $$('.hitn', tbl).forEach(x => x.classList.remove('hitn'));
       const msg = $('#rlMsg'); msg.className = 'msg'; msg.textContent = 'No va más…';
-      const n = rint(37), idx = ORDER.indexOf(n), step = Math.PI * 2 / 37, th = -Math.PI / 2 + idx * step;
-      const r0 = st.rel, m = Math.round((r0 - th) / (Math.PI * 2) - 6), r1 = th + Math.PI * 2 * m;
-      const myPick = pick;
-      // relámpago: números con rayo antes de girar
+      const n = rint(37), step = Math.PI * 2 / 37, th = -Math.PI / 2 + ORDER.indexOf(n) * step;
+      const r0 = st.rel, r1 = th + Math.PI * 2 * Math.round((r0 - th) / (Math.PI * 2) - 6);
       let lucky = {};
-      $$('#rlBoard .lucky').forEach(b => { b.classList.remove('lucky'); b.removeAttribute('data-x'); });
+      $$('.lucky', tbl).forEach(b => { b.classList.remove('lucky'); b.removeAttribute('data-x'); });
       if (mode === 'ruleta2') {
         const k = 1 + rint(3); while (Object.keys(lucky).length < k) lucky[rint(37)] = [50, 100, 150, 200, 250][rint(5)];
-        Object.entries(lucky).forEach(([num, x]) => { const b = $(`#rlBoard [data-b=n${num}]`); if (b) { b.classList.add('lucky'); b.dataset.x = '×' + x; } });
+        Object.entries(lucky).forEach(([num, x]) => { const b = tbl.querySelector(`[data-n="${num}"]`); if (b) { b.classList.add('lucky'); b.dataset.x = '×' + x; } });
         msg.textContent = 'Rayos: ' + Object.entries(lucky).map(([num, x]) => `${num} ×${x}`).join(', '); Sound.boom();
       }
-      // dos bolas: segunda bola independiente
       let n2 = null, b0, b1;
       if (mode === 'ruleta3') { n2 = rint(37); const th2 = -Math.PI / 2 + ORDER.indexOf(n2) * step; b0 = st.rel2; b1 = th2 + Math.PI * 2 * Math.round((b0 - th2) / (Math.PI * 2) - 7); }
       st.anim = {
         t0: performance.now(), dur: 4600, r0, r1, b0, b1, lp: 0, done: () => {
           st.rel = ((r1 % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
           if (n2 !== null) st.rel2 = ((b1 % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-          const B = RL_BETS[myPick]; let mm = 0;
-          if (mode === 'ruleta3') mm = rlDouble(B.m)[(B.w(n) ? 1 : 0) + (B.w(n2) ? 1 : 0)];
-          else if (B.w(n)) mm = mode === 'ruleta2' ? (myPick.startsWith('n') ? (lucky[n] || 30) : B.m) : (myPick.startsWith('n') && evNow() === 'ruleta' ? 40 : B.m);
-          const r = settle(t, t.amount * mm);
+          let payout = 0, wins = 0;
+          for (const [k, a] of snapshot) {
+            const d = RLT_DEFS.get(k); let m = 0;
+            if (mode === 'ruleta3') m = d.m / 2 * ((d.nums.has(n) ? 1 : 0) + (d.nums.has(n2) ? 1 : 0));
+            else if (d.nums.has(n)) m = d.nums.size === 1 ? (mode === 'ruleta2' ? (lucky[n] || 30) : (mode === 'ruleta' && evNow() === 'ruleta' ? 40 : 36)) : d.m;
+            if (m) { payout += a * m; wins++; const host = tbl.querySelector(`[data-k="${k}"]`); if (host) host.classList.add('hitn'); }
+          }
+          [n, n2].forEach(x => { if (x !== null) { const cell = tbl.querySelector(`[data-n="${x}"]`); if (cell) cell.classList.add('hitn'); } });
+          const r = settle(t, payout);
           const cn = x => x === 0 ? 'verde' : REDS.has(x) ? 'rojo' : 'negro';
-          msg.className = 'msg ' + (r.net > 0 ? 'win' : 'loss'); msg.textContent = `${n2 !== null ? `${n} ${cn(n)} y ${n2} ${cn(n2)}` : `${n} ${cn(n)}`}${lucky[n] && myPick === 'n' + n ? ' ¡con rayo!' : ''} · ${r.net > 0 ? 'ganas ' + fmt(r.net) : r.credit > 0 ? 'recuperas ' + fmt(r.credit) : 'pierdes'}`;
+          msg.className = 'msg ' + (r.net > 0 ? 'win' : 'loss'); msg.textContent = `${n2 !== null ? `${n} ${cn(n)} y ${n2} ${cn(n2)}` : `${n} ${cn(n)}`}${lucky[n] && bets.has('n-' + n) ? ' ¡con rayo!' : ''} · ${wins ? `${wins} apuesta${wins > 1 ? 's' : ''} ganadora${wins > 1 ? 's' : ''} · ` : ''}${r.net > 0 ? 'ganas ' + fmt(r.net) : r.credit > 0 ? 'recuperas ' + fmt(r.credit) : 'pierdes ' + fmt(t.free ? 0 : t.amount)}`;
           if (n2 !== null) st.hist.unshift(n2);
-          st.hist.unshift(n); st.hist = st.hist.slice(0, 12);
+          st.hist.unshift(n); st.hist = st.hist.slice(0, 14);
           $('#rlHist').innerHTML = st.hist.map(x => `<span style="background:${x === 0 ? '#127a4c' : REDS.has(x) ? '#a8202d' : '#1b1b22'}">${x}</span>`).join('');
-          ctx.busy = false; bet.disable(false); $('#rlSpin').disabled = false;
+          lock(false);
         }
       };
     };
+    this.key = e => { if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return; if (e.key === ' ' && !/BUTTON/.test(e.target.tagName)) { e.preventDefault(); $('#rlSpin').click(); } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); $('#rlUndo').click(); } };
+    addEventListener('keydown', this.key);
   },
-  unmount() { if (this.st) this.st.run = false; },
+  unmount() { if (this.st) this.st.run = false; removeEventListener('keydown', this.key); },
 }; }
 Games.ruleta = makeRoulette('ruleta'); Games.ruleta2 = makeRoulette('ruleta2'); Games.ruleta3 = makeRoulette('ruleta3');
 
